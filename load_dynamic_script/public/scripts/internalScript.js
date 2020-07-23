@@ -1,0 +1,1 @@
+var isGlobal = 'is Global';

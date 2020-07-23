@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)https://www.html5rocks.com/en/tutorials/speed/script-loading/ -->
+<html lang="en" dir="ltr" itemscope="" itemtype="http://schema.org/Article" style="" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths adownload webaudio no-battery blobconstructor contenteditable cors csscalc cssfilters mediaqueries no-regions classlist datalistelem details texttrackapi track filereader filesystem fullscreen getusermedia gamepads xhr2 quotamanagement performance raf no-stylescoped websocketsbinary no-webintents todataurljpeg todataurlwebp webp"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta property="twitter:account_id" content="1593210261">
+  <!-- Copyright (c) 2012 Google Inc.
+   *
+   * Licensed under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License.
+   * You may obtain a copy of the License at
+   *
+   *     http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
+   *
+   * Author: Jake Archibald - jakearchibald@google.com
+   *
+   * 
+   *
+  -->
+  <title>Deep dive into the murky waters of script loading - HTML5 Rocks</title>
+  <meta name="description" content="How to squeeze more performance out of script loading.">
+  <meta name="keywords" content="html5,html 5,html5 demos,html5 examples,javascript,css3,notifications,geolocation,web workers,apppcache,file api,filereader,indexeddb,offline,audio,video,drag and drop,chrome,sse,mobile">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta name="theme-color" content="#f04530">
+  <link rel="shortcut icon" href="https://www.html5rocks.com/favicon.ico">
+  <link rel="alternate" type="application/rss+xml" title="HTML5 Rocks RSS" href="http://feeds.feedburner.com/html5rocks">
+  <meta name="google-site-verification" content="E1HOIDkksrWY5npenL8FeQhKn4Ujctd75iO2lfufSyA">
+  <meta itemprop="name" content="Deep dive into the murky waters of script loading - HTML5 Rocks">
+  <meta itemprop="description" content="How to squeeze more performance out of script loading.">
+  
+  <meta itemprop="image" content="https://www.html5rocks.com/static/images/html5rocks-logo-wings.png">
+  
+
+  
+    
+  <link rel="canonical" href="https://www.html5rocks.com/tutorials/speed/script-loading/">  
+    
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ChromiumDev">
+  <meta name="twitter:creator" content="@jaffathecake">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Deep dive into the murky waters of script loading - HTML5 Rocks">
+  <meta property="og:url" content="https://www.html5rocks.com/en/tutorials/speed/script-loading/">
+  <meta property="og:description" content="How to squeeze more performance out of script loading.">
+  <meta property="og:image" content="https://www.html5rocks.com/static/images/profiles/jakearchibald.png">
+  <meta property="og:site_name" content="HTML5 Rocks - A resource for open web HTML5 developers">
+  
+
+  
+  <link rel="author" href="https://www.google.com/profiles/116237864387312784020">
+  
+  
+  <link rel="publisher" href="https://plus.google.com/+GoogleChromeDevelopers">
+
+  
+  
+  <link rel="alternate" hreflang="zh" href="https://www.html5rocks.com/zh/tutorials/speed/script-loading/">
+  
+  
+
+  
+    
+    <link rel="stylesheet" media="all" href="./Deep dive into the murky waters of script loading - HTML5 Rocks_files/v2-combined.min.css">
+    
+
+    
+  
+
+  <link href="./Deep dive into the murky waters of script loading - HTML5 Rocks_files/css" rel="stylesheet">
+
+  <link rel="apple-touch-icon" href="https://www.html5rocks.com/static/images/identity/HTML5_Badge_64.png">
+  <link rel="apple-touch-icon-precomposed" href="https://www.html5rocks.com/static/images/identity/HTML5_Badge_64.png">
+
+  <script type="text/javascript" src="./Deep dive into the murky waters of script loading - HTML5 Rocks_files/count.js" async=""></script><script type="text/javascript" async="" src="./Deep dive into the murky waters of script loading - HTML5 Rocks_files/analytics.js"></script><script async="" src="./Deep dive into the murky waters of script loading - HTML5 Rocks_files/gtm.js"></script><script async="" src="./Deep dive into the murky waters of script loading - HTML5 Rocks_files/analytics.js"></script><script async="" src="./Deep dive into the murky waters of script loading - HTML5 Rocks_files/gtm.js"></script><script src="./Deep dive into the murky waters of script loading - HTML5 Rocks_files/modernizr.custom.82437.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5-els.js"></script>
+  <![endif]-->
+
+  
+<script src="./Deep dive into the murky waters of script loading - HTML5 Rocks_files/count-data.js"></script></head>
+<body data-href="tutorials-speed-script-loading" onload="" class="article tutorial">
+
+  <header class="main" id="siteheader">
+    <h1 id="title">
+      <a href="https://www.html5rocks.com/en/" title="HTML5 Rocks">HTML5 Rocks</a>
+    </h1>
+    <a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#sitenav" id="navtoggle">Show navigation</a>
+
+    
+    <a id="toctoggle" href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc">Table of Contents</a>
+    
+
+    <nav id="sitenav">
+      <ul>
+        
+        <li id="home_menu"><a href="https://www.html5rocks.com/en/" class="home">Home</a></li>
+        
+        <li id="tutorials_menu"><a href="https://www.html5rocks.com/en/tutorials/?page=1" class="tutorials">Tutorials</a></li>
+        <li id="updates_menu"><a href="https://developers.google.com/web/updates/" class="updates">Updates</a></li>
+      </ul>
+    </nav>
+
+    
+    <nav class="toc" id="toc">
+      <h1>Table of Contents</h1>
+
+      <ul><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-introduction">Introduction</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-first-script">My first script include</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-thanks-ie">Thanks IE! (no, I’m not being sarcastic)</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-html5-rescue">HTML5 to the rescue</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-js-lib">I know what we need, a JavaScript library!</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-dom-rescue">The DOM to the rescue</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-js-has-problems">That’s the fastest way to load scripts right? Right?</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-depressing">I find this article depressing.</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-interesting-ie">IE has an idea!</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-enough">Enough! How should I load scripts?</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-aggressive-optimisation">Eww, there must be something better we can use now?</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-quick-reference">Quick reference</a></li></ul>
+
+      <h1 class="visible-title">Localizations:</h1>
+      <ul>
+        
+          
+          <li><a href="https://www.html5rocks.com/zh/tutorials/speed/script-loading/">中文 (简体)</a></li>
+          
+          <li><a href="https://github.com/html5rocks/www.html5rocks.com/blob/master/CONTRIBUTING.md">Contribute another</a></li>
+        
+      </ul>
+    </nav>
+    
+  </header>
+
+  <div class="body-content">
+    
+
+  <section class="title">
+
+    
+
+    <section class="title-text container">
+      
+      <h1>Deep dive into the murky waters of script loading</h1>
+      
+      
+
+      <a href="https://www.html5rocks.com/en/" class="watermark">HTML5 Rocks</a>
+    </section>
+  </section>
+
+  <article class="content-wrapper">
+
+    <section class="container">
+
+      
+
+      <div class="article-meta sticky" id="article-meta" style="top: 22px;">
+        <nav class="toc">
+          <h1>Table of Contents</h1>
+
+          <ul><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-introduction">Introduction</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-first-script">My first script include</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-thanks-ie">Thanks IE! (no, I’m not being sarcastic)</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-html5-rescue">HTML5 to the rescue</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-js-lib">I know what we need, a JavaScript library!</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-dom-rescue">The DOM to the rescue</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-js-has-problems">That’s the fastest way to load scripts right? Right?</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-depressing">I find this article depressing.</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-interesting-ie">IE has an idea!</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-enough">Enough! How should I load scripts?</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-aggressive-optimisation">Eww, there must be something better we can use now?</a></li><li><a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-quick-reference">Quick reference</a></li></ul>
+        </nav>
+
+        <aside class="localizations">
+          <h1>Localizations</h1>
+          <ul>
+            
+              
+              <li><a href="https://www.html5rocks.com/zh/tutorials/speed/script-loading/">中文 (简体)</a></li>
+              
+              <li><a href="https://github.com/html5rocks/www.html5rocks.com/blob/master/CONTRIBUTING.md">Contribute another</a></li>
+            
+          </ul>
+        </aside>
+      </div>
+      
+
+      <div class="content" id="article-content">
+
+        <section class="byline">
+
+          <div class="byline-content">
+            
+            <section class="author-images">
+              <a href="https://www.html5rocks.com/profiles/#jakearchibald">
+                <img src="./Deep dive into the murky waters of script loading - HTML5 Rocks_files/jakearchibald.png" itemprop="photo" alt="Jake Archibald" title="Jake Archibald">
+              </a>
+
+              
+            </section>
+
+            <section class="meta">
+              <div class="authors">
+                <strong>By</strong> <a href="https://www.html5rocks.com/profiles/#jakearchibald">Jake Archibald</a>
+                
+              </div>
+
+              
+
+              <div class="date">
+                <time pubdate=""><strong>Published:</strong> June 5th, 2013</time>
+                
+                <span><strong>Comments:</strong> <a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#disqus_thread" class="load-comments" data-disqus-identifier="https://www.html5rocks.com/tutorials/speed/script-loading/">22</a></span>
+              </div>
+
+              <div id="notcompatible" class="hidden">
+                Your browser may not support the functionality in this article.
+              </div>
+            </section>
+            <div class="clear"></div>
+
+            
+          </div>
+        </section>
+
+        
+
+<h2 id="toc-introduction">Introduction</h2>
+
+<p>In this article I’m going to teach you how to load some JavaScript in the browser and execute it.</p>
+
+<p>No, wait, come back! I know it sounds mundane and simple, but remember, this is happening in the browser where the theoretically simple becomes a legacy-driven quirk-hole. Knowing these quirks lets you pick the fastest, least disruptive way to load scripts. If you’re on a tight schedule, skip to the <a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#toc-quick-reference">quick reference</a>.</p>
+
+<p>For starters, here’s how <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting-1.html#script">the spec</a> defines the various ways a script could download and execute:</p>
+
+<figure>
+  <img src="./Deep dive into the murky waters of script loading - HTML5 Rocks_files/script-loading.png" alt="">
+  <figcaption>The WHATWG on script loading</figcaption>
+</figure>
+
+<p>Like all of the WHATWG specs, it initially looks like the aftermath of a cluster bomb in a scrabble factory, but once you’ve read it for the 5th time and wiped the blood from your eyes, it’s actually pretty interesting:</p>
+
+<h2 id="toc-first-script">My first script include</h2>
+
+<pre class="prettyprint"><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"//other-domain.com/1.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"2.js"</span><span class="tag">&gt;&lt;/script&gt;</span></pre>
+
+<p>Ahh, blissful simplicity. Here the browser will download both scripts in parallel and execute them as soon as possible, maintaining their order. “2.js” won’t execute until “1.js” has executed (or failed to do so), “1.js” won’t execute until the previous script or stylesheet has executed, etc etc.</p>
+
+<p>Unfortunately, the browser blocks further rendering of the page while all this is happening. This is due to DOM APIs from “the first age of the web” that allow strings to be appended onto the content the parser is chewing through, such as <code>document.write</code>. Newer browsers will continue to scan or parse the document in the background and trigger downloads for external content it may need (js, images, css etc), but rendering is still blocked.</p>
+
+<p>This is why the great and the good of the performance world recommend putting script elements at the end of your document, as it blocks as little content as possible. Unfortunately it means your script isn’t seen by the browser until it downloads all your HTML, and by that point it’s started downloading other content, such as CSS, images and iframes. Modern browsers are smart enough to give priority to JavaScript over imagery, but we can do better.</p>
+
+<h2 id="toc-thanks-ie">Thanks IE! (no, I’m not being sarcastic)</h2>
+
+<pre class="prettyprint"><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"//other-domain.com/1.js"</span><span class="pln"> </span><span class="atn">defer</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"2.js"</span><span class="pln"> </span><span class="atn">defer</span><span class="tag">&gt;&lt;/script&gt;</span></pre>
+
+<p>Microsoft recognised these performance issues and introduced “defer” into Internet Explorer 4. This basically says “I promise not to inject stuff into the parser using things like <code>document.write</code>. If I break that promise, you are free to punish me in any way you see fit”. This attribute <a href="http://www.w3.org/TR/html401/interact/scripts.html#h-18.2.1">made it into HTML4</a> and appeared in other browsers.</p>
+
+<p>In the above example, the browser will download both scripts in parallel and execute them just before <code>DOMContentLoaded</code> fires, maintaining their order.</p>
+
+<p>Like a cluster-bomb in a sheep factory, “defer” became a wooly mess. Between “src” and “defer” attributes, and script tags vs dynamically added scripts, we have 6 patterns of adding a script. Of course, the browsers didn’t agree on the order they should execute. <a href="https://hacks.mozilla.org/2009/06/defer/">Mozilla wrote a great piece on the problem</a> as it stood back in 2009.</p>
+
+<p>The WHATWG made the behaviour explicit, declaring “defer” to have no effect on scripts that were dynamically added, or lacked “src”. Otherwise, deferred scripts should run after the document had parsed, in the order they were added.</p>
+
+<h3>Thanks IE! (ok, now I’m being sarcastic)</h3>
+
+<p>It giveth, it taketh away. Unfortunately there’s a nasty bug in IE4-9 that can <a href="https://github.com/h5bp/lazyweb-requests/issues/42">cause scripts to execute in an unexpected order</a>. Here’s what happens:</p>
+
+<h4>1.js</h4>
+<pre class="prettyprint"><span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'1'</span><span class="pun">);</span><span class="pln">
+document</span><span class="pun">.</span><span class="pln">getElementsByTagName</span><span class="pun">(</span><span class="str">'p'</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">].</span><span class="pln">innerHTML </span><span class="pun">=</span><span class="pln"> </span><span class="str">'Changing some content'</span><span class="pun">;</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'2'</span><span class="pun">);</span></pre>
+
+<h4>2.js</h4>
+<pre class="prettyprint"><span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'3'</span><span class="pun">);</span></pre>
+
+<p>Assuming there’s a paragraph on the page, the expected order of logs is [1, 2, 3], although in IE9 and below you get [1, 3, 2]. Particular DOM operations cause IE to pause current script execution and execute other pending scripts before continuing.</p>
+
+<p>However, even in non-buggy implementations, such as IE10 and other browsers, script execution is delayed until the whole document has downloaded and parsed. This can be convenient if you’re going to wait for <code>DOMContentLoaded</code> anyway, but if you want to be really aggressive with performance, you can start adding listeners and bootstrapping sooner…</p>
+
+<h2 id="toc-html5-rescue">HTML5 to the rescue</h2>
+<pre class="prettyprint"><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"//other-domain.com/1.js"</span><span class="pln"> </span><span class="atn">async</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"2.js"</span><span class="pln"> </span><span class="atn">async</span><span class="tag">&gt;&lt;/script&gt;</span></pre>
+
+<p>HTML5 gave us a new attribute, “async”, that assumes you’re not going to use <code>document.write</code>, but doesn’t wait until the document has parsed to execute. The browser will download both scripts in parallel and execute them as soon as possible.</p>
+
+<p>Unfortunately, because they’re going to execute as soon as possible, “2.js” may execute before “1.js”. This is fine if they’re independent, perhaps “1.js” is a tracking script which has nothing to do with “2.js”. But if your “1.js” is a CDN copy of jQuery that “2.js” depends on, your page is going to get coated in errors, like a cluster-bomb in a… I dunno… I’ve got nothing for this one.</p>
+
+<h2 id="toc-js-lib">I know what we need, a JavaScript library!</h2>
+
+<p>The holy grail is having a set of scripts download immediately without blocking rendering and execute as soon as possible in the order they were added. Unfortunately HTML hates you and won’t let you do that.</p>
+
+<p>The problem was tackled by JavaScript in a few flavours. Some required you to make changes to your JavaScript, wrapping it in a callback that the library calls in the correct order (eg <a href="http://requirejs.org/">RequireJS</a>). Others would use XHR to download in parallel then <code>eval()</code> in the correct order, which didn’t work for scripts on another domain unless they had a <a href="https://developer.mozilla.org/en-US/docs/HTTP/Access_control_CORS">CORS header</a> and the browser supported it. Some even used super-magic hacks, like <a href="http://labjs.com/">LabJS</a>.</p>
+
+<p>The hacks involved tricking the browser into downloading the resource in a way that would trigger an event on completion, but avoid executing it. In LabJS, the script would be added with an incorrect mime type, eg <code>&lt;script type="script/cache" src="..."&gt;</code>. Once all scripts had downloaded, they’d be added again with a correct type, hoping the browser would get them straight from the cache and execute them immediately, in order. This depended on convenient but unspecified behaviour and broke when HTML5 declared browsers shouldn’t download scripts with an unrecognised type. Worth noting that LabJS adapted to these changes and now uses a combination of the methods in this article.</p>
+
+<p>However, script loaders have a performance problem of their own, you have to wait for the library’s JavaScript to download and parse before any of scripts it manages can begin downloading. Also, how are we going to load the script loader? How are we going to load the script that tells the script loader what to load? Who watches the Watchmen? Why am I naked? These are all difficult questions.</p>
+
+<p>Basically, if you have to download an extra script file before even thinking about downloading other scripts, you've lost the performance battle right there.</p>
+
+<h2 id="toc-dom-rescue">The DOM to the rescue</h2>
+
+<p>The answer is actually in the HTML5 spec, although it’s hidden away at the bottom of the script-loading section.</p>
+
+<blockquote>
+  <p>The async IDL attribute controls whether the element will execute asynchronously or not. If the element's "force-async" flag is set, then, on getting, the async IDL attribute must return true, and on setting, the "force-async" flag must first be unset…</p>
+</blockquote>
+
+<p>Let’s translate that into “Earthling”:</p>
+
+<pre class="prettyprint"><span class="pun">[</span><span class="pln">
+  </span><span class="str">'//other-domain.com/1.js'</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">'2.js'</span><span class="pln">
+</span><span class="pun">].</span><span class="pln">forEach</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">src</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">var</span><span class="pln"> script </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">createElement</span><span class="pun">(</span><span class="str">'script'</span><span class="pun">);</span><span class="pln">
+  script</span><span class="pun">.</span><span class="pln">src </span><span class="pun">=</span><span class="pln"> src</span><span class="pun">;</span><span class="pln">
+  document</span><span class="pun">.</span><span class="pln">head</span><span class="pun">.</span><span class="pln">appendChild</span><span class="pun">(</span><span class="pln">script</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">});</span></pre>
+
+<p><strong>Scripts that are dynamically created and added to the document are async by default</strong>, they don’t block rendering and execute as soon as they download, meaning they could come out in the wrong order. However, we can explicitly mark them as not async:</p>
+
+<pre class="prettyprint"><span class="pun">[</span><span class="pln">
+  </span><span class="str">'//other-domain.com/1.js'</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">'2.js'</span><span class="pln">
+</span><span class="pun">].</span><span class="pln">forEach</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">src</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">var</span><span class="pln"> script </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">createElement</span><span class="pun">(</span><span class="str">'script'</span><span class="pun">);</span><span class="pln">
+  script</span><span class="pun">.</span><span class="pln">src </span><span class="pun">=</span><span class="pln"> src</span><span class="pun">;</span><span class="pln">
+  script</span><span class="pun">.</span><span class="pln">async </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><span class="pln">
+  document</span><span class="pun">.</span><span class="pln">head</span><span class="pun">.</span><span class="pln">appendChild</span><span class="pun">(</span><span class="pln">script</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">});</span></pre>
+
+<p>This gives our scripts a mix of behaviour that can’t be achieved with plain HTML. By being <em>explicitly</em> not async, scripts are added to an execution queue, the same queue they’re added to in our first plain-HTML example. However, by being dynamically created, they’re executed outside of document parsing, so rendering isn’t blocked while they’re downloaded (don’t confuse not-async script loading with sync XHR, which is never a good thing).</p>
+
+<p>The script above should be included inline in the head of pages, queueing script downloads as soon as possible without disrupting progressive rendering, and executes as soon as possible in the order you specified. “2.js” is free to download before “1.js”, but it won’t be executed until “1.js” has either successfully downloaded and executed, or fails to do either. Hurrah! async-download but ordered-execution!</p>
+
+<p>Loading scripts this way is supported by <a href="http://caniuse.com/#search=async">everything that supports the async attribute</a>, with the exception of Safari 5.0 (5.1 is fine). Additionally, all versions of Firefox and Opera are supported as versions that don’t support the async attribute conveniently execute dynamically-added scripts in the order they’re added to the document anyway.</p>
+
+<h2 id="toc-js-has-problems">That’s the fastest way to load scripts right? Right?</h2>
+
+<p>Well, if you’re dynamically deciding which scripts to load, yes, otherwise, perhaps not. With the example above the browser has to parse and execute script to discover which scripts to download. This hides your scripts from preload scanners. Browsers use these scanners to discover resources on pages you’re likely to visit next, or discover page resources while the parser is blocked by another resource.</p>
+
+<p>We can add discoverability back in by putting this in the head of the document:</p>
+
+<pre class="prettyprint"><span class="tag">&lt;link</span><span class="pln"> </span><span class="atn">rel</span><span class="pun">=</span><span class="atv">"subresource"</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"//other-domain.com/1.js"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;link</span><span class="pln"> </span><span class="atn">rel</span><span class="pun">=</span><span class="atv">"subresource"</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"2.js"</span><span class="tag">&gt;</span></pre>
+
+<p>This tells the browser the page needs 1.js and 2.js. <code>link[rel=subresource]</code> is similar to <code>link[rel=prefetch]</code>, but with <a href="http://www.chromium.org/spdy/link-headers-and-server-hint/link-rel-subresource">different semantics</a>. Unfortunately it’s currently only supported in Chrome, and you have to declare which scripts to load twice, once via link elements, and again in your script.</p>
+
+<p><strong>Correction:</strong> I originally stated these were picked up by the preload scanner, they're not, they're picked up by the regular parser. However, preload scanner <em>could</em> pick these up, it just doesn't yet, whereas scripts included by executable code can never be preloaded. Thanks to <a href="https://twitter.com/yoavweiss">Yoav Weiss</a> who corrected me in the comments.</p>
+
+<h2 id="toc-depressing">I find this article depressing.</h2>
+
+<p>The situation is depressing and you should feel depressed. There’s no non-repetitive yet declarative way to download scripts quickly and asynchronously while controlling the execution order.</p>
+<p>With HTTP2/SPDY you can reduce the request overhead to the point where delivering scripts in multiple small individually-cacheable files can be the fastest way. Imagine:</p>
+
+<pre class="prettyprint"><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"dependencies.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"enhancement-1.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"enhancement-2.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"enhancement-3.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+…
+</span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"enhancement-10.js"</span><span class="tag">&gt;&lt;/script&gt;</span></pre>
+
+<p>Each enhancement script deals with a particular page component, but requires utility functions in dependencies.js. Ideally we want to download all asynchronously, then execute the enhancement scripts as soon as possible, in any order, but after dependencies.js. It’s progressive progressive enhancement!</p>
+<p>Unfortunately there’s no declarative way to achieve this unless the scripts themselves are modified to track the loading state of dependencies.js. Even async=false doesn’t solve this issue, as execution of enhancement-10.js will block on 1-9. In fact, there’s only one browser that makes this possible without hacks…</p>
+
+<h2 id="toc-interesting-ie">IE has an idea!</h2>
+
+<p>IE loads scripts differently to other browsers.</p>
+
+<pre class="prettyprint"><span class="kwd">var</span><span class="pln"> script </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">createElement</span><span class="pun">(</span><span class="str">'script'</span><span class="pun">);</span><span class="pln">
+script</span><span class="pun">.</span><span class="pln">src </span><span class="pun">=</span><span class="pln"> </span><span class="str">'whatever.js'</span><span class="pun">;</span></pre>
+
+<p>IE starts downloading “whatever.js” now, other browsers don’t start downloading until the script has been added to the document. IE also has an event, “readystatechange”, and property, “readystate”, which tell us the loading progress. This is actually really useful, as it lets us control the loading and executing of scripts independently.</p>
+
+<pre class="prettyprint"><span class="kwd">var</span><span class="pln"> script </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">createElement</span><span class="pun">(</span><span class="str">'script'</span><span class="pun">);</span><span class="pln">
+
+script</span><span class="pun">.</span><span class="pln">onreadystatechange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">script</span><span class="pun">.</span><span class="pln">readyState </span><span class="pun">==</span><span class="pln"> </span><span class="str">'loaded'</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="com">// Our script has download, but hasn't executed.</span><span class="pln">
+    </span><span class="com">// It won't execute until we do:</span><span class="pln">
+    document</span><span class="pun">.</span><span class="pln">body</span><span class="pun">.</span><span class="pln">appendChild</span><span class="pun">(</span><span class="pln">script</span><span class="pun">);</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">};</span><span class="pln">
+
+script</span><span class="pun">.</span><span class="pln">src </span><span class="pun">=</span><span class="pln"> </span><span class="str">'whatever.js'</span><span class="pun">;</span></pre>
+
+<p>We can build complex dependency models by choosing when to add scripts into the document. IE has supported this model since version 6. Pretty interesting, but it still suffers from the same preloader discoverability issue as <code>async=false</code>.</p>
+
+<h2 id="toc-enough">Enough! How should I load scripts?</h2>
+
+<p>Ok ok. If you want to load scripts in a way that doesn’t block rendering, doesn’t involve repetition, and has excellent browser support, here’s what I propose:</p>
+
+<pre class="prettyprint"><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"//other-domain.com/1.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"2.js"</span><span class="tag">&gt;&lt;/script&gt;</span></pre>
+
+<p>That. At the end of the body element. Yes, being a web developer is much like being King Sisyphus (boom! 100 hipster points for Greek mythology reference!). Limitations in HTML and browsers prevent us doing much better.</p>
+
+<p>I’m hoping <a href="http://wiki.ecmascript.org/doku.php?id=harmony:modules">JavaScript modules</a> will save us by providing a declarative non-blocking way to load scripts and give control over execution order, although this requires scripts to be written as modules.</p>
+
+<h2 id="toc-aggressive-optimisation">Eww, there must be something better we can use now?</h2>
+
+<p>Fair enough, for bonus points, if you want to get really aggressive about performance, and don’t mind a bit of complexity and repetition, you can combine a few of the tricks above.</p>
+
+<p>First up, we add the subresource declaration, for preloaders:</p>
+
+<pre class="prettyprint"><span class="tag">&lt;link</span><span class="pln"> </span><span class="atn">rel</span><span class="pun">=</span><span class="atv">"subresource"</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"//other-domain.com/1.js"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;link</span><span class="pln"> </span><span class="atn">rel</span><span class="pun">=</span><span class="atv">"subresource"</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"2.js"</span><span class="tag">&gt;</span></pre>
+
+<p>Then, inline in the head of the document, we load our scripts with JavaScript, using <code>async=false</code>, falling back to IE’s readystate-based script loading, falling back to defer.</p>
+
+<pre class="prettyprint"><span class="kwd">var</span><span class="pln"> scripts </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+  </span><span class="str">'1.js'</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">'2.js'</span><span class="pln">
+</span><span class="pun">];</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> src</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> script</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> pendingScripts </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[];</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> firstScript </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">scripts</span><span class="pun">[</span><span class="lit">0</span><span class="pun">];</span><span class="pln">
+
+</span><span class="com">// Watch scripts load in IE</span><span class="pln">
+</span><span class="kwd">function</span><span class="pln"> stateChange</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="com">// Execute as many scripts in order as we can</span><span class="pln">
+  </span><span class="kwd">var</span><span class="pln"> pendingScript</span><span class="pun">;</span><span class="pln">
+  </span><span class="kwd">while</span><span class="pln"> </span><span class="pun">(</span><span class="pln">pendingScripts</span><span class="pun">[</span><span class="lit">0</span><span class="pun">]</span><span class="pln"> </span><span class="pun">&amp;&amp;</span><span class="pln"> pendingScripts</span><span class="pun">[</span><span class="lit">0</span><span class="pun">].</span><span class="pln">readyState </span><span class="pun">==</span><span class="pln"> </span><span class="str">'loaded'</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    pendingScript </span><span class="pun">=</span><span class="pln"> pendingScripts</span><span class="pun">.</span><span class="pln">shift</span><span class="pun">();</span><span class="pln">
+    </span><span class="com">// avoid future loading events from this script (eg, if src changes)</span><span class="pln">
+    pendingScript</span><span class="pun">.</span><span class="pln">onreadystatechange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">;</span><span class="pln">
+    </span><span class="com">// can't just appendChild, old IE bug if element isn't closed</span><span class="pln">
+    firstScript</span><span class="pun">.</span><span class="pln">parentNode</span><span class="pun">.</span><span class="pln">insertBefore</span><span class="pun">(</span><span class="pln">pendingScript</span><span class="pun">,</span><span class="pln"> firstScript</span><span class="pun">);</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="com">// loop through our script urls</span><span class="pln">
+</span><span class="kwd">while</span><span class="pln"> </span><span class="pun">(</span><span class="pln">src </span><span class="pun">=</span><span class="pln"> scripts</span><span class="pun">.</span><span class="pln">shift</span><span class="pun">())</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="str">'async'</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> firstScript</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="com">// modern browsers</span><span class="pln">
+    script </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">createElement</span><span class="pun">(</span><span class="str">'script'</span><span class="pun">);</span><span class="pln">
+    script</span><span class="pun">.</span><span class="pln">async </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><span class="pln">
+    script</span><span class="pun">.</span><span class="pln">src </span><span class="pun">=</span><span class="pln"> src</span><span class="pun">;</span><span class="pln">
+    document</span><span class="pun">.</span><span class="pln">head</span><span class="pun">.</span><span class="pln">appendChild</span><span class="pun">(</span><span class="pln">script</span><span class="pun">);</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+  </span><span class="kwd">else</span><span class="pln"> </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">firstScript</span><span class="pun">.</span><span class="pln">readyState</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="com">// IE&lt;10</span><span class="pln">
+    </span><span class="com">// create a script and add it to our todo pile</span><span class="pln">
+    script </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">createElement</span><span class="pun">(</span><span class="str">'script'</span><span class="pun">);</span><span class="pln">
+    pendingScripts</span><span class="pun">.</span><span class="pln">push</span><span class="pun">(</span><span class="pln">script</span><span class="pun">);</span><span class="pln">
+    </span><span class="com">// listen for state changes</span><span class="pln">
+    script</span><span class="pun">.</span><span class="pln">onreadystatechange </span><span class="pun">=</span><span class="pln"> stateChange</span><span class="pun">;</span><span class="pln">
+    </span><span class="com">// must set src AFTER adding onreadystatechange listener</span><span class="pln">
+    </span><span class="com">// else we’ll miss the loaded event for cached scripts</span><span class="pln">
+    script</span><span class="pun">.</span><span class="pln">src </span><span class="pun">=</span><span class="pln"> src</span><span class="pun">;</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+  </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="com">// fall back to defer</span><span class="pln">
+    document</span><span class="pun">.</span><span class="pln">write</span><span class="pun">(</span><span class="str">'&lt;script src="'</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> src </span><span class="pun">+</span><span class="pln"> </span><span class="str">'" defer&gt;&lt;/'</span><span class="pun">+</span><span class="str">'script&gt;'</span><span class="pun">);</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+
+<p>A few tricks and minification later, it’s 362 bytes + your script URLs:</p>
+
+<pre class="prettyprint"><span class="pun">!</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">e</span><span class="pun">,</span><span class="pln">t</span><span class="pun">,</span><span class="pln">r</span><span class="pun">){</span><span class="kwd">function</span><span class="pln"> n</span><span class="pun">(){</span><span class="kwd">for</span><span class="pun">(;</span><span class="pln">d</span><span class="pun">[</span><span class="lit">0</span><span class="pun">]&amp;&amp;</span><span class="str">"loaded"</span><span class="pun">==</span><span class="pln">d</span><span class="pun">[</span><span class="lit">0</span><span class="pun">][</span><span class="pln">f</span><span class="pun">];)</span><span class="pln">c</span><span class="pun">=</span><span class="pln">d</span><span class="pun">.</span><span class="pln">shift</span><span class="pun">(),</span><span class="pln">c</span><span class="pun">[</span><span class="pln">o</span><span class="pun">]=!</span><span class="pln">i</span><span class="pun">.</span><span class="pln">parentNode</span><span class="pun">.</span><span class="pln">insertBefore</span><span class="pun">(</span><span class="pln">c</span><span class="pun">,</span><span class="pln">i</span><span class="pun">)}</span><span class="kwd">for</span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> s</span><span class="pun">,</span><span class="pln">a</span><span class="pun">,</span><span class="pln">c</span><span class="pun">,</span><span class="pln">d</span><span class="pun">=[],</span><span class="pln">i</span><span class="pun">=</span><span class="pln">e</span><span class="pun">.</span><span class="pln">scripts</span><span class="pun">[</span><span class="lit">0</span><span class="pun">],</span><span class="pln">o</span><span class="pun">=</span><span class="str">"onreadystatechange"</span><span class="pun">,</span><span class="pln">f</span><span class="pun">=</span><span class="str">"readyState"</span><span class="pun">;</span><span class="pln">s</span><span class="pun">=</span><span class="pln">r</span><span class="pun">.</span><span class="pln">shift</span><span class="pun">();)</span><span class="pln">a</span><span class="pun">=</span><span class="pln">e</span><span class="pun">.</span><span class="pln">createElement</span><span class="pun">(</span><span class="pln">t</span><span class="pun">),</span><span class="str">"async"</span><span class="kwd">in</span><span class="pln"> i</span><span class="pun">?(</span><span class="pln">a</span><span class="pun">.</span><span class="pln">async</span><span class="pun">=!</span><span class="lit">1</span><span class="pun">,</span><span class="pln">e</span><span class="pun">.</span><span class="pln">head</span><span class="pun">.</span><span class="pln">appendChild</span><span class="pun">(</span><span class="pln">a</span><span class="pun">)):</span><span class="pln">i</span><span class="pun">[</span><span class="pln">f</span><span class="pun">]?(</span><span class="pln">d</span><span class="pun">.</span><span class="pln">push</span><span class="pun">(</span><span class="pln">a</span><span class="pun">),</span><span class="pln">a</span><span class="pun">[</span><span class="pln">o</span><span class="pun">]=</span><span class="pln">n</span><span class="pun">):</span><span class="pln">e</span><span class="pun">.</span><span class="pln">write</span><span class="pun">(</span><span class="str">"&lt;"</span><span class="pun">+</span><span class="pln">t</span><span class="pun">+</span><span class="str">' src="'</span><span class="pun">+</span><span class="pln">s</span><span class="pun">+</span><span class="str">'" defer&gt;&lt;/'</span><span class="pun">+</span><span class="pln">t</span><span class="pun">+</span><span class="str">"&gt;"</span><span class="pun">),</span><span class="pln">a</span><span class="pun">.</span><span class="pln">src</span><span class="pun">=</span><span class="pln">s</span><span class="pun">}(</span><span class="pln">document</span><span class="pun">,</span><span class="str">"script"</span><span class="pun">,[</span><span class="pln">
+  </span><span class="str">"//other-domain.com/1.js"</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">"2.js"</span><span class="pln">
+</span><span class="pun">])</span></pre>
+
+<p>Is it worth the extra bytes compared to a simple script include? If you’re already using JavaScript to conditionally load scripts, <a href="http://responsivenews.co.uk/post/18948466399/cutting-the-mustard">as the BBC do</a>, you may as well benefit from triggering those downloads earlier. Otherwise, perhaps not, stick with the simple end-of-body method.</p>
+
+<p>Phew, now I know why the WHATWG script loading section is so vast. I need a drink.</p>
+
+<h2 id="toc-quick-reference">Quick reference</h2>
+
+<h3>Plain script elements</h3>
+<pre class="prettyprint"><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"//other-domain.com/1.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"2.js"</span><span class="tag">&gt;&lt;/script&gt;</span></pre>
+
+<p><strong>Spec says:</strong> Download together, execute in order after any pending CSS, block rendering until complete.</p>
+<p><strong>Browsers say:</strong> Yes sir!</p>
+
+<h3>Defer</h3>
+<pre class="prettyprint"><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"//other-domain.com/1.js"</span><span class="pln"> </span><span class="atn">defer</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"2.js"</span><span class="pln"> </span><span class="atn">defer</span><span class="tag">&gt;&lt;/script&gt;</span></pre>
+
+<p><strong>Spec says:</strong> Download together, execute in order just before DOMContentLoaded. Ignore “defer” on scripts without “src”.</p>
+<p><strong>IE &lt; 10 says:</strong> I might execute 2.js halfway through the execution of 1.js. Isn’t that fun??</p>
+<p><strong>The <a href="http://caniuse.com/#search=defer">browsers in red</a> say:</strong> I have no idea what this “defer” thing is, I’m going to load the scripts as if it weren’t there.</p>
+<p><strong>Other browsers say:</strong> Ok, but I might not ignore “defer” on scripts without “src”.</p>
+
+<h3>Async</h3>
+<pre class="prettyprint"><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"//other-domain.com/1.js"</span><span class="pln"> </span><span class="atn">async</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"2.js"</span><span class="pln"> </span><span class="atn">async</span><span class="tag">&gt;&lt;/script&gt;</span></pre>
+
+<p><strong>Spec says:</strong> Download together, execute in whatever order they download in.</p>
+<p><strong>The <a href="http://caniuse.com/#search=async">browsers in red</a> say:</strong> What’s ‘async’? I’m going to load the scripts as if it weren’t there.</p>
+<p><strong>Other browsers say:</strong> Yeah, ok.</p>
+
+<h3>Async false</h3>
+<pre class="prettyprint"><span class="pun">[</span><span class="pln">
+  </span><span class="str">'1.js'</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">'2.js'</span><span class="pln">
+</span><span class="pun">].</span><span class="pln">forEach</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">src</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">var</span><span class="pln"> script </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">createElement</span><span class="pun">(</span><span class="str">'script'</span><span class="pun">);</span><span class="pln">
+  script</span><span class="pun">.</span><span class="pln">src </span><span class="pun">=</span><span class="pln"> src</span><span class="pun">;</span><span class="pln">
+  script</span><span class="pun">.</span><span class="pln">async </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><span class="pln">
+  document</span><span class="pun">.</span><span class="pln">head</span><span class="pun">.</span><span class="pln">appendChild</span><span class="pun">(</span><span class="pln">script</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">});</span></pre>
+
+<p><strong>Spec says:</strong> Download together, execute in order as soon as all download.</p>
+<p><strong>Firefox &lt; 3.6, Opera says:</strong> I have no idea what this “async” thing is, but it just so happens I execute scripts added via JS in the order they’re added.</p>
+<p><strong>Safari 5.0 says:</strong> I understand “async”, but don’t understand setting it to “false” with JS. I’ll execute your scripts as soon as they land, in whatever order.</p>
+<p><strong>IE &lt; 10 says:</strong> No idea about “async”, but <a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#interesting-ie">there is a workaround</a> using “onreadystatechange”.</p>
+<p><strong>Other <a href="http://caniuse.com/#search=async">browsers in red</a> say:</strong> I don’t understand this “async” thing, I’ll execute your scripts as soon as they land, in whatever order.</p>
+<p><strong>Everything else says:</strong> I’m your friend, we’re going to do this by the book.</p>
+
+      </div>
+    </section>
+  </article>
+
+  
+  <section class="disqus pattern-bg-lighter">
+
+    <div id="disqus" class="container">
+
+      <h2>Comments</h2>
+
+      <div id="disqus_thread">
+
+        <a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/#disqus_thread" class="load-comments" data-disqus-identifier="https://www.html5rocks.com/tutorials/speed/script-loading/">22</a>
+
+      </div>
+    </div>
+
+    <noscript>
+      <p class="center">
+        <strong>
+          <a href="https://disqus.com/?ref_noscript">Please enable JavaScript to view the comments powered by Disqus.</a>
+        </strong>
+      </p>
+    </noscript>
+
+    <script>
+
+      var disqus_shortname = 'html5rocks';
+      var disqus_identifier = 'https://www.html5rocks.com/tutorials/speed/script-loading/';
+      var disqus_url = 'https://www.html5rocks.com/tutorials/speed/script-loading/';
+      var disqus_developer = 0;
+
+      var disqus_config = function () {
+        var funky_language_code_mapping = {
+          'de': 'de_inf',
+          'es': 'es_ES',
+          'pt': 'pt_EU',
+          'sr': 'sr_CYRL',
+          'sv': 'sv_SE',
+          'zh': 'zh_HANT'
+        };
+        this.language = funky_language_code_mapping['en'] ||
+                        'en';
+
+        this.callbacks.onReady = [ function () {
+                                      try {
+                                        ga('send', 'event', 'View comments');
+                                      } catch(err){}
+                                   } ];
+        this.callbacks.onNewComment = [ function (comment) {
+                                          try {
+                                            ga('send', 'event', 'Commented');
+                                          } catch(err){}
+                                        } ];
+      };
+
+      window.addEventListener('load', function(e) {
+
+        var c = document.createElement('script');
+        c.type = 'text/javascript';
+        c.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        c.async = true;
+
+        var s = document.getElementsByTagName('script')[0], sp = s.parentNode;
+        sp.insertBefore(c, s);
+
+        if (window.location.hash === '#disqus_thread')
+          loadComments();
+
+      }, false);
+
+      var disqus_loaded = false;
+      function loadComments() {
+
+        if (disqus_loaded)
+          return;
+
+        disqus_loaded = true;
+
+        ga('send', 'event', 'Interactions', 'Comments', 'Comments Loaded');
+
+        var s = document.getElementsByTagName('script')[0], sp = s.parentNode;
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+
+        var disqusContainer = document.getElementById('disqus');
+        disqusContainer.classList.add('active');
+
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        sp.insertBefore(dsq, s);
+      }
+
+      function outgoing(url) {
+        try {
+          ga('send', 'event', 'Outbound Links' , url);
+        } catch(err){}
+      }
+      // Open external links (also that don't have a target defined) in a new tab.
+      var externLinks = document.querySelectorAll('article.tutorial a[href^="http"]:not([target])');
+      for(var i = 0, a; a = externLinks[i]; ++i) {
+        a.target = '_blank';
+        a.addEventListener('click', new Function('outgoing(' + '"' + a.href.replace(/.*?:\/\//g, "") + '"' + ');'));
+      }
+
+      var loadCommentsButtons = document.querySelectorAll('.load-comments');
+      for(var l = 0; l < loadCommentsButtons.length; l++)
+        loadCommentsButtons[l].addEventListener('click', loadComments);
+
+    </script>
+  </section>
+  
+
+  <footer>
+    <div class="container">
+
+      
+        <h1>Next steps</h1>
+
+        
+
+        <aside class="panel share">
+          <h2>Share</h2>
+          <style>
+            aside.share.native .android { display: inline-block !important;
+            background-image: url(https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_share_white_36px.svg) !important;
+            background-size: 48px 48px !important;
+             background-position: 0, 0 !important; }
+          </style>
+          <a href="https://twitter.com/share?url=https://www.html5rocks.com/tutorials/speed/script-loading/&amp;text=Deep%20dive%20into%20the%20murky%20waters%20of%20script%20loading&amp;lang=en&amp;via=ChromiumDev&amp;related=ChromiumDev" class="android" style="display: none;">Share</a>
+          <a href="https://twitter.com/share?url=https://www.html5rocks.com/tutorials/speed/script-loading/&amp;text=Deep%20dive%20into%20the%20murky%20waters%20of%20script%20loading&amp;lang=en&amp;via=ChromiumDev&amp;related=ChromiumDev" class="twitter" target="_blank">Twitter</a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.html5rocks.com/tutorials/speed/script-loading/" class="facebook" target="_blank">Facebook</a>
+          <a href="https://plus.google.com/share?url=https://www.html5rocks.com/tutorials/speed/script-loading/" class="gplus" onclick="javascript:window.open(this.href, &#39;&#39;, &#39;menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600&#39;);return false;">Google+</a>
+        </aside>
+
+        <aside class="panel rss">
+          <h2>Subscribe</h2>
+          <p>Enjoyed this article? Grab the <a href="http://feeds.feedburner.com/html5rocks">RSS feed</a> and stay up-to-date.</p>
+        </aside>
+
+      
+
+      <p class="licensing">
+      
+        Except as otherwise <a href="http://code.google.com/policies.html#restrictions">noted</a>, the content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>, and code samples are licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>.
+      
+      </p>
+
+    </div>
+  </footer>
+
+  <script>
+    window.isCompatible = function() {
+      
+  return true;
+
+    };
+    
+    if(navigator.share !== undefined) {
+    document.addEventListener('DOMContentLoaded', e => {
+      var shareBox = document.querySelector('aside.share');
+      if(shareBox !== undefined) { shareBox.classList.toggle('native'); }
+      
+      var shareBtn = document.querySelector('aside.share a.android');
+      shareBtn.addEventListener('click', clickEvent => {
+        clickEvent.preventDefault();
+        const title = "Deep dive into the murky waters of script loading";
+        const url = "https://www.html5rocks.com/tutorials/speed/script-loading/";
+        navigator.share({title: title, text: url, url: url})
+          .then(() => console.log('Successful share'),
+           error => console.log('Error sharing:', error));
+      });
+    });
+}
+
+    if (isCompatible() === false) {
+      document.getElementById('notcompatible').className = '';
+    }
+
+    function _prettyPrint() {
+      if (typeof customPrettyPrintLanguage != 'undefined') {
+        customPrettyPrintLanguage();
+      }
+      prettyPrint();
+    }
+  </script>
+  <script async="" src="./Deep dive into the murky waters of script loading - HTML5 Rocks_files/prettify.min.js" onload="_prettyPrint()"></script>
+  <!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-XXXX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MB3LRF');</script>
+<!-- End Google Tag Manager -->
+
+
+  </div>
+
+  <script>
+  (function() {
+
+    // Kill feedburner and marketing tracking arguments, but let them register
+    // before we do it.
+    setTimeout(function() {
+      if (/^\?utm_/.test(document.location.search) &&
+          window.history.replaceState) {
+        window.history.replaceState(
+            {}, '', document.location.href.replace(/\?utm_.*/, ''));
+      }
+    }, 2000);
+
+    var siteHeader = document.getElementById('siteheader');
+    var navToggle = document.getElementById('navtoggle');
+    var siteNav = document.getElementById('sitenav');
+
+    function toggle(target, forceActive) {
+
+      if (typeof toc !== 'undefined') {
+        // Switch off whichever one is not the
+        // current target
+        if (target === toc)
+          siteNav.classList.remove('active');
+        else
+          toc.classList.remove('active');
+      }
+
+      // Toggle if no force parameter is set
+      if (typeof forceActive === 'undefined') {
+        target.classList.toggle('active');
+      } else {
+        if (forceActive)
+          target.classList.add('active');
+        else
+          target.classList.remove('active');
+      }
+
+      // now find out what the set state ended up being
+      var isActive = target.classList.contains('active');
+
+      if (isActive)
+        siteHeader.classList.add('expanded');
+      else
+        siteHeader.classList.remove('expanded');
+
+    }
+
+    navToggle.addEventListener('click', function(e) {
+      toggle(siteNav);
+      e.preventDefault();
+    });
+
+    
+
+    var tocToggle = document.getElementById('toctoggle');
+    var toc = document.getElementById('toc');
+    var articleMeta = document.getElementById('article-meta');
+    var articleContent = document.getElementById('article-content');
+    var articleMetaHeight = 0;
+    var articleMetaMaxY = 0;
+    var articleMetaMinY = 0;
+    var articleContentPadding = 200;
+
+    var tocLinks = document.querySelectorAll('.toc a');
+    for (var t = 0; t < tocLinks.length; t++)
+      tocLinks[t].addEventListener('click', onTocLinkClick);
+
+    tocToggle.addEventListener('click', function(e) {
+      toggle(toc);
+      e.preventDefault();
+    });
+
+    toc.addEventListener('click', function(e) {
+      if (e.target !== siteNav)
+        toggle(toc, false);
+    });
+
+    function onTocLinkClick() {
+      ga('send', 'event', 'Interactions', 'TOC', 'TOC Clicked');
+    }
+
+    function setMinScrollYFromMetaY() {
+      var scrollPosition = window.scrollY;
+
+      var articleMetaBounds = articleMeta.getBoundingClientRect();
+      var articleMetaTop = Math.max(352,
+          articleMetaBounds.top - 20 + scrollPosition);
+
+      articleMetaHeight = articleMetaBounds.bottom - articleMetaBounds.top;
+      articleMetaMinY = articleMetaTop;
+    }
+
+    function setMaxScrollYFromContentHeight() {
+
+      var scrollPosition = window.scrollY;
+
+      var articleContentBounds = articleContent.getBoundingClientRect();
+      var articleContentTop = articleContentBounds.top + scrollPosition;
+      var articleContentHeight = articleContentBounds.bottom - articleContentBounds.top;
+
+      articleMetaMaxY = articleContentTop +
+          articleContentHeight -
+          articleMetaHeight -
+          articleContentPadding;
+
+    }
+
+    function onScroll(e) {
+
+      if (window.scrollY >= articleMetaMinY) {
+
+        articleMeta.classList.add('sticky');
+
+        var articleMetaTop = 22 - Math.max(0, window.scrollY - articleMetaMaxY);
+        articleMeta.style.top = articleMetaTop + 'px';
+
+      } else {
+        articleMeta.classList.remove('sticky');
+        articleMeta.style.top = 'auto';
+      }
+    }
+
+    if (articleMeta.getBoundingClientRect) {
+      setMinScrollYFromMetaY();
+      setMaxScrollYFromContentHeight();
+      document.addEventListener('scroll', onScroll);
+      window.addEventListener('load', setMaxScrollYFromContentHeight, false);
+    }
+
+    
+  })();
+  </script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-15028909-1', 'auto');
+  ga('create', 'UA-49880327-4', 'auto', {'name': 'html5rocks'});
+
+  ga('send', 'pageview');
+  ga('html5rocks.send', 'pageview');
+
+  </script>
+   <!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-XXXX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MB3LRF');</script>
+<!-- End Google Tag Manager -->
+
+
+</body></html>

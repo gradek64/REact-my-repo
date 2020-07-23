@@ -4,6 +4,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import useFormField from '../../custom_hook_principle/useFormField';
 
+//this is functional component
 function HookWrapper({ customHook }) {
   return <div hook={customHook()} />;
 }

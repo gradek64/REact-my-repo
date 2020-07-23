@@ -34,7 +34,7 @@ export function LanguageProvider(props) {
 export function translate(text) {
   const languageContext = useContext(LanguageContext);
 
-  //this below object is divided in two
+  // this below object is divided in two
   /* languageContext.dictionary = language as id
   languageContext.dictionary[text] = [language][text] 
 

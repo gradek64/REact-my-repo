@@ -1,5 +1,6 @@
 import React from 'react';
 
-const ListHookedToLocalRedux = ({ items: curtent }) => `curtent number of items: ${curtent}`;
+const ListHookedToLocalRedux = ({ items: current }) =>
+  `current number of items: ${current}`;
 
 export default ListHookedToLocalRedux;

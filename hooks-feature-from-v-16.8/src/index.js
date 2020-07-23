@@ -11,6 +11,11 @@ import CustomHook from './custom_Hooks_shared_logic';
 import CustomHookCounter1 from './custom_hook_principle/CounterComp1';
 import CustomHookCounter2 from './custom_hook_principle/CounterComp2';
 import CustomHookGlobalState from './global_state_custom_hook';
+import ExampleClickUpdateuseCallback from './useCallback_hook_memoization';
+import ExampleClickUpdateuseMemo from './useMemo_hook_memoization';
+import UseReducerComparison from './useReducer_v_useState_benefits/UseReducer_hook';
+import UseStateComparison from './useReducer_v_useState_benefits/UseState_comparison';
+import UseState_custom_hook_comparison from './useReducer_v_useState_benefits/UseState_comparison';
 
 // shared logic hook;
 import { useFriendStatus } from './custom_Hooks_shared_logic/sharedLogic_hook';
@@ -61,6 +66,28 @@ const Index = () => {
       <h2>custom Hooks counter with useCounter extracted logic hook</h2>
       <CustomHookCounter1 />
       <CustomHookCounter2 />
+      <div style={{ border: '2px dotted orange' }}>
+        <h2>
+          useCallback hook to cache and read components wrapped in
+          React.memo(component) (momoization)
+        </h2>
+        <ExampleClickUpdateuseCallback />
+      </div>
+      <div style={{ border: '2px dotted green' }}>
+        <h2>
+          useMemo hook to cache and read components wrapped in
+          React.memo(component) (momoization)
+        </h2>
+        <ExampleClickUpdateuseMemo />
+      </div>
+      <div style={{ border: '2px dotted green' }}>
+        <h2>Use Reducer versus use State</h2>
+        <UseReducerComparison />
+        <h3>useState comparison</h3>
+        <UseStateComparison />
+        <h3>useState comparison as custom hook</h3>
+        <UseState_custom_hook_comparison />
+      </div>
       <h2>custom Hooks shared logic</h2>
       <CustomHook />
       <p>

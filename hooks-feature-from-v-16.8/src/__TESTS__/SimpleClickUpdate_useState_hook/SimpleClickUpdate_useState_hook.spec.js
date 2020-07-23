@@ -27,12 +27,13 @@ describe('state response to clicks', () => {
     //use container cheaky way to have access to standard DOM selectors
     const { container } = render(<CounterComp />);
     const button1 = container.querySelectorAll('button')[0];
+    console.log('container', container.querySelectorAll('button'));
     fireEvent.click(button1);
     expect(container.querySelector('#display')).toHaveTextContent(
       'You clicked 1 times'
     );
   });
-  it('decrements counter', () => {
+  fit('decrements counter', () => {
     //use container cheaky way to have access to standard DOM selectors
     const { container } = render(<CounterComp />);
     const button2 = container.querySelectorAll('button')[1];

@@ -33,15 +33,15 @@ export const SectionContext = React.createContext();
 const { Provider } = SectionContext;
 
 const AppLocalRedux = () => {
-  //this is same as useState but with state management as redux will do
+  // this is same as useState but with state management as redux will do
   const [list, dispatchAction] = useReducer(listReducer, initialList);
 
   return (
     <div style={{ border: '1px dashed blue' }}>
       {/* we have wrapper that provides state distribution in a value prop */}
       <Provider value={{ list, dispatchAction }}>
-        {/*Notice bellow components dont have props they receive data by context wrapper*/}
-        {/* props are encapsulated in value object which has dispatchAction method and list*/}
+        {/* Notice bellow components dont have props they receive data by context wrapper */}
+        {/* props are encapsulated in value object which has dispatchAction method and list */}
         <Info />
         <List />
       </Provider>

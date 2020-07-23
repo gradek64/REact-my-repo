@@ -28,7 +28,7 @@ const listReducer = (state, action) => {
 
 const AppLocalRedux = () => {
   //useReducer is just the same state mananagement as useState()
-  //but allows you to deal with more complicated state as  object state
+  //but allows you to deal with more complicated state as object state
   const [list, dispatchAction] = useReducer(listReducer, initialList);
 
   return (

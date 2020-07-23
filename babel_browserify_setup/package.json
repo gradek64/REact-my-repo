@@ -7,6 +7,7 @@
     "babelMe": "babel  ./scripts --experimental --source-maps-inline -d ./lib",
     "babelMeWatch": "babel  ./scripts --experimental -w --source-maps-inline -d ./lib",
     "browserifyMe": "browserify lib/main.js -o bundle.js",
+    "babelMe_and_browserifyMe": "npm run babelMe && npm run browserifyMe",
     "watchifyMe": "watchify lib/main.js -o bundle.js",
     "browserifyMe-watchifyMe": "browserify lib/main.js -o bundle.js && watchify lib/main.js -o bundle.js"
   },
