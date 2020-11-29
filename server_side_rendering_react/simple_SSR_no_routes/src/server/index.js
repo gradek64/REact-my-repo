@@ -12,6 +12,7 @@ app.use(express.static('public'));
 
 app.get('*', (req, res) => {
   const configProps = { name: 'Grzegorz', likes: 'motorbikes' };
+  //App being rendered on server with props just like you woud do on client
   const markup = renderToString(<App {...configProps} />);
   res.send(`
     <!DOCTYPE html>
@@ -38,5 +39,4 @@ app.listen(3000, () => {
   1) Just get shared App rendering to string on server then taking over on client.
   2) Pass data to <App /> on server. Show diff. Add data to window then pick it up on the client too.
   3) Instead of static data move to dynamic data (github gists)
-  4) add in routing.
 */
