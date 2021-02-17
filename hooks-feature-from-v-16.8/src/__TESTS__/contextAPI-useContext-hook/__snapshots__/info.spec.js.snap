@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Context value is updated by child component 1`] = `
+<DocumentFragment>
+  curtent number of items: 5
+</DocumentFragment>
+`;

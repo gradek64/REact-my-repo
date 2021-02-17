@@ -1,0 +1,13 @@
+:root {
+  --main-color: red;
+  --pane-padding: 5px 42px;
+}
+
+.my-class {
+  color: var(--main-color);
+  text-transform: capitalize;
+
+  & a {
+    color: green;
+  }
+}

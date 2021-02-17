@@ -1,0 +1,75 @@
+.clickAway {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+}
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  visibility: visible;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  opacity: 1;
+
+  /*you need animate most of the properties all is just a cheat to get animation back on class remove;*/
+  transition: all 1s;
+
+  &.close-state {
+    /*for animation you need to use visibility not display property*/
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .modal-content {
+    padding: 2rem;
+
+    /*width: 80%;*/
+    max-width: 1000px;
+    background-color: white;
+    position: absolute;
+  }
+
+  &.no-animation {
+    .modal-content {
+      right: 0;
+    }
+  }
+
+  .modal-content {
+    right: -100%;
+    padding: 2rem;
+
+    /*width: 80%;*/
+    max-width: 1000px;
+    background-color: white;
+    position: absolute;
+    transition: right 1s;
+
+    &.slide-in {
+      right: 0;
+    }
+  }
+
+  .close-modal {
+    position: absolute;
+    max-width: 100px;
+    width: 5%;
+    height: auto;
+    top: -1rem;
+    border-radius: 50%;
+    border: 1px solid;
+    cursor: pointer;
+    right: -1rem;
+    font-size: 3rem;
+  }
+}

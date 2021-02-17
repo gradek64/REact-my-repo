@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<li
+  className="card"
+  id="card-0"
+>
+  <img
+    alt="Singer"
+    src="images/tn_property01.jpg"
+  />
+  <div
+    className="details"
+  >
+    <span
+      className="index"
+    >
+      1
+    </span>
+    <p
+      className="location"
+    >
+      Singer
+      <br />
+      914 Argyle Road
+    </p>
+    <ul
+      className="features"
+    >
+      <li
+        className="icon-bed"
+      >
+        2
+         
+        <span>
+          bedrooms
+        </span>
+      </li>
+      <li
+        className="icon-bath"
+      >
+        2
+         
+        <span>
+          bathrooms
+        </span>
+      </li>
+      <li
+        className="icon-car"
+      >
+        2
+         
+        <span>
+          parking spots
+        </span>
+      </li>
+    </ul>
+  </div>
+</li>
+`;

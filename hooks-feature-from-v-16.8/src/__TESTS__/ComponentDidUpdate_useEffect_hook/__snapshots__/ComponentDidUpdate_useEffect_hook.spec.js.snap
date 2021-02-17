@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correclty with initial state should take a snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <h2>
+      Simple click update counter using hook useState()
+    </h2>
+    <p
+      data-testid="counter"
+      id="display"
+    >
+      You clicked 0 times
+    </p>
+    <button
+      type="button"
+    >
+      Click me up
+    </button>
+  </div>
+</DocumentFragment>
+`;

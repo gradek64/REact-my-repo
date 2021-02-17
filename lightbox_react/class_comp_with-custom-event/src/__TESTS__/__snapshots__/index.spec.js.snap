@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Index should render correctly 1`] = `
+<Fragment>
+  <button
+    onClick={[Function]}
+  >
+    modal 1
+  </button>
+  <button
+    onClick={[Function]}
+  >
+    modal 2
+  </button>
+  <Modal
+    eventOn="OPEN_MODAL_1"
+  >
+    <p>
+      this is modal test
+    </p>
+  </Modal>
+  <Modal
+    eventOn="OPEN_MODAL_2"
+  >
+    <TestComponent />
+  </Modal>
+</Fragment>
+`;

@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`with mock Provider snapshot for <List Component it renders List component correctlly 1`] = `
+<DocumentFragment>
+  <div>
+    <div>
+      <span>
+        title
+      </span>
+      <button
+        type="button"
+      >
+        remove
+      </button>
+    </div>
+    <div>
+      <span>
+        title
+      </span>
+      <button
+        type="button"
+      >
+        remove
+      </button>
+    </div>
+    <div>
+      <span>
+        title
+      </span>
+      <button
+        type="button"
+      >
+        remove
+      </button>
+    </div>
+    <div>
+      <span>
+        title
+      </span>
+      <button
+        type="button"
+      >
+        remove
+      </button>
+    </div>
+    <div>
+      <span>
+        title
+      </span>
+      <button
+        type="button"
+      >
+        remove
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

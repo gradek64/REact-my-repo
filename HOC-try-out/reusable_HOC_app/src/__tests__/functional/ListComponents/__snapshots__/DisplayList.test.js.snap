@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    key="Greg"
+  >
+    <div>
+      Character: 
+      Greg
+    </div>
+    <div>
+      Side: 
+      dark
+    </div>
+  </div>
+  <div
+    key="Greg"
+  >
+    <div>
+      Character: 
+      Greg
+    </div>
+    <div>
+      Side: 
+      light
+    </div>
+  </div>
+</div>
+`;

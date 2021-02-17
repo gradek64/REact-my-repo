@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<RenderDisplayList
+  list={
+    Array [
+      Object {
+        "name": "Gregi",
+        "side": "noSide",
+      },
+      Object {
+        "name": "Greg",
+        "side": "dark",
+      },
+    ]
+  }
+/>
+`;

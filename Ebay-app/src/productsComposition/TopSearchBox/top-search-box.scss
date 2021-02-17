@@ -1,0 +1,9 @@
+.top-search-box {
+  display: flex;
+  align-items: center;
+
+  .custom-search-size {
+    flex: 1;
+    margin-right: 0.6rem;
+  }
+}

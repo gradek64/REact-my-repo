@@ -1,0 +1,1 @@
+Idea fo this exercise is to practice <Component render={(state)=>{<component}} /> U can share your state with other components , so all you have to do is to hook up your componet with the Component class that holds state, it is great idea for likes button that increment/decrement and using one single login for all buttons.

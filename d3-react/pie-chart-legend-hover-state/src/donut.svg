@@ -1,0 +1,22 @@
+<svg height="160" viewbox="0 0 160 160">
+    <g class="circle circle-1" transform="translate(-400, 0) rotate(-90, 80, 80)">
+        <circle class="outline" cx="80" cy="80" fill="transparent" r="60" stroke="#eee" stroke-width="30"></circle>
+        <circle cx="80" cy="80" fill="transparent" r="60" stroke="#6495ED" stroke-dasharray="374.99111843077515" stroke-dashoffset="235.75525273624842" stroke-width="30"></circle>
+    </g>
+    <g class="circle circle-2" transform="translate(-200, 0) rotate(44.87031700288185, 80, 80)">
+        <circle class="outline" cx="80" cy="80" fill="transparent" r="60" stroke="#eee" stroke-width="30"></circle>
+        <circle cx="80" cy="80" fill="transparent" r="60" stroke="goldenrod" stroke-dasharray="374.99111843077515" stroke-dashoffset="293.33602875017084" stroke-width="30"></circle>
+    </g>
+    <g class="circle circle-3" transform="rotate(124.75504322766571, 80, 80)">
+        <circle class="outline" cx="80" cy="80" fill="transparent" r="60" stroke="#eee" stroke-width="30"></circle>
+        <circle cx="80" cy="80" fill="transparent" r="60" stroke="#cd5c5c" stroke-dasharray="374.99111843077515" stroke-dashoffset="314.52140860434986" stroke-width="30"></circle>
+    </g>
+    <g class="circle circle-4" transform="translate(200, 0) rotate(184.4092219020173, 80, 80)">
+        <circle class="outline" cx="80" cy="80" fill="transparent" r="60" stroke="#eee" stroke-width="30"></circle>
+        <circle cx="80" cy="80" fill="transparent" r="60" stroke="thistle" stroke-dasharray="374.99111843077515" stroke-dashoffset="322.66963162518795" stroke-width="30"></circle>
+    </g>
+    <g class="circle circle-5" transform="translate(400, 0) rotate(236.28242074927954, 80, 80)">
+        <circle class="outline" cx="80" cy="80" fill="transparent" r="60" stroke="#eee" stroke-width="30"></circle>
+        <circle cx="80" cy="80" fill="transparent" r="60" stroke="lightgray" stroke-dasharray="374.99111843077515" stroke-dashoffset="341.6821520071435" stroke-width="30"></circle>
+    </g>
+</svg>

@@ -1,0 +1,8 @@
+{
+    "use": [
+        "postcss-import",
+    ],
+    "input": "testCSS.css",
+    "output": "main.css",
+
+}

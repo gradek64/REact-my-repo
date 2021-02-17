@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`It renders correctly 1`] = `
+<div>
+  <div
+    className="tableHeader"
+  >
+    <h1>
+      active filter: 
+      none
+    </h1>
+    <h1>
+      active sortBy: 
+      sortASC
+    </h1>
+    <SearchBox
+      eventHandler={[Function]}
+      placeholder="filter"
+    />
+    <SimpleButton
+      eventHandler={[Function]}
+      label="filter DARK side"
+      value="dark"
+    />
+    <SimpleButton
+      eventHandler={[Function]}
+      label="filter LIGHT side"
+      value="light"
+    />
+    <ToggleSimpleButton
+      action={[Function]}
+      label="sort"
+      toggleLabels={
+        Array [
+          "ASC",
+          "DESC",
+        ]
+      }
+      values={
+        Array [
+          "sortASC",
+          "sortDESC",
+        ]
+      }
+    />
+    <div
+      style={
+        Object {
+          "backgroundColor": "white",
+          "display": "inline-block",
+          "width": "10%",
+        }
+      }
+    >
+      <ToggleSimpleButton
+        label="DropDown"
+      >
+        <ul
+          style={
+            Object {
+              "backgroundColor": "white",
+              "listStyleType": "none",
+              "margin": 0,
+              "padding": 0,
+            }
+          }
+        >
+          <li>
+            <SimpleButton
+              eventHandler={[Function]}
+              label="sortDESC"
+              value="sortDESC"
+            />
+          </li>
+          <li>
+             
+            <SimpleButton
+              eventHandler={[Function]}
+              label="sortASC"
+              value="sortASC"
+            />
+          </li>
+        </ul>
+      </ToggleSimpleButton>
+    </div>
+  </div>
+  <div>
+    <withTransformPropsComp
+      actionType="sortBy"
+      filter=""
+      letterSearch=""
+      list={
+        Array [
+          Object {
+            "name": "Luke",
+            "side": "light",
+          },
+          Object {
+            "name": "Darth Vader",
+            "side": "dark",
+          },
+        ]
+      }
+      sortBy="sortASC"
+    />
+  </div>
+</div>
+`;

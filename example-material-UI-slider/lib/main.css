@@ -1,0 +1,16 @@
+.app {
+  width: 350px;
+  margin: 0 auto;
+}
+
+.scroller {
+  margin: 0 auto;
+  height: 300px;
+  width: 300px;
+  overflow: hidden;
+}
+
+.item {
+  margin: 30px 0;
+  display: inline-block;
+}

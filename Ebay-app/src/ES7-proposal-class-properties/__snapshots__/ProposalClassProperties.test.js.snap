@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<span
+  className="my-class"
+>
+  value from state is there yeah Proposal
+  <a
+    href="#"
+  >
+    check tutorial here
+  </a>
+</span>
+`;

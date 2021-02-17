@@ -1,0 +1,17 @@
+@import "_color";
+body {
+  background: $bgcolor;
+  color: $color;
+}
+
+.bar {
+  fill: "red";
+}
+
+.bar:hover {
+  fill: "brown";
+}
+
+.axis--x path {
+  display: none;
+}

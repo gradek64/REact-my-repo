@@ -1,0 +1,38 @@
+{
+  "name": "test_modules",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "babelMe": "babel  ./scripts --experimental --source-maps-inline -d ./lib",
+    "babelMeWatch": "babel  ./scripts --experimental -w --source-maps-inline -d ./lib",
+    "browserifyMe": "browserify lib/main.js -o bundle.js",
+    "watchifyMe": "watchify lib/main.js -o bundle.js",
+    "browserifyMe-watchifyMe": "browserify lib/main.js -o bundle.js && watchify lib/main.js -o bundle.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^9.0.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "browserify": "^16.2.2",
+    "eslint": "^5.5.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "watchify": "^3.11.0"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ]
+  },
+  "devDependencies": {
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-react": "^7.11.1"
+  }
+}

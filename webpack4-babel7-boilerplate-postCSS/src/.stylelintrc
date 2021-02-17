@@ -1,0 +1,33 @@
+{
+    "rules":
+    {
+        "block-no-empty": null,
+        "color-no-invalid-hex": true,
+        "comment-empty-line-before": ["always",
+        {
+            "ignore": ["stylelint-commands", "after-comment"]
+        }],
+        "declaration-colon-space-after": "always",
+        "indentation": ["tab",
+        {
+            "except": ["value"]
+        }],
+        "block-closing-brace-empty-line-before": null,
+        "block-closing-brace-newline-after": null,
+        "block-closing-brace-newline-before": null,
+        "block-closing-brace-space-after": null,
+        "block-closing-brace-space-before": null,
+        "block-no-empty": null,
+        "block-opening-brace-newline-after": null,
+        "block-opening-brace-newline-before": null,
+        "block-opening-brace-space-after": null,
+        "block-opening-brace-space-before": null,
+        "max-empty-lines": 2,
+        "rule-empty-line-before": ["always",
+        {
+            "except": ["first-nested"],
+            "ignore": ["after-comment"]
+        }],
+        "unit-whitelist": ["em", "rem", "%", "s", "px"]
+    }
+}

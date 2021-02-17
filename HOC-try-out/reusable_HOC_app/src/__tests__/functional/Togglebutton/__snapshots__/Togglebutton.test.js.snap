@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<ToggleSimpleButton
+  action={[Function]}
+  label="sort"
+  toggleLabels={
+    Array [
+      "ASC",
+      "DESC",
+    ]
+  }
+  values={
+    Array [
+      "sortASC",
+      "sortDESC",
+    ]
+  }
+>
+  <ToggleState
+    render={[Function]}
+  >
+    <SimpleButton
+      eventHandler={[Function]}
+      label="sort DESC"
+      value=""
+    >
+      <button
+        className="simple-button"
+        onClick={[Function]}
+      >
+        sort DESC
+      </button>
+    </SimpleButton>
+  </ToggleState>
+</ToggleSimpleButton>
+`;

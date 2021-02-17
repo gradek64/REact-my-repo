@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<Fragment>
+  <Component
+    list={
+      Array [
+        Object {
+          "_id": "593e9297e17df20c4a237d42",
+          "address": "914 Argyle Road Alley",
+          "bathrooms": 2,
+          "bedrooms": 2,
+          "carSpaces": 2,
+          "city": "Singer",
+          "index": 0,
+          "latitude": -33.944576,
+          "longitude": 151.25584,
+          "picture": "images/tn_property01.jpg",
+          "price": 937180,
+        },
+        Object {
+          "_id": "593e9297ec4cca9c56bf61af",
+          "address": "255 Raleigh Place",
+          "bathrooms": 1,
+          "bedrooms": 2,
+          "carSpaces": 0,
+          "city": "Machias",
+          "index": 1,
+          "latitude": -33.944471,
+          "longitude": 151.2541,
+          "picture": "images/tn_property02.jpg",
+          "price": 703725,
+        },
+      ]
+    }
+  />
+</Fragment>
+`;

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Context value is updated by child component 1`] = `
+<div
+  style={
+    Object {
+      "border": "1px dashed blue",
+    }
+  }
+>
+  <ContextProvider
+    value={
+      Object {
+        "dispatchAction": [Function],
+        "list": Object {
+          "greg": "is so cool",
+          "items": Array [
+            Object {
+              "title": "title1",
+            },
+            Object {
+              "title": "title2",
+            },
+            Object {
+              "title": "title3",
+            },
+            Object {
+              "title": "title4",
+            },
+            Object {
+              "title": "title5",
+            },
+          ],
+        },
+      }
+    }
+  >
+    <Info />
+    <List />
+  </ContextProvider>
+</div>
+`;

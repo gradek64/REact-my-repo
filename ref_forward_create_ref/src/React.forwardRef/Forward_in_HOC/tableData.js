@@ -1,0 +1,22 @@
+export default [
+  { firstname: "Gregi", lastname: "Gil", age: 27 },
+  { firstname: "Rikka", lastname: "Hassa", age: 27 },
+  { firstname: "Serena", lastname: "Gal", age: 34 },
+  { firstname: "Gregi", lastname: "Gil", age: 27 },
+  { firstname: "Gregi", lastname: "Gil", age: 67 },
+  { firstname: "Gregi", lastname: "Gil", age: 27 },
+  { firstname: "Rikka", lastname: "Hassa", age: 27 },
+  { firstname: "Serena", lastname: "Gal", age: 34 },
+  { firstname: "Gregi", lastname: "Gil", age: 27 },
+  { firstname: "Gregi", lastname: "Gil", age: 67 },
+  { firstname: "Gregi", lastname: "Gil", age: 27 },
+  { firstname: "Rikka", lastname: "Hassa", age: 27 },
+  { firstname: "Serena", lastname: "Gal", age: 34 },
+  { firstname: "Gregi", lastname: "Gil", age: 27 },
+  { firstname: "Gregi", lastname: "Gil", age: 67 },
+  { firstname: "Gregi", lastname: "Gil", age: 27 },
+  { firstname: "Rikka", lastname: "Hassa", age: 27 },
+  { firstname: "Serena", lastname: "Gal", age: 34 },
+  { firstname: "Gregi", lastname: "Gil", age: 27 },
+  { firstname: "Gregi", lastname: "Gil", age: 67 }
+];

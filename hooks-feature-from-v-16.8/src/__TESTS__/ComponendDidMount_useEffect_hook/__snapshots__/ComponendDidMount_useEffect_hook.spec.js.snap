@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correclty with initial state should take a snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <p
+      id="display"
+    >
+      initial 0
+    </p>
+  </div>
+</DocumentFragment>
+`;

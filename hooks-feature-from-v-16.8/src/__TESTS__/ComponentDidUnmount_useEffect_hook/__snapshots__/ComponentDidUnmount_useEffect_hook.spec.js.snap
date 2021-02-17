@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correclty with initial state should take a snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <span>
+      it logs unmounted state once removed
+    </span>
+    <button
+      type="button"
+    >
+      remove me
+    </button>
+  </div>
+</DocumentFragment>
+`;

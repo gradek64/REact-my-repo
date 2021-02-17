@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<SearchAutoSuggestion
+  classSent=""
+  searchBoxRef={
+    Object {
+      "current": <input
+        class="custom-search"
+        id="results"
+        type="text"
+      />,
+    }
+  }
+  submitHandler={[Function]}
+>
+  <div
+    className="search-auto-suggetions "
+  >
+    <ForwardRef
+      arrowDownUpHandler={[Function]}
+      className="custom-search"
+      id="results"
+      onInputHandler={[Function]}
+      submitHandler={[Function]}
+    >
+      <input
+        className="custom-search"
+        id="results"
+        onInput={[Function]}
+        onKeyDown={[Function]}
+        type="text"
+      />
+    </ForwardRef>
+  </div>
+</SearchAutoSuggestion>
+`;

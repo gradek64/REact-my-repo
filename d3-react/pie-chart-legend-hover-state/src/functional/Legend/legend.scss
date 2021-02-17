@@ -1,0 +1,23 @@
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 10px;
+
+  .legend-fagment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+
+    .swatches {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+    }
+
+    .labels {
+      padding-left: 10px;
+    }
+  }
+}

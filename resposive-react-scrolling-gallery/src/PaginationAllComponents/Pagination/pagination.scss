@@ -1,0 +1,21 @@
+$ballSize: 50rem;
+$ballColor: green;
+$textColor: white;
+$textSize: 0.5rem;
+
+.ball {
+  color: $textColor;
+  font-size: $textSize;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  padding: 5px 8px;
+  background-color: $ballColor;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid transparent;
+
+  &:hover {
+    background-image: linear-gradient(green, orange);
+    border: 1px solid orange;
+  }
+}

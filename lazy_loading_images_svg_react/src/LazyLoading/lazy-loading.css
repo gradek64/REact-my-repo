@@ -1,0 +1,33 @@
+/*
+These styles are just decorative: they don't affect the lazy-loading functionality at all.
+*/
+
+body {
+  text-align: center;
+}
+
+img {
+  display: block;
+  margin: 1em auto;
+  width: 90%;
+  max-width: 800px;
+  background-color: pink;
+  border: 4px solid blue;
+}
+
+button {
+  margin: 1em;
+  padding: 0.5em 1em;
+  border: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.0625em;
+  background-color: #222;
+  color: #fff;
+}
+
+button:hover,
+button:focus {
+  background-color: #444;
+}

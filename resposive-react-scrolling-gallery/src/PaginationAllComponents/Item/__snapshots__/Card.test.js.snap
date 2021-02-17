@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<li
+  className="card"
+  id="card-0"
+>
+  <img
+    alt="Singer"
+    src="images/tn_property01.jpg"
+  />
+</li>
+`;

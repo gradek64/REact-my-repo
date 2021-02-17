@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="pageMask"
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  role="presentation"
+  style={
+    Object {
+      "height": "100vh",
+      "left": "0",
+      "position": "absolute",
+      "top": "0",
+      "width": "100%",
+    }
+  }
+/>
+`;

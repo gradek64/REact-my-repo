@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal should render correctly 1`] = `
+<Fragment>
+  <div
+    className="modal"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="presentation"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={0}
+  >
+    <div
+      className="modal-content"
+    >
+      <Component />
+    </div>
+  </div>
+</Fragment>
+`;
