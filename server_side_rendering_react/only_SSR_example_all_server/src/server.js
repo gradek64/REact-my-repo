@@ -20,7 +20,7 @@ const PORT = 2000;
 
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
   const context = {};
   const store = createStore();
   console.log('route has changed');
