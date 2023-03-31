@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 const Comp = (props) => <p>{props.rendered}</p>;
 
 /**
@@ -10,15 +10,23 @@ const Comp = (props) => <p>{props.rendered}</p>;
  * You also need webpack configuration for both server and browser check webpack.config.js
  **/
 
-const App = (propsFromNode) => (
-  <div>
+const App = (propsFromNode) => {
+  const [count, setCount] = useState(0);
+
+  return (
     <div>
-      <Comp rendered="should be rendered here" />
+      <div>
+        <Comp rendered="should be rendered here" />
+      </div>
+      <p>
+        Hello there {propsFromNode.name} and likes {propsFromNode.likes}{" "}
+      </p>
+      <div>
+        <p>You clicked {count} times</p>
+        <button onClick={() => setCount(count + 1)}>Click me</button>
+      </div>
     </div>
-    <p>
-      Hello {propsFromNode.name} and likes {propsFromNode.likes}{' '}
-    </p>
-  </div>
-);
+  );
+};
 
 export default App;

@@ -1,0 +1,76 @@
+{
+  "name": "react_web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "dev": "concurrently --raw --kill-others \"npm:dev:*\"",
+    "dev:build-server": "webpack -w --config ./config/server/webpack.config.dev.js",
+    "wait": "wait on server to be build before running it",
+    "dev:run-server": "wait-on ./dist/server.js &&  nodemon --inspect  ./dist/server.js",
+    "---INFO---": "need to open on http://localhost:3100/ which hydreated react client app not server",
+    "dev:run:client-dev-server": "webpack-dev-server --hot --config ./config/client/webpack.config.js --mode development --port 3100"
+  },
+  "engines": {
+    "node": ">=16.13.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/react",
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/proposal-class-properties",
+      "@babel/plugin-transform-runtime",
+      "@babel/plugin-syntax-dynamic-import",
+      "react-loadable/babel"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "@types/react": "^16.8.5",
+    "@types/react-loadable": "^5.5.6",
+    "@zxcvbn-ts/core": "^2.0.1",
+    "@zxcvbn-ts/language-common": "^2.0.1",
+    "@zxcvbn-ts/language-en": "^2.0.1",
+    "boxen": "4.2.0",
+    "concurrently": "^6.3.0",
+    "express": "^4.17.1",
+    "isomorphic-fetch": "^3.0.0",
+    "nodemon": "^2.0.13",
+    "react": "16.8.5",
+    "react-content-loader": "^6.1.0",
+    "react-dom": "16.8.5",
+    "react-loadable": "^5.5.0",
+    "react-router-dom": "^5.3.0",
+    "serialize-javascript": "^6.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "7.4.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.16.8",
+    "@babel/preset-react": "7.0.0",
+    "babel-loader": "8.0.5",
+    "babel-regenerator-runtime": "^6.5.0",
+    "css-loader": "2.1.1",
+    "html-loader": "0.5.5",
+    "node-color-log": "^6.0.0",
+    "sass-loader": "7.1.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "2.2.0",
+    "wait-on": "^7.0.1",
+    "chalk": "3.0.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.3",
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-merge": "^4.1.4",
+    "webpack-node-externals": "^1.7.2"
+  }
+}

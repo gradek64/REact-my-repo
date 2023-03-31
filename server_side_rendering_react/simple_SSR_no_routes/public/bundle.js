@@ -60,25 +60,11 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(21);
-} else {
-  module.exports = __webpack_require__(22);
-}
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -271,11 +257,21 @@ process.umask = function () {
 };
 
 /***/ }),
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(6);
+} else {
+  module.exports = __webpack_require__(7);
+}
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -371,7 +367,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 };
 
 /***/ }),
-/* 7 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -467,66 +463,38 @@ checkPropTypes.resetWarningCache = function () {
 };
 
 module.exports = checkPropTypes;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
-
-module.exports = ReactPropTypesSecret;
-
-/***/ }),
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(25);
+  module.exports = __webpack_require__(11);
 } else {
-  module.exports = __webpack_require__(26);
+  module.exports = __webpack_require__(12);
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(23);
+var _reactDom = __webpack_require__(9);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _App = __webpack_require__(31);
+var _App = __webpack_require__(17);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -535,11 +503,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _reactDom2.default.hydrate(_react2.default.createElement(_App2.default, window.__INITIAL_DATA__), document.getElementById('app'));
 
 /***/ }),
-/* 21 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v16.13.1
+/** @license React v16.14.0
  * react.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -552,7 +520,7 @@ _reactDom2.default.hydrate(_react2.default.createElement(_App2.default, window._
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var l = __webpack_require__(6),
+var l = __webpack_require__(2),
     n = "function" === typeof Symbol && Symbol.for,
     p = n ? Symbol.for("react.element") : 60103,
     q = n ? Symbol.for("react.portal") : 60106,
@@ -704,14 +672,14 @@ exports.useLayoutEffect = function (a, b) {
   return Z().useRef(a);
 };exports.useState = function (a) {
   return Z().useState(a);
-};exports.version = "16.13.1";
+};exports.version = "16.14.0";
 
 /***/ }),
-/* 22 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/** @license React v16.13.1
+/* WEBPACK VAR INJECTION */(function(process) {/** @license React v16.14.0
  * react.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -728,10 +696,10 @@ if (process.env.NODE_ENV !== "production") {
   (function () {
     'use strict';
 
-    var _assign = __webpack_require__(6);
-    var checkPropTypes = __webpack_require__(7);
+    var _assign = __webpack_require__(2);
+    var checkPropTypes = __webpack_require__(3);
 
-    var ReactVersion = '16.13.1';
+    var ReactVersion = '16.14.0';
 
     // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
     // nor polyfill, then a plain number is used for performance.
@@ -2603,10 +2571,28 @@ if (process.env.NODE_ENV !== "production") {
     exports.version = ReactVersion;
   })();
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 23 */
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+module.exports = ReactPropTypesSecret;
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2641,18 +2627,18 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(24);
+  module.exports = __webpack_require__(10);
 } else {
-  module.exports = __webpack_require__(27);
+  module.exports = __webpack_require__(13);
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 24 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v16.13.1
+/** @license React v16.14.0
  * react-dom.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -2668,9 +2654,9 @@ if (process.env.NODE_ENV === 'production') {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var aa = __webpack_require__(0),
-    n = __webpack_require__(6),
-    r = __webpack_require__(12);function u(a) {
+var aa = __webpack_require__(1),
+    n = __webpack_require__(2),
+    r = __webpack_require__(4);function u(a) {
   for (var b = "https://reactjs.org/docs/error-decoder.html?invariant=" + a, c = 1; c < arguments.length; c++) {
     b += "&args[]=" + encodeURIComponent(arguments[c]);
   }return "Minified React error #" + a + "; visit " + b + " for the full message or use the non-minified dev environment for full errors and additional helpful warnings.";
@@ -5289,7 +5275,7 @@ Ga = function Ga(a, b, c, d, e) {
     }, findFiberByHostInstance: function findFiberByHostInstance(a) {
       return b ? b(a) : null;
     }, findHostInstancesForRefresh: null, scheduleRefresh: null, scheduleRoot: null, setRefreshHandler: null, getCurrentFiber: null }));
-})({ findFiberByHostInstance: tc, bundleType: 0, version: "16.13.1",
+})({ findFiberByHostInstance: tc, bundleType: 0, version: "16.14.0",
   rendererPackageName: "react-dom" });exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = lk;exports.createPortal = kk;exports.findDOMNode = function (a) {
   if (null == a) return null;if (1 === a.nodeType) return a;var b = a._reactInternalFiber;if (void 0 === b) {
     if ("function" === typeof a.render) throw Error(u(188));throw Error(u(268, Object.keys(a)));
@@ -5317,10 +5303,10 @@ exports.unmountComponentAtNode = function (a) {
 };
 exports.unstable_renderSubtreeIntoContainer = function (a, b, c, d) {
   if (!gk(c)) throw Error(u(200));if (null == a || void 0 === a._reactInternalFiber) throw Error(u(38));return ik(a, b, c, !1, d);
-};exports.version = "16.13.1";
+};exports.version = "16.14.0";
 
 /***/ }),
-/* 25 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5499,7 +5485,7 @@ exports.unstable_shouldYield = function () {
 };
 
 /***/ }),
-/* 26 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6360,21 +6346,21 @@ if (process.env.NODE_ENV !== "production") {
     exports.unstable_wrapCallback = unstable_wrapCallback;
   })();
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 27 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/** @license React v16.13.1
+/* WEBPACK VAR INJECTION */(function(process) {/** @license React v16.14.0
  * react-dom.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
- */var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};if(process.env.NODE_ENV!=="production"){(function(){'use strict';var React=__webpack_require__(0);var _assign=__webpack_require__(6);var Scheduler=__webpack_require__(12);var checkPropTypes=__webpack_require__(7);var tracing=__webpack_require__(28);var ReactSharedInternals=React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;// Prevent newer renderers from RTE when used with older react package versions.
+ */var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};if(process.env.NODE_ENV!=="production"){(function(){'use strict';var React=__webpack_require__(1);var _assign=__webpack_require__(2);var Scheduler=__webpack_require__(4);var checkPropTypes=__webpack_require__(3);var tracing=__webpack_require__(14);var ReactSharedInternals=React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;// Prevent newer renderers from RTE when used with older react package versions.
 // Current owner and dispatcher used to share the same ref,
 // but PR #14548 split them out to better support the react-debug-tools package.
 if(!ReactSharedInternals.hasOwnProperty('ReactCurrentDispatcher')){ReactSharedInternals.ReactCurrentDispatcher={current:null};}if(!ReactSharedInternals.hasOwnProperty('ReactCurrentBatchConfig')){ReactSharedInternals.ReactCurrentBatchConfig={suspense:null};}// by calls to these methods by a Babel plugin.
@@ -10492,7 +10478,7 @@ container._reactRootContainer=null;unmarkContainerAsRoot(container);});});// If 
 return true;}else{{var _rootEl=getReactRootElementInContainer(container);var hasNonRootReactChild=!!(_rootEl&&getInstanceFromNode$1(_rootEl));// Check if the container itself is a React root node.
 var isContainerReactRoot=container.nodeType===ELEMENT_NODE&&isValidContainer(container.parentNode)&&!!container.parentNode._reactRootContainer;if(hasNonRootReactChild){error("unmountComponentAtNode(): The node you're attempting to unmount "+'was rendered by React and is not a top-level container. %s',isContainerReactRoot?'You may have accidentally passed in a React root node instead '+'of its container.':'Instead, have the parent component update its state and '+'rerender in order to remove this component.');}}return false;}}function createPortal(children,containerInfo,// TODO: figure out the API for cross-renderer implementation.
 implementation){var key=arguments.length>3&&arguments[3]!==undefined?arguments[3]:null;return{// This tag allow us to uniquely identify this as a React Portal
-$$typeof:REACT_PORTAL_TYPE,key:key==null?null:''+key,children:children,containerInfo:containerInfo,implementation:implementation};}var ReactVersion='16.13.1';setAttemptUserBlockingHydration(attemptUserBlockingHydration$1);setAttemptContinuousHydration(attemptContinuousHydration$1);setAttemptHydrationAtCurrentPriority(attemptHydrationAtCurrentPriority$1);var didWarnAboutUnstableCreatePortal=false;{if(typeof Map!=='function'||// $FlowIssue Flow incorrectly thinks Map has no prototype
+$$typeof:REACT_PORTAL_TYPE,key:key==null?null:''+key,children:children,containerInfo:containerInfo,implementation:implementation};}var ReactVersion='16.14.0';setAttemptUserBlockingHydration(attemptUserBlockingHydration$1);setAttemptContinuousHydration(attemptContinuousHydration$1);setAttemptHydrationAtCurrentPriority(attemptHydrationAtCurrentPriority$1);var didWarnAboutUnstableCreatePortal=false;{if(typeof Map!=='function'||// $FlowIssue Flow incorrectly thinks Map has no prototype
 Map.prototype==null||typeof Map.prototype.forEach!=='function'||typeof Set!=='function'||// $FlowIssue Flow incorrectly thinks Set has no prototype
 Set.prototype==null||typeof Set.prototype.clear!=='function'||typeof Set.prototype.forEach!=='function'){error('React depends on Map and Set built-in types. Make sure that you load a '+'polyfill in older browsers. https://fb.me/react-polyfills');}}setRestoreImplementation(restoreControlledState$3);setBatchingImplementation(batchedUpdates$1,discreteUpdates$1,flushDiscreteUpdates,batchedEventUpdates$1);function createPortal$1(children,container){var key=arguments.length>2&&arguments[2]!==undefined?arguments[2]:null;if(!isValidContainer(container)){{throw Error("Target container is not a DOM element.");}}// TODO: pass ReactDOM portal implementation as third argument
 // $FlowFixMe The Flow type is opaque but there's no way to actually create it.
@@ -10502,24 +10488,24 @@ Events:[getInstanceFromNode$1,getNodeFromInstance$1,getFiberCurrentPropsFromNode
 if(navigator.userAgent.indexOf('Chrome')>-1&&navigator.userAgent.indexOf('Edge')===-1||navigator.userAgent.indexOf('Firefox')>-1){var protocol=window.location.protocol;// Don't warn in exotic cases like chrome-extension://.
 if(/^(https?|file):$/.test(protocol)){// eslint-disable-next-line react-internal/no-production-logging
 console.info('%cDownload the React DevTools '+'for a better development experience: '+'https://fb.me/react-devtools'+(protocol==='file:'?'\nYou might need to use a local HTTP server (instead of file://): '+'https://fb.me/react-devtools-faq':''),'font-weight:bold');}}}}exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED=Internals;exports.createPortal=createPortal$1;exports.findDOMNode=findDOMNode;exports.flushSync=flushSync;exports.hydrate=hydrate;exports.render=render;exports.unmountComponentAtNode=unmountComponentAtNode;exports.unstable_batchedUpdates=batchedUpdates$1;exports.unstable_createPortal=unstable_createPortal;exports.unstable_renderSubtreeIntoContainer=renderSubtreeIntoContainer;exports.version=ReactVersion;})();}
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 28 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(29);
+  module.exports = __webpack_require__(15);
 } else {
-  module.exports = __webpack_require__(30);
+  module.exports = __webpack_require__(16);
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 29 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10546,7 +10532,7 @@ var b = 0;exports.__interactionsRef = null;exports.__subscriberRef = null;export
 };
 
 /***/ }),
-/* 30 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10897,10 +10883,10 @@ if (process.env.NODE_ENV !== "production") {
     exports.unstable_wrap = unstable_wrap;
   })();
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 31 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10910,7 +10896,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(0);
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -10918,7 +10906,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Comp = function Comp(props) {
   return _react2.default.createElement(
-    'p',
+    "p",
     null,
     props.rendered
   );
@@ -10930,26 +10918,49 @@ var Comp = function Comp(props) {
  * <App/> top container/component  will be rendered on server site and it will accept also
  * props send it to it (no need to match content on server cause) cause this component
  * is imported directly in server.js so this is being rendered on server site and displayed
- *
+ * You also need webpack configuration for both server and browser check webpack.config.js
  **/
 
 var App = function App(propsFromNode) {
+  var _useState = (0, _react.useState)(0),
+      _useState2 = _slicedToArray(_useState, 2),
+      count = _useState2[0],
+      setCount = _useState2[1];
+
   return _react2.default.createElement(
-    'div',
+    "div",
     null,
     _react2.default.createElement(
-      'div',
+      "div",
       null,
-      _react2.default.createElement(Comp, { rendered: 'should be rendered here' })
+      _react2.default.createElement(Comp, { rendered: "should be rendered here" })
     ),
     _react2.default.createElement(
-      'p',
+      "p",
       null,
-      'Hello ',
+      "Hello there ",
       propsFromNode.name,
-      ' and likes ',
+      " and likes ",
       propsFromNode.likes,
-      ' '
+      " "
+    ),
+    _react2.default.createElement(
+      "div",
+      null,
+      _react2.default.createElement(
+        "p",
+        null,
+        "You clicked ",
+        count,
+        " times"
+      ),
+      _react2.default.createElement(
+        "button",
+        { onClick: function onClick() {
+            return setCount(count + 1);
+          } },
+        "Click me"
+      )
     )
   );
 };
