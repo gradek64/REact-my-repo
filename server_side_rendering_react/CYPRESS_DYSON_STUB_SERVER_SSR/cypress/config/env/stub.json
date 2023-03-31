@@ -1,0 +1,4 @@
+{
+  "baseUrl": "http://localhost:3100",
+  "dysonStubCookie": "dyson_payment_session"
+}

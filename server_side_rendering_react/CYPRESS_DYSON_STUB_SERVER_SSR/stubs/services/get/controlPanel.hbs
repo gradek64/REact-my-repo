@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://www.argos.co.uk/assets/bolt/0.13.1/css/bolt.min.css" media="screen, projection" rel="stylesheet" type="text/css" charset="UTF-8">
+  <link href="https://www.argos.co.uk/assets/bolt2/3.3.0/bolt.min.css" media="screen, projection" rel="stylesheet" type="text/css" charset="UTF-8">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+  <style>
+    .margin-top-20 {
+      margin-top: 20px;
+    }
+
+    .margin-bottom-20 {
+      margin-bottom: 20px;
+    }
+
+    pre.prettyprint {
+      border: none!important;
+      margin-bottom: 30px;
+    }
+
+    .h1 {
+      margin-bottom: 30px !important;
+    }
+
+    .h3 {
+      margin-top: 0;
+    }
+
+    .optionsContainer {
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    .accordion__checkbox {
+      display: none;
+    }
+    .accordion__label {
+      position: relative;
+      display: block;
+      cursor: pointer;
+    }
+    .accordion__label:after {
+      content: "-";
+      position: absolute;
+      right: 1em;
+    }
+    input.accordion__checkbox:checked + .accordion__label:after {
+      content: "+";
+    }
+    input.accordion__checkbox:unchecked ~ .accordion__panel {
+      display: block;
+    }
+    input.accordion__checkbox:checked ~ .accordion__panel {
+      display: none;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    ul li a {
+      margin: 5px
+    }
+  </style>
+</head>
+
+<body class="bolt-v2">
+  <main class="container">
+    <div class="xs-row">
+      <div class="xs-12">
+        <h1 class="h1">Login Dashboard
+          <button class="button button--tiny clickStub" data-object="session" data-type="destroy">Reset session</button>
+        </h1>
+      </div>
+    </div>
+    <div class="xs-row">
+      <div class="xs-7">
+        <div class="background-color-grey-light optionsContainer">
+          <h3 class="h3">Config options</h3>
+          <div class="form-group">
+            <label class="form-group__label" for="brandConfig">
+              Brand:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="brandConfig" data-object="configCookies" data-type="setBrandConfigCookie">
+                {{#each brandOptionsDatasets}} {{option @key description info disabled ../brandCookie}} {{/each}}
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="background-color-grey-light optionsContainer">
+          <h3 class="h3">User options</h3>
+          <div class="form-group">
+            <label class="form-group__label" for="toggleLoginStatus">
+              Login status:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleLoginStatus" data-object="user" data-type="setLoginState">
+                {{#each loginOptions}} {{option @key description info disabled ../selectedLoginValue}} {{/each}}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="background-color-grey-light optionsContainer">
+          <h3 class="h3">Response Options</h3>
+          <div class="checkbox">
+            <input type="checkbox" class="checkbox__input changeStub" id="toggleCookie" data-object="loginService" data-type="setCookie"{{checkedIf selectedSetCookie}}>
+            <label class="checkbox__label" for="toggleCookie">Response sends cookie 🍪:</label>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleLoginData">
+              Login Response:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleLoginData" data-object="loginService" data-type="loginData">
+                {{#each loginDatasets}} {{option @key description info disabled ../selectedLoginType}} {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleRegistrationData">
+              Registration Response:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleRegistrationData" data-object="loginService" data-type="registrationData">
+                {{#each registrationDatasets}} {{option @key description info disabled ../selectedRegistrationType}} {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleForgottenPasswordData">
+              Forgotten Password Response:<br />
+              (not supported on remoteStub)
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleForgottenPasswordData" data-object="loginService" data-type="forgottenPasswordData">
+                {{#each forgottenPasswordDatasets}} {{option @key description info disabled ../selectedForgottenPasswordType}} {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="togglePasswordLinkData">
+              Password Link Response:<br />
+              (not supported on remoteStub)
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="togglePasswordLinkData" data-object="loginService" data-type="passwordLinkData">
+                {{#each passwordLinkDatasets}} {{option @key description info disabled ../selectedPasswordLinkType}} {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="togglePasswordChangeData">
+              Password Change Response:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="togglePasswordChangeData" data-object="loginService" data-type="passwordChangeData">
+                {{#each passwordChangeDatasets}} {{option @key description info disabled ../selectedPasswordChangeType}} {{/each}}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="background-color-grey-light optionsContainer">
+          <h3 class="h3">Iovation transaction risk result options</h3>
+          <div class="form-group">
+            <label class="form-group__label" for="toggleIovationResult">
+              Result:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleIovationResult" data-object="iovationService" data-type="setIovationResult">
+                {{#each iovationResultOptions}} {{option @key description info disabled ../selectedIovationResultValue}} {{/each}}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button class="button button--tiny clickStub" data-object="session" data-type="destroy">Reset session</button>
+        </div>
+      </div>
+
+      <div class="xs-5">
+        <div class="background-color-grey-light optionsContainer">
+          <ul>
+            <li><h3 class="h4">Mock pages</h3></li>
+            <li><a target="_blank" href="/basket">Basket page</a></li>
+            <li><a target="_blank" href="/pnpl">Pay Now, Pay Later page</a></li>
+            <li><h3 class="h4">Login pages</h3></li>
+            <li><a target="_blank" href="/login?pageName=payNow">Prepay collection</a></li>
+            <li><a target="_blank" href="/login?pageName=mandatoryPrepay">Mandatory prepay</a></li>
+            <li><a target="_blank" href="/login?pageName=delivery">Delivery</a></li>
+            <li><a target="_blank" href="/login?pageName=monthlyCare&successUrl=%2Fmonthly-care%3FpurchaseOrderId%3D123%26purchaseSku%3D456">Custom return URL</a></li>
+            <li><a target="_blank" href="/login?pageName=payNow&successUrl=%2Fcheckout%2F1c496acc-305b-486a-bd2a-7b192691063b%2Fpayment&allowGuest=true">Prepay collection &amp; guest user</a></li>
+            <li><h3 class="h4">Registration pages</h3></li>
+            <li><a target="_blank" href="/register?pageName=payNow">Registration</a></li>
+            <li><a target="_blank" href="/register?pageName=monthlyCare&successUrl=%2Fmonthly-care%3FpurchaseOrderId%3D123%26purchaseSku%3D456">Registration with custom return URL</a></li>
+            <li><h3 class="h4">Password pages</h3></li>
+            <li><a target="_blank" href="/forgotten-password">Forgotten Password</a></li>
+            <li><a target="_blank" href="/reset-password?krypto=12345&traceablereference=abcdef">Reset Password</a></li>
+            <li><a target="_blank" href="/reset-password?krypto=12345">Expired Reset Password Link</a></li>
+            <li><h3 class="h4">Error pages</h3></li>
+            <li><a target="_blank" href="/login/error">Generic Error page</a></li>
+          </ul>
+          <br />
+        </div>
+        <div>
+          <input class="accordion__checkbox" type="checkbox" name="panel-1" id="panel-1">
+          <label class="accordion__label h2" for="panel-1">Current session</label>
+          <div class="accordion__panel">
+            <pre class="prettyprint"><code class="language-js">{{sessionDataJson}}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <script>
+    $(document).ready(function () {
+      $('.changeStub').change(function () {
+        $.ajax({
+          type: 'GET',
+          url: '/login-stub/' + $(this).data('object'),
+          data: {
+            type: $(this).data('type'),
+            value: $(this).attr('type') === 'checkbox' ? $(this).is(':checked') : $(this).val()
+          },
+          success: function () {
+            location.reload()
+          }
+        })
+      })
+      $('.clickStub').click(function () {
+        $.ajax({
+          type: 'GET',
+          url: '/login-stub/' + $(this).data('object'),
+          data: {
+            type: $(this).data('type'),
+            value: $(this).data('value')
+          },
+          success: function () {
+            location.reload()
+          }
+        })
+      })
+    })
+  </script>
+</body>
+
+</html>
