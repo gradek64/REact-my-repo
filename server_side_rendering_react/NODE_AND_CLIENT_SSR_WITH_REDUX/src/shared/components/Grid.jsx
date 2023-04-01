@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 //thunk redux action
-import { fetchData } from "../Redux/actions/actions";
+// import { fetchData } from "../Redux/actions/actions";
 
 const Grid = (props) => {
   //this state has been generated in server site (ssr.js)
@@ -16,7 +16,7 @@ const Grid = (props) => {
     //in this case since state.data is shared between routes
     //u need check if global webpack const is __isBrowser__ set
     if (__isBrowser__) {
-      dispatch(fetchData(repo_name));
+      // dispatch(fetchData(repo_name));
     }
   }, [repo_name, dispatch]); //check based on param change
 

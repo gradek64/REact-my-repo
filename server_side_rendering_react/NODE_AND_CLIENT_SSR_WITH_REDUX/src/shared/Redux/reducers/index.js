@@ -1,15 +1,13 @@
-import { combineReducers } from "redux";
-import { connectRouter } from "connected-react-router";
+import { combineReducers } from 'redux'
+import { connectRouter } from 'connected-react-router'
 
-import data from "../reducers/dataReducer";
+import promotions from './promotions/promosReducer'
 
-/**
- * @param {} history either browser or memory history(server site static router)
- */
 const createRootReducer = (history) =>
   combineReducers({
-    data,
-    router: connectRouter(history),
-  });
+    promotions,
+    router: connectRouter(history)
 
-export default createRootReducer;
+  })
+
+export default createRootReducer
