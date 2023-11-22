@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import PasswordInput from './PasswordStrength/PasswordInputCheck'
 export default function Home() {
   // Declare a new state variable, which we'll call "count"

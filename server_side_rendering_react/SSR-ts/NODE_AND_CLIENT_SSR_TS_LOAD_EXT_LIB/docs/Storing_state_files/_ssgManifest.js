@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fconfirm-subscription","\u002F","\u002Fposts\u002Freact-state-url","\u002Fposts\u002F[id]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
