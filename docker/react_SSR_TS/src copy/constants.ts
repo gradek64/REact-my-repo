@@ -1,0 +1,3 @@
+export enum API_ERRORS {
+  HASHES_DO_NOT_EQUAL = 'HASHES_DO_NOT_EQUAL',
+}

@@ -1,0 +1,14 @@
+FROM node:16.13.2
+
+WORKDIR /app
+
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+
+RUN npm install
+
+# This COPY command will take all the files located in the current directory and copies them into the image
+COPY . .
+
+# run image with CMD command as : node server.js
+CMD [ "npm", "start" ]
