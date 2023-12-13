@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Dashboard - Payment</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link href="https://www.argos.co.uk/assets/bolt/0.13.1/css/bolt.min.css" media="screen, projection" rel="stylesheet"
+    type="text/css" charset="UTF-8">
+  <link href="https://www.argos.co.uk/assets/bolt2/3.3.0/bolt.min.css" media="screen, projection" rel="stylesheet"
+    type="text/css" charset="UTF-8">
+  <link href="/public/stub/controlPanel.css" media="screen, projection" rel="stylesheet" type="text/css"
+    charset="UTF-8">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</head>
+
+<body class="bolt-v2">
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#shipment-options">Shipments</a></li>
+        <li><a href="#user-options">User</a></li>
+        <li><a href="#addresses-options">Addresses</a></li>
+        <li><a href="#get-order-options">Get Order</a></li>
+        <li><a href="#arrange-delivery-options">Arrange Delivery</a></li>
+        <li><a href="#other-options">Other</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="sidebar">
+      <h1 class="h2">Payment Dashboard</h1>
+      <button class="button sidebar__button clickStub" data-object="session" data-type="destroy">Reset</button>
+      <br />
+      <ul>
+        <h2 class="h4">Checkout Pages</h2>
+        <li><a target="_blank" href="/checkout/{{uuid}}?fulfilment={{checkoutUrlFulfilmentParam}}">Start Checkout</a></li>
+        <li><a target="_blank" href="/checkout/{{uuid}}/payment">Payment &mdash; initialised</a></li>
+        <li><a target="_blank" href="/checkout/{{uuid}}/guest">Guest checkout</a></li>
+        <li><a target="_blank" href="/checkout/{{uuid}}/delivery">Delivery</a></li>
+        <br />
+        <h2 class="h4">Confirmation Pages</h2>
+        <li><a target="_blank" href="/confirmation/6586587637">Confirmation</a></li>
+        <li><a target="_blank" href="/confirmation/error">Payment not processable</a></li>
+        <br />
+        <h2 class="h4">Order Retrieval Pages</h2>
+        <li><a target="_blank" href="/order/tracking">Order retrieval form</a></li>
+        <li><a target="_blank" href="/order/tracking/6586587637">Manage order</a></li>
+        <br />
+        <div>
+          <input class="accordion__checkbox" checked type="checkbox" name="mock-pages" id="mock-pages">
+          <label class="accordion__label sidebar-accordion h4" for="mock-pages">Mock Pages</label>
+          <div class="accordion__panel">
+            <li><a target="_blank" href="/basket">Basket</a></li>
+            <li><a target="_blank" href="/login">Login</a></li>
+            <li><a target="_blank" href="/register">Registration</a></li>
+            <li><a target="_blank" href="/checkout/animation">Place order preview</a></li>
+            <li><a target="_blank" href="/credit-application/{{uuid}}">Credit Application</a></li>
+            <li><a target="_blank" href="/monthly-payment-plan-application/{{uuid}}">MPP Application</a></li>
+          </div>
+        </div>
+      </ul>
+    </div>
+    <div class="main">
+      <div class="xs-row">
+        <div class="xs-12">
+          <h3 class="h4" id="shipment-options">
+            Shipments
+            <button class="button button--tiny button--secondary button--reset clickStub" data-object="basket" data-type="reset">Reset shipments</button>
+          </h3>
+          <br />
+        </div>
+
+        {{#each shipments}}
+          <div class="optionsContainer xs-12 md-6 lg-4">
+            <div class="shipment__title">
+              <strong>{{capitaliseFirstLetter fulfilmentType}}</strong>
+              <button class="button--transparent button--borderless clickStub" data-object="shipment" data-type="delete" data-index="{{@index}}"><strong>✕</strong></button>
+            </div>
+
+            {{#ifvalue fulfilmentType values='DELIVERY,HD'}}
+              <div class="form-group">
+                <label class="form-group__label" for="toggleShipmentType">Type:</label>
+                <div class="form-group__input-wrapper">
+                  <select class="form-group__input changeStub" id="toggleShipmentType" data-object="shipment" data-type="shipmentType" data-index="{{@index}}">
+                    {{#each ../../deliveryShipmentTypes}} {{option @key @this @this disabled ../../shipmentType}} {{/each}}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-group__label" for="toggleShipmentType">Fulfilment status:</label>
+                <div class="form-group__input-wrapper">
+                  <select class="form-group__input changeStub" id="toggleFulfilmentStatus" data-object="shipment" data-type="fulfilmentStatus" data-index="{{@index}}">
+                    {{#each ../../fulfilmentStatus}} {{option @key @this @this disabled ../../fulfilmentStatus}} {{/each}}
+                  </select>
+                </div>
+              </div>
+              {{#ifvalue ../shipmentType values="SMALL_ITEM,LARGE_ITEM,CLOTHING"}}
+                <div class="form-group">
+                  <label class="form-group__label" for="toggleSlotAvailability">Slots:</label>
+                  <div class="form-group__input-wrapper">
+                    <select class="form-group__input changeStub" id="toggleSlotAvailability" data-object="shipment" data-type="toggleSlotAvailability" data-index="{{@index}}">
+                      {{#each ../../slotAvailability}} {{option @key @this @this disabled ../../slotAvailability}} {{/each}}
+                    </select>
+                  </div>
+                </div>
+              {{/ifvalue}}
+              <div class="form-group">
+                <label class="form-group__label" for="toggleDeliverableDays">Deliverable days:</label>
+                <div class="form-group__input-wrapper">
+                  <select class="form-group__input changeStub" id="toggleDeliverableDays" data-object="shipment" data-type="toggleDeliverableDays" data-index="{{@index}}">
+                    {{#each ../../deliverableDays}} {{option @key @this @this disabled ../../deliverableDays}} {{/each}}
+                  </select>
+                </div>
+              </div>
+
+              
+            {{/ifvalue}}
+
+            <div class="form-group">
+              <label class="form-group__label" for="toggleBasketData">
+                Basket:
+              </label>
+              <div class="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="toggleBasketData" data-object="shipment"
+                  data-type="basketData" data-index="{{@index}}">
+                  {{#each (lookup ../basketDatasets shipmentType)}} {{option @key description info disabled ../basketType}} {{/each}}
+                </select>
+              </div>
+            </div>
+            {{#ifvalue fulfilmentType value='COLLECTION'}}
+            <div class="form-group">
+              <label class="form-group__label" for="toggleFulfilmentData">
+                Fulfilments:
+              </label>
+              <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="toggleFulfilmentData" data-object="confirmation"
+                  data-type="fulfilmentData">
+                  {{#each ../../fulfilmentDatasets}}
+                  {{option @key description info disabled ../../../selectedFulfilmentSet}}
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-group__label" for="toggleShipmentCountData">
+                Number of shipments:
+              </label>
+              <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="toggleShipmentCountData" data-object="get-order"
+                  data-type="shipmentCountData">
+                  {{#each ../../shipmentCountDatasets}}
+                  {{option @key description info disabled ../../../selectedShipmentsCount}}
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-group__label" for="toggleShipmentStartTime">
+                Shipment collection start time:
+              </label>
+              <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="toggleShipmentStartTime" data-object="confirmation"
+                  data-type="shipmentStartTime">
+                  {{#each ../../shipmentStartTimeDatasets}}
+                  {{option @key description info disabled ../../../selectedShipmentsStartTime}}
+                  {{/each}}
+                </select>
+                <div class="checkbox">
+                <input type="checkbox" id="toggleStoreData" class="checkbox__input changeStub" data-object="store"
+                  data-type="setMissingStoreData" {{#if ../../hasMissingStoreInfo }}checked{{/if}}>
+                <label for="toggleStoreData" class="checkbox__label">set missing store data</label>
+              </div>
+              </div>
+            </div>
+            {{/ifvalue}}
+            {{#ifvalue fulfilmentType values='DELIVERY,HD'}}
+              {{#ifvalue ../shipmentType value="DIGITAL_DOWNLOAD"}}
+                <p class="note"><strong>Note:</strong> Delivery instructions can't be added to a digital download</p>
+              {{/ifvalue}}
+              {{#ifvalue ../shipmentType value="WARRANTY"}}
+                <p class="note"><strong>Note:</strong> Delivery instructions can't be added to a warranty</p>
+              {{/ifvalue}}
+              {{#ifvalue ../shipmentType value="PRE_ORDER"}}
+                <p class="note"><strong>Note:</strong> Delivery instructions can't be added to a pre-order</p>
+              {{/ifvalue}}
+              <div class="checkbox">
+                <input type="checkbox" id="toggleDeliveryInstructions-{{@index}}" class="checkbox__input changeStub" data-object="shipment"
+                  data-type="toggleDeliveryInstructions" data-index="{{@index}}" {{#if ../deliveryInstruction}}checked{{/if}}
+                  {{#ifvalue ../shipmentType value="DIGITAL_DOWNLOAD"}}disabled{{/ifvalue}}
+                  {{#ifvalue ../shipmentType value="WARRANTY"}}disabled{{/ifvalue}}
+                  {{#ifvalue ../shipmentType value="PRE_ORDER"}}disabled{{/ifvalue}}>
+                <label for="toggleDeliveryInstructions-{{@index}}" class="checkbox__label">Add delivery instructions</label>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" id="toggleSpecialDelivery-{{@index}}" class="checkbox__input changeStub" data-object="shipment"
+                  data-type="toggleSpecialDelivery" data-index="{{@index}}" {{#if ../isSpecialDelivery}}checked{{/if}} />
+                <label for="toggleSpecialDelivery-{{@index}}" class="checkbox__label">Is special delivery</label>
+              </div>
+            {{/ifvalue}}
+          </div>
+        {{/each}}
+
+        <div class="optionsContainer xs-12 md-6 lg-4">
+          <div class="xs-stack xs-middle">
+            <div class="xs-12 form-group">
+              <button class="button-link clickStub" data-object="shipment" data-type="addCollectionShipment">Add collection</button>
+            </div>
+            <div class="xs-12 form-group">
+              <button class="button-link clickStub" data-object="shipment" data-type="addDeliveryShipment">Add delivery</button>
+            </div>
+            <div class="xs-12 form-group">
+              <button class="button-link clickStub" data-object="shipment" data-type="addAllDeliveryShipments">Add all delivery shipments</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="xs-row">
+        <div class="xs-12">
+          <h3 class="h4" id="user-options">
+            User
+          </h3>
+          <br />
+        </div>
+
+        <div class="xs-12 md-6 lg-4">
+          <div class="optionsContainer">
+            <h3 class="h4">User presets</h3>
+            <div class="form-group">
+              <label class="form-group__label" for="toggleCustomerType">
+                Auth presets
+              </label>
+
+              <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="toggleCustomerType" data-object="user-presets" data-type="auth">
+                  <option disabled selected value> -- select a preset -- </option>
+                  <option value="noAuth">401 | No auth</option>
+                  <option value="noLink">404 | Snapshot not yet linked to a user</option>
+                  <option value="guestValid">200 | Guest | Accessing their own snapshot</option>
+                  <option value="guestValidNoAddressData">200 | Guest | Accessing their own snapshot (no address data)</option>
+                  <option value="guestInvalidRegistered">401 | Guest | Accessing somebody else's snapshot</option>
+                  <option value="guestInvalidGuest">401 | Guest | Accessing somebody else's guest snapshot</option>
+                  <option value="registeredValid">200 | Registered | Accessing their own snapshot</option>
+                  <option value="registeredInvalidRegistered">401 | Registered | Accessing somebody else's snapshot</option>
+                  <option value="registeredInvalidGuest">401 | Registered | Accessing somebody else's guest snapshot</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="optionsContainer">
+            <h3 class="h4">Patch Customer</h3>
+              <div class="form-group">
+                <label class="form-group__label" for="togglePatchCustomerResponse">
+                  Patch Customer Responses:
+                </label>
+
+                <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="togglePatchCustomerResponse" data-object="patch-customer" data-type="patchCustomer">
+                  {{#each patchCustomerResponseData}} {{option @key description info disabled ../selectedPatchCustomerResponse}} {{/each}}
+                </select>
+                </div>
+              </div>
+          </div>
+          <div class="optionsContainer">
+            <h3 class="h4">Marketing preferences</h3>
+            <div class="form-group">
+              <label class="form-group__label" for="marketingPreferencesResponseStatus">
+                API Response Code:
+              </label>
+              <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="marketingPreferencesResponseStatus" data-object="user" data-type="marketingPreferencesResponseStatus">
+                  {{#each marketingPreferenceResponseStatusData}} {{option @key description info disabled ../marketingPreferenceResponseStatus}} {{/each}}
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-group__label" for="argosMarketingPreferenceResponse">
+                Argos:
+              </label>
+              <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="argosMarketingPreferenceResponse" data-object="user" data-type="argosMarketingPreferences">
+                  {{#each marketingPreferenceData}} {{option @key description info disabled ../argosMarketingPreference}} {{/each}}
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-group__label" for="habitatMarketingPreferenceResponse">
+                Habitat:
+              </label>
+              <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="habitatMarketingPreferenceResponse" data-object="user" data-type="habitatMarketingPreferences">
+                  {{#each marketingPreferenceData}} {{option @key description info disabled ../habitatMarketingPreference}} {{/each}}
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-group__label" for="tuMarketingPreferenceResponse">
+                Tu:
+              </label>
+              <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="tuMarketingPreferenceResponse" data-object="user" data-type="tuMarketingPreferences">
+                  {{#each marketingPreferenceData}} {{option @key description info disabled ../tuMarketingPreference}} {{/each}}
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="xs-12 md-6 lg-4">
+          <div class="optionsContainer">
+            <h3 class="h4">Checkout Service</h3>
+
+            <div class="form-group">
+              <label class="form-group__label" for="toggleCustomerType">
+                Customer type
+              </label>
+
+              <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="toggleCustomerType" data-object="snapshot-service" data-type="customerType">
+                  {{#each customerDataset}} {{option @key description info disabled ../selectedCustomerType}} {{/each}}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="optionsContainer">
+            <h3 class="h4">WCS</h3>
+
+            <div class="form-group">
+              <label class="form-group__label" for="toggleUserData">
+                User type
+              </label>
+
+              <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="toggleUserData" data-object="user" data-type="userData">
+                  {{#each userDatasets}} {{option @key description info disabled ../selectedUser}} {{/each}}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="optionsContainer">
+            <h3 class="h4">Session Manager</h3>
+
+            <div class="form-group">
+              <label class="form-group__label" for="toggleUserSessionManager">
+                Session type
+              </label>
+
+              <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="toggleUserSessionManager" data-object="user-session-manager" data-type="userSessionType">
+                  <option value="user" disabled {{#ifvalue userSessionType value="user"}}selected{{/ifvalue}}>User</option>
+                  <option value="guest" disabled {{#ifvalue userSessionType value="guest"}}selected{{/ifvalue}}>Guest</option>
+                  <option value="anonymous" {{#ifvalue userSessionType value="anonymous"}}selected{{/ifvalue}}>Anonymous</option>
+                  <option value="none" {{#ifvalue userSessionType value="none"}}selected{{/ifvalue}}>None</option>
+                </select>
+              </div>
+
+              <small>For Guest MVP, guest users will use an "anonymous" token.</small>
+            </div>
+
+            <div class="form-group">
+              <label class="form-group__label" for="toggleUserSessionManagerData">
+                Create Anonymous Session scenario
+              </label>
+
+              <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="toggleUserSessionManagerData" data-object="user-session-manager" data-type="userSessionManager">
+                  {{#each userSessionManagerResponseData}} {{option @key description info disabled ../selectedUserSessionManagerResponse}} {{/each}}
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-group__label" for="toggleCheckUserAccountResponses">
+                Check User Account API:
+              </label>
+
+              <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="toggleCheckUserAccountResponses" data-object="check-user-account-service" data-type="checkUserAccountService">
+                {{#each checkUserAccountServiceResponseData}} {{option @key description info disabled ../selectedUserAccountServiceResponseData}} {{/each}}
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-group__label" for="toggleCreateUserAccountResponses">
+                Create User Account API:
+              </label>
+
+              <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="toggleCreateUserAccountResponses" data-object="create-user-account-service" data-type="createUserAccountService">
+                {{#each createUserAccountServiceResponseData}} {{option @key description info disabled ../selectedUserCreateAccountServiceResponseData}} {{/each}}
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="optionsContainer xs-12 md-6 lg-4" id="wallet-options">
+          <h3 class="h4">Wallet</h3>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleWalletData">
+              Saved cards
+            </label>
+
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleWalletData" data-object="wallet" data-type="walletData">
+                {{#each walletData}} {{option @key description info disabled ../selectedWalletType}} {{/each}}
+              </select>
+            </div>
+          </div>
+
+         
+
+          <div class="form-group">
+            <label class="form-group__label" for="NectarCardDeleted" style='display: flex;align-items:center;'>
+              Delete Nectar Card
+            </label>
+
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="NectarCardDeleted" data-object="nectar" data-type="deleteCard">
+                {{#each deleteNectarCardDatasets}} {{option @key description info disabled ../selectedDeleteNectarCardResponseData}} {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleWalletResponseData">
+              Get Wallet scenario
+            </label>
+
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleWalletResponseData" data-object="wallet" data-type="walletResponseData">
+                {{#each walletResponseData}} {{option @key description info disabled ../selectedWalletResponseType}} {{/each}}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="xs-row">
+        <div class="xs-12">
+          <h3 class="h4" id="addresses-options">Addresses</h3>
+          <br />
+        </div>
+
+        <div class='optionsContainer xs-12 md-6 lg-4'>
+          <h3 class="h4">Snapshot</h3>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleUpdateBillingAddress">
+              Update Billing Address scenario
+            </label>
+
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleUpdateBillingAddress" data-object="address"
+                data-type="updateBillingAddressResponseData">
+                {{#each updateBillingAddressResponseData}}
+                {{option @key description info disabled ../selectedUpdateBillingAddressType}} {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleUpdateContactAddressResponseData">
+              Update Contact Address scenario
+            </label>
+
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleUpdateContactAddressResponseData" data-object="address"
+                data-type="updateContactAddressResponseData">
+                {{#each updateContactAddressResponseData}}
+                {{option @key description info disabled ../selectedUpdateContactAddressResponseType}} {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleUpdateDeliveryAddressResponseData">
+              Update Delivery Address scenario
+            </label>
+
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleUpdateDeliveryAddressResponseData" data-object="address"
+                data-type="updateDeliveryAddressResponseData">
+                {{#each updateDeliveryAddressResponseData}}
+                {{option @key description info disabled ../selectedUpdateDeliveryAddressResponseType}} {{/each}}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="optionsContainer xs-12 md-6 lg-4">
+          <h3 class="h4">Account ({{addressCount}} addresses)</h3>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleAddressData">
+              Addresses scenario
+            </label>
+
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleAddressData" data-object="address"
+                data-type="addressData">
+                {{#each addressDatasets}} {{option @key description info disabled ../selectedAddressType}} {{/each}}
+              </select>
+            </div>
+
+            <div class="checkbox">
+              <input type="checkbox" id="toggleContactAddress" class="checkbox__input changeStub" data-object="user"
+                data-type="isFirstAddressPreferred" {{#if isFirstAddressPreferred}}checked{{/if}} {{#if
+                isPreferredAddressDisabled}}disabled{{/if}}>
+              <label for="toggleContactAddress" class="checkbox__label">Set first address as preferred</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleAddAddressResponseData">
+              Add Account Address scenario
+            </label>
+
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleAddAddressResponseData" data-object="address"
+                data-type="addAddressResponseData">
+                {{#each addAddressResponseData}}
+                {{option @key description info disabled ../selectedAddAddressResponseType}} {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleUpdateAddressResponseData">
+              Edit Account Address scenario
+            </label>
+
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleUpdateAddressResponseData" data-object="address"
+                data-type="updateAddressResponseData">
+                {{#each updateAddressResponseData}}
+                {{option @key description info disabled ../selectedUpdateAddressResponseType}} {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleGetAddressResponseData">
+              Get Account Addresses scenario
+            </label>
+
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleGetAddressResponseData" data-object="address"
+                data-type="getAddressResponseData">
+                {{#each getAddressResponseData}}
+                {{option @key description info disabled ../selectedGetAddressResponseType}} {{/each}}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="optionsContainer xs-12 md-6 lg-4">
+          <h3 class="h4">Address presets</h3>
+
+          <div class="form-group">
+            <label class="form-group__label">Billing address</label>
+
+            {{#if billing.id}}
+              <p class="note"><strong>ID:</strong> {{billing.id}}</p>
+
+              <div className="form-group__input-wrapper">
+                {{#if billing.isUK}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setBillingInternational">Set to international address</button><br>
+                {{else}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setBillingUK">Set to UK address</button><br>
+                {{/if}}
+
+                {{#if billing.isSingleCharFirstName}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setBillingMultiCharFirstName">Set first name to multiple characters</button><br>
+                {{else}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setBillingSingleCharFirstName">Set first name to single character</button><br>
+                {{/if}}
+
+                {{#if billing.contactMismatch}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setBillingMatchContact">Match contact address</button><br>
+                {{else}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setBillingUnique">Unmatch contact address</button><br>
+                {{/if}}
+
+                {{#if delivery.id}}
+                  {{#if billing.deliveryMismatch}}
+                    <button class="button-link clickStub" data-object="address-presets" data-type="setBillingMatchDelivery">Match delivery address</button><br>
+                  {{else}}
+                    <button class="button-link clickStub" data-object="address-presets" data-type="setBillingUnique">Unmatch delivery address</button><br>
+                  {{/if}}
+                {{/if}}
+              </div>
+            {{else}}
+              <p class="note">User has no addresses</p>
+            {{/if}}
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label">Contact address</label>
+
+            {{#if contact.id}}
+              <p class="note"><strong>ID:</strong> {{contact.id}}</p>
+
+              <div className="form-group__input-wrapper">
+                {{#if contact.isUK}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setContactInternational">Set to international address</button><br>
+                {{else}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setContactUK">Set to UK address</button><br>
+                {{/if}}
+
+                {{#if contact.isSingleCharFirstName}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setContactMultiCharFirstName">Set first name to multiple characters</button><br>
+                {{else}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setContactSingleCharFirstName">Set first name to single character</button><br>
+                {{/if}}
+
+                {{#if contact.billingMismatch}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setContactMatchBilling">Match billing address</button><br>
+                {{else}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setContactUnique">Unmatch billing address</button><br>
+                {{/if}}
+
+                {{#if delivery.id}}
+                  {{#if contact.deliveryMismatch}}
+                    <button class="button-link clickStub" data-object="address-presets" data-type="setContactMatchDelivery">Match delivery address</button><br>
+                  {{else}}
+                    <button class="button-link clickStub" data-object="address-presets" data-type="setContactUnique">Unmatch delivery address</button><br>
+                  {{/if}}
+                {{/if}}
+              </div>
+            {{else}}
+              <p class="note">User has no addresses</p>
+            {{/if}}
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label">Delivery address</label>
+
+            {{#if delivery.id}}
+              <p class="note"><strong>ID:</strong> {{delivery.id}}</p>
+
+              <div className="form-group__input-wrapper">
+                {{#if delivery.isSingleCharFirstName}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setDeliveryMultiCharFirstName">Set first name to multiple characters</button><br>
+                {{else}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setDeliverySingleCharFirstName">Set first name to single character</button><br>
+                {{/if}}
+
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setDeliveryOnlyLocalizedPostcode">Set only localised postcode in address</button><br>
+
+                {{#if delivery.billingMismatch}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setDeliveryMatchBilling">Match billing address</button><br>
+                {{else}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setDeliveryUnique">Unmatch billing address</button><br>
+                {{/if}}
+
+                {{#if delivery.contactMismatch}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setDeliveryMatchContact">Match contact address</button><br>
+                {{else}}
+                  <button class="button-link clickStub" data-object="address-presets" data-type="setDeliveryUnique">Unmatch contact address</button><br>
+                {{/if}}
+              </div>
+            {{else}}
+              <p class="note">Add a physical delivery shipment to see the delivery address</p>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
+      <div class="xs-row">
+        <div class="xs-12">
+          <h3 class="h4" id="get-order-options">Get Order</h3>
+          <br />
+        </div>
+
+        <div class="optionsContainer xs-12 md-6 lg-4" id="get-order-options">
+          <h3 class="h4">Get Order Responses</h3>
+          <p class="form-group__label">Shared settings for when we get an order on the OCP or through the Order Retrieval</p>
+          <br />
+          <div class="form-group">
+            <label class="form-group__label" for="toggleAvailableMonthlyCare">
+              Available Monthly care:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleAvailableMonthlyCare" data-object="get-order"
+                data-type="availableMonthlyCare">
+                {{#each monthlyCareDatasets}}
+                {{option @key description info disabled ../selectedAvailableMonthlyCare}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-group__label" for="togglePaymentMethodResponse">
+              Payment Method to use when landing on the <abbr title="Order Confirmation Page">OCP</abbr> directly or when retrieving an order:
+              <p class="note"><strong>Note:</strong> This stub can be combined with Promos, Gift Cards &amp; Nectar -
+                adhering to the same compatibility rules as the E2E flow does. The outstanding amount is then assigned
+                to the chosen payment method.</p>
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="togglePaymentMethodResponse" data-object="get-order"
+                data-type="paymentMethod">
+                {{#each paymentMethods}}
+                {{option @key @key info (lookup ../shouldDisablePaymentMethod [status]) ../selectedPaymentType}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-group__label" for="toggleAdvices">
+              Advices:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleAdvices" data-object="get-order"
+                data-type="advices">
+                {{#each advicesDatasets}}
+                {{option @key @key info disabled ../selectedAdvice}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-group__label">
+              Toggles
+            </label>
+            <div class="checkbox">
+              <input type="checkbox" id="sortShipmentsByStartTime" class="checkbox__input changeStub"
+                data-object="get-order" data-type="sortShipmentsByStartTime" {{#if
+                shipmentSortByStartTime}}checked{{/if}}>
+              <label for="sortShipmentsByStartTime" class="checkbox__label">Force shipment sorting by start
+                time</label>
+            </div>
+            <div class="checkbox">
+              <input type="checkbox" id="nectarLinked" class="checkbox__input changeStub" data-object="get-order"
+                data-type="nectarLinked" {{#if nectarLinked}}checked{{/if}}>
+              <label for="nectarLinked" class="checkbox__label">Has Nectar card linked</label>
+            </div>
+            <div class="checkbox">
+              <input type="checkbox" id="eligibleCompanyVoucher" class="checkbox__input changeStub"
+                data-object="get-order" data-type="eligibleCompanyVoucher" {{#if
+                isEligibleCompanyVoucher}}checked{{/if}}>
+              <label for="eligibleCompanyVoucher" class="checkbox__label">Eligible for company voucher</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="optionsContainer xs-12 md-6 lg-4" id="confirmation-options">
+          <h3 class="h4">Confirmation options</h3>
+          <div class="form-group">
+            <label class="form-group__label" for="toggleConfirmationResponse">
+              Get Order Responses:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleConfirmationResponse" data-object="confirmation"
+                data-type="confirmationResponse">
+                {{#each confirmationDatasets}}
+                {{option @key description info disabled ../selectedConfirmationType}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="optionsContainer xs-12 md-6 lg-4" id="order-retrieval-options">
+          <h3 class="h4">Order retrieval options</h3>
+          <div class="form-group">
+            <label class="form-group__label" for="toggleOrderRetrievalResponse">
+              Order Retrieval Responses:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleOrderRetrievalResponse" data-object="orderRetrieval"
+                data-type="orderRetrievalResponse">
+                {{#each orderRetrievalDatasets}}
+                {{option @key description info disabled ../selectedOrderRetrievalType}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="button-link clickStub" data-object="orderRetrieval" data-type="addOneOfEachStatus">Add one shipment of each status</button>
+          </div>
+          <div class="form-group">
+            <button class="button-link clickStub" data-object="orderRetrieval" data-type="addAllCancellableAmendableCombinations">Add every cancellable and amendable combination</button>
+          </div>
+          <div class="form-group">
+            <button class="button-link clickStub" data-object="orderRetrieval" data-type="reset">Reset</button>
+          </div>       
+
+          <div class="form-group">
+            {{#times shipmentsCount}}
+              <p>Shipment {{inc this}}:</p>
+                <label class="form-group__label" for="toggleShipmentCountData">
+                Status:
+                </label>
+                <select class="form-group__input changeStub" id="toggleShipmentCountData" data-object="orderRetrieval" data-type="shipmentStatus" data-index="{{this}}">
+                  {{#with (lookup ../orderRetrievalOrders @this)}}
+                    {{#each ../../orderRetrievalShipmentStatus}}
+                      {{option @key @this @this disabled ../status}}
+                    {{/each}}
+                  {{/with}}
+                </select>
+              <div class="checkbox">
+                <input type="checkbox" id="toggleCancellable-{{this}}" class="checkbox__input changeStub" data-object="orderRetrieval"
+                  data-type="toggleCancellable" data-index="{{this}}" {{#with (lookup ../orderRetrievalOrders @this)}}{{#if isCancellable}}checked{{/if}}{{/with}}>
+                <label for="toggleCancellable-{{this}}" class="checkbox__label">Cancellable</label>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" id="toggleAmendable-{{this}}" class="checkbox__input changeStub" data-object="orderRetrieval"
+                  data-type="toggleAmendable" data-index="{{this}}" {{#with (lookup ../orderRetrievalOrders @this)}}{{#if isAmendable}}checked{{/if}}{{/with}}>
+                <label for="toggleAmendable-{{this}}" class="checkbox__label">Amendable</label>
+              </div>
+              <br />
+            {{/times}}
+          </div>
+
+          <h3 class="h4">Manage order options</h3>
+          <div class="form-group">
+            <label class="form-group__label" for="toggleCancelOrderResponseData">
+              Cancel Order Responses:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleCancelOrderResponseData" data-object="cancel-order"
+                data-type="cancelOrderResponseData">
+                {{#each cancelOrderResponseData}}
+                {{option @key description info disabled ../selectedCancelOrderResponseType}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-group__label" for="toggleExtendOrderResponseData">
+              Extend Order Responses:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleExtendOrderResponseData" data-object="extend-order"
+                data-type="extendOrderResponseData">
+                {{#each extendOrderResponseData}}
+                {{option @key description info disabled ../selectedExtendOrderResponseType}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="xs-row">
+        <div class="xs-12">
+          <h3 class="h4" id="arrange-delivery-options">Arrange Delivery</h3>
+          <br />
+        </div>
+
+        <div class="optionsContainer xs-12 md-6 lg-4" id="arrange-delivery-options">
+          <h3 class="h4">API responses</h3>
+          <br />
+          <div class="form-group">
+            <label class="form-group__label" for="toggleCreateFulfilmentResponses">
+              Create Fulfilment Responses:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleCreateFulfilmentResponses" data-object="arrange-delivery" data-type="createFulfilment">
+              {{#each createFulfilmentResponseData}} {{option @key description info disabled ../selectedCreateFulfilmentResponseData}} {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleGetConsignmentsResponses">
+              Get Consignments Responses:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleGetConsignmentsResponses" data-object="arrange-delivery" data-type="getConsignments">
+              {{#each getConsignmentsResponseData}} {{option @key description info disabled ../selectedGetConsignmentsResponseData}} {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleGetSlotsResponses">
+              Get Slots Responses:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleGetSlotsResponses" data-object="arrange-delivery" data-type="getSlots">
+              {{#each getSlotsResponseData}} {{option @key description info disabled ../selectedGetSlotsResponseData}} {{/each}}
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-group__label" for="toggleCreateBookingResponse">
+              Create Booking Responses:
+            </label>
+            <div class="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleCreateBookingResponses" data-object="arrange-delivery" data-type="createBooking"> 
+                {{#each createBookingResponseData}} {{option @key description info disabled ../selectedCreateBookingResponseData}} {{/each}}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="xs-row">
+        <div class="xs-12">
+          <h3 class="h4" id="other-options">Other</h3>
+          <br />
+        </div>
+      </div>
+
+      <div class="xs-row">
+        <div class="optionsContainer xs-12 md-6 lg-4" id="user-preferences-options">
+          <h3 class="h4">User preferences options</h3>
+          <div class="form-group">
+            <label class="form-group__label" for="toggleStoreData">
+              Store:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleStoreData" data-object="store" data-type="storeData">
+                {{#each storeDatasets}} {{option @key legacyName info disabled ../selectedStore}} {{/each}}
+              </select>
+            </div>
+            <div>
+              <p style="display:flex;align-items:center;padding-left:10px;">
+                <span
+                  style="border-radius: 3px;background-color:{{#if isClickAndCollect}}orange{{else}}#808080{{/if}};width:24px;height:24px;justify-content:center;align-items:center;margin-right:10px;display:inline-flex;">
+                  <svg width="1em" height="1em" viewBox="0 0 21 34">
+                    <path
+                      d="M8.096 23.353c.129 0 .258.043.387.086.345.13.603.387.732.689l2.454 6.243 1.895-.732-2.497-6.415c-.13-.345-.13-.732.086-1.034.172-.301.473-.56.86-.603l5.124-.947L3.015 5.183v20.925l4.435-2.626c.215-.086.43-.13.646-.13m2.885 9.817c-.474 0-.948-.3-1.12-.775l-2.368-6.07-5.037 2.97c-.388.216-.862.216-1.206 0-.387-.215-.603-.602-.603-1.076V1.998c0-.517.302-.948.775-1.12.474-.172.99-.043 1.335.301L20.41 20.597c.301.345.387.775.258 1.206-.13.43-.517.732-.947.818l-5.856 1.076 2.411 6.157c.13.302.13.646 0 .947-.129.302-.387.517-.688.646L11.41 33.04c-.172.086-.301.13-.43.13"
+                      fill="#ffffff">
+                    </path>
+                  </svg>
+                </span> {{#unless isClickAndCollect}}Not{{/unless}} Click &amp; Collect store
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="optionsContainer xs-12 md-6 lg-4">
+          <h3 class="h4">Payments response options</h3>
+          <div class="form-group">
+            <div class='payment-methods__labels'>
+              <label class='payment-methods__label'>Default</label>
+              <label class='payment-methods__label'>Temporarily Disabled</label>
+              <label class='payment-methods__label'>Permanently Disabled</label>
+            </div>
+
+            {{#each paymentMethods}}
+            <div class='radio-group'>
+              <label for={{@key}} class='radio-group__label'>
+                {{#ifvalue @key values="CARD_ARGOS_CREDIT,CARD_GIFT_ARGOS,CARD_GIFT_FLEXECASH,CARD_NECTAR_SPEND" }}
+                <img src="/public/stub/{{@key}}.jpg" alt='' width='25' height='17' />
+                {{else}}
+                <img src="/public/stub/{{@key}}.svg" alt='' width='25' height='17' />
+                {{/ifvalue}}
+                &nbsp;&nbsp;
+                <p class='lg-block'>{{lookup ../paymentMethodsTitles @key}}</p>
+              </label>
+              <div class='radio-group__inputs payment-methods__radios'>
+                <input type="radio" name='{{@key}}_STATUS' value="AVAILABLE" class="changeStub"
+                  data-object="payment-method" data-type={{@key}} {{#ifvalue this.status value="AVAILABLE"
+                  }}checked{{/ifvalue}}>
+                <input type="radio" name='{{@key}}_STATUS' value="TEMPORARILY_DISABLED" class="changeStub"
+                  data-object="payment-method" data-type={{@key}} {{#ifvalue this.status value="TEMPORARILY_DISABLED"
+                  }}checked{{/ifvalue}}>
+                <input type="radio" name='{{@key}}_STATUS' value="PERMANENTLY_DISABLED" class="changeStub"
+                  data-object="payment-method" data-type={{@key}} {{#ifvalue this.status value="PERMANENTLY_DISABLED"
+                  }}checked{{/ifvalue}}>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+
+        <div class="optionsContainer xs-12 md-6 lg-4" id="basket-options">
+          <h3 class="h4">Basket options</h3>
+          <div class="form-group">
+            <label class="form-group__label" for="toggleProductData">
+              Products:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleProductResponseData" data-object="product"
+                data-type="productResponseData">
+                {{#each productResponseData}} {{option @key description info disabled ../selectedProductResponseType}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-group__label" for="togglePromoData">
+              Promos:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="togglePromoData" data-object="basket"
+                data-type="promoData">
+                {{#each promotionDatasets}} {{option @key description info disabled ../selectedPromoType}} {{/each}}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="optionsContainer xs-12 md-6 lg-4" id="set-datacash-error">
+          <h3 class="h4">Set Datacash Error</h3>
+          <div class="form-group">
+            <label class="form-group__label" for="toggleDatacashError">
+              Error type:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleDatacashError" data-object="datacash-error"
+                data-type="datacashError">
+                {{#each datacashErrorDataset}} {{option @key description info disabled ../selectedDatacashErrorType}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" id="datacashError" class="checkbox__input changeStub" data-object="datacash-error"
+              data-type="showDatacashError" {{#if showDatacashError}}checked{{/if}}>
+            <label for="datacashError" class="checkbox__label">Throw Datacash error</label>
+          </div>
+          <h3 class="h4">Set Checkout API Error Responses</h3>
+          <div class="form-group">
+            <label class="form-group__label" for="toggleSetErrorToAllCheckoutApi">
+              Error type:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleSetErrorToAllCheckoutApi" data-object="checkout-set-api"
+                data-type="checkoutApi">
+                {{#each CheckoutEndPointsResponseData}} {{option @key description info disabled ../selectedApiErrorResponsesType}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+          <h3 class="h4">Send timezone identifier</h3>
+          <div class="checkbox">
+            <input type="checkbox" id="toggleTimeZoneIdentifier" class="checkbox__input changeStub" data-object="checkout-set-api"
+              data-type="setCheckoutApiTimeZoneIdentifier" {{#if ./hasTimeZoneIdentifier }}checked{{/if}}>
+            <label for="toggleTimeZoneIdentifier" class="checkbox__label"> Send UTC 'Z' identifier with timestamps</label>
+            </div>
+        </div>
+        <div class="optionsContainer xs-12 md-6 lg-4" id="payments-response-options">
+          <h3 class="h4">Payment options</h3>
+          <div class="form-group">
+            <label class="form-group__label" for="toggleAddPaymentResponseData">
+              Add Payment Responses:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleAddPaymentResponseData" data-object="payments"
+                data-type="addPaymentResponseData">
+                {{#each addPaymentResponseData}}
+                {{option @key description info disabled ../selectedAddPaymentResponseType}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-group__label" for="togglePatchPaymentResponseData">
+              Patch Payment Responses:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="togglePatchPaymentResponseData" data-object="payments"
+                data-type="patchPaymentResponseData">
+                {{#each patchPaymentResponseData}}
+                {{option @key description info disabled ../selectedPatchPaymentResponseType}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-group__label" for="toggleDeletePaymentResponseData">
+              Delete Payment Responses:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleDeletePaymentResponseData" data-object="payments"
+                data-type="deletePaymentResponseData">
+                {{#each deletePaymentResponseData}}
+                {{option @key description info disabled ../selectedDeletePaymentResponseType}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleCreditPlanDatasets">
+              Credit plans:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleCreditPlanDatasets" data-object="credit-plans"
+                data-type="argosCardCreditPlan">
+                {{#each argosCardCreditPlansDatasets}}
+                  {{option @key description info disabled ../argosCardCreditPlanType}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleMonthlyPlanDatasets">
+              Monthly plans:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleMonthlyPlanDatasets" data-object="credit-plans"
+                data-type="monthlyPaymentCreditPlan">
+                {{#each monthlyPaymentCreditPlanDatasets}}
+                  {{option @key description info disabled ../monthlyPaymentCreditPlanType}}
+                {{/each}}
+              </select>
+            </div>
+            <div className="form-group__input-wrapper">
+                  <div class="form-group">
+                    <form> 
+                  <form> 
+                    <form> 
+                      <label class="form-group__label" for="apr">
+                        Set Monthly plans APR:
+                      </label>
+                      <input id='apr' type="number" class="form-control" name="apr" value={{monthlyPaymentCreditPlanAPR}}>
+                      <div>
+                        <p>
+                        <label class="form-group__label" for="amount" >Plan length range:</label>
+                        <input type="text" id="amount" readonly style="border:0;background:transparent;">
+                        <input type="hidden" name="minimumDuration" id="minimumDuration"  value={{monthlyPaymentMinDuration}}>
+                        <input type="hidden"  name="maximumDuration" id="maximumDuration" value={{monthlyPaymentMaxDuration}}>
+                      </p>
+                      <div id="slider-range"></div>
+                      </div>
+                    <button style="display:block;margin: 10px auto;" class="button button--tiny clickStub" data-object="credit-plans" data-type="setMonthlyPaymentCreditPlanAPRAndLength" >Set APR and plan length</button>
+                    </form>
+                  </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="toggleCreditPlansResponseData">
+              Credit Plans Responses:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleCreditPlansResponseData" data-object="credit-plans"
+                data-type="creditPlansResponse">
+                {{#each creditPlansResponseDatasets}}
+                {{option @key description info disabled ../creditPlansResponseType}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="checkbox">
+            <input type="checkbox" id="paypalError" class="checkbox__input changeStub" data-object="payments"
+              data-type="showPaypalError" {{#if showPaypalError}}checked{{/if}}>
+            <label for="paypalError" class="checkbox__label">Force PayPal CTA Rendering error</label>
+          </div>
+        </div>
+        <div class="optionsContainer xs-12 md-6 lg-4" id="order-response-options">
+          <h3 class="h4">Order response options</h3>
+          <div class="form-group">
+            <label class="form-group__label" for="togglePlaceOrderResponseData">
+              Place Order Responses:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="togglePlaceOrderResponseData" data-object="payments"
+                data-type="placeOrderResponseData">
+                {{#each placeOrderResponseData}}
+                {{option @key description info disabled ../selectedPlaceOrderResponseType}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="optionsContainer xs-12 md-6 lg-4" id="snapshot-service-options">
+          <h3 class="h4">Snapshot service options</h3>
+          <div class="form-group">
+            <label class="form-group__label" for="calculatePrices">
+              Calculate Prices Responses:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="calculatePrices"
+                data-object="snapshot-service" data-type="calculatePrices">
+                {{#each snapshotServiceDatasets.calculatePrices}}
+                  {{option @key description info disabled ../selectedCalculatePricesType}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-group__label" for="prepareForCheckout">
+              Prepare for Checkout Responses:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="prepareForCheckout"
+                data-object="snapshot-service" data-type="prepareForCheckout">
+                {{#each snapshotServiceDatasets.prepareForCheckout}}
+                  {{option @key description info disabled ../selectedPrepareForCheckoutType}}
+                {{/each}}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-group__label" for="toggleSnapshotInitialisation">
+              Snapshot Initialisation Responses:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleSnapshotInitialisation"
+                data-object="snapshot-service" data-type="snapshotInitialisation">
+                {{#each snapshotServiceDatasets.snapshotInitialisation}}
+                {{option @key description info disabled ../selectedSnapshotInitialisation}} {{/each}}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-group__label" for="toggleSnapshotGet">
+              Get Snapshot Responses:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleSnapshotGet" data-object="snapshot-service"
+                data-type="snapshotGet">
+                {{#each snapshotServiceDatasets.snapshotGet}}
+                {{option @key description info disabled ../selectedSnapshotGet}} {{/each}}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-group__label" for="toggleSnapshotStatus">
+              Set Snapshot Status:
+            </label>
+            <div className="form-group__input-wrapper">
+              <select class="form-group__input changeStub" id="toggleSnapshotStatus" data-object="snapshot-service"
+                data-type="snapshotStatus">
+                {{#each snapshotServiceDatasets.snapshotStatus}}
+                {{option @key description info disabled ../selectedSnapshotStatus}} {{/each}}
+              </select>
+            </div>
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" id="brandMismatch" class="checkbox__input changeStub" data-object="snapshot-service"
+              data-type="brandMismatch" {{#if brandMismatch}}checked{{/if}}>
+            <label for="brandMismatch" class="checkbox__label">Set brand mismatch</label>
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" id="hasOrderId" class="checkbox__input changeStub" data-object="snapshot-service"
+              data-type="hasOrderId" {{#if hasOrderId}}checked{{/if}}>
+            <label for="hasOrderId" class="checkbox__label">Set a hardcoded orderId</label>
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" id="isWcsHandover" class="checkbox__input changeStub" data-object="snapshot-service"
+              data-type="isWcsHandover" {{#if isWcsHandover}}checked{{/if}}>
+            <label for="isWcsHandover" class="checkbox__label">Set isWcsHandover</label>
+          </div>
+        </div>
+        <div class="optionsContainer xs-12 md-6 lg-4" id="promotions-response-options">
+          <h3 class="h4">Promotions response options</h3>
+          <div class="form-group">
+            <div class="checkbox">
+              <label class="form-group__label" for="toggleUpdateSnapshotAddress">
+                Add Promotion Responses:
+              </label>
+              <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="toggleAddPromoToSnapshot" data-object="promotions"
+                  data-type="promotionResponse">
+                  {{#each addPromotionResponseData}}
+                  {{option @key description info disabled ../selectedAddPromotionResponseType}}
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="checkbox">
+              <label class="form-group__label" for="toggleDeletePromoToSnapshot">
+                Delete Promotion Responses:
+              </label>
+              <div className="form-group__input-wrapper">
+                <select class="form-group__input changeStub" id="toggleDeletePromoToSnapshot" data-object="promotions"
+                  data-type="deletePromoResponse">
+                  {{#each deletePromotionResponseData}}
+                  {{option @key description info disabled ../selectedDeletePromotionResponseType}}
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="checkbox">
+              <input type="checkbox" id="expireSubsequentPromos" class="checkbox__input changeStub"
+                data-object="promotions" data-type="expireSubsequentPromos" {{#if
+                shouldExpireSubsequentPromos}}checked{{/if}}>
+              <label for="expireSubsequentPromos" class="checkbox__label">Expire any existing promos when next promo
+                is
+                added</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="xs-row">
+        <div class="xs-12 lg-6">
+          <input class="accordion__checkbox" checked type="checkbox" name="panel-user" id="panel-user">
+          <label class="accordion__label h4" for="panel-user"><a target="_blank" href="/payment-stub/user">User</a></label>
+          <div class="accordion__panel">
+            <pre class="prettyprint"><code class="language-js">{{userJson}}</code></pre>
+          </div>
+        </div>
+        <div class="xs-12 lg-6">
+          <input class="accordion__checkbox" checked type="checkbox" name="panel-payment-methods" id="panel-payment-methods">
+          <label class="accordion__label h4" for="panel-payment-methods"><a target="_blank" href="/payment-stub/payment-method">Payment Methods</a></label>
+          <div class="accordion__panel">
+            <pre class="prettyprint"><code class="language-js">{{paymentMethodJson}}</code></pre>
+          </div>
+        </div>
+        <div class="xs-12 lg-6">
+          <input class="accordion__checkbox" checked type="checkbox" name="panel-wallet" id="panel-wallet">
+          <label class="accordion__label h4" for="panel-wallet"><a target="_blank" href="/payment-stub/wallet">Wallet</a></label>
+          <div class="accordion__panel">
+            <pre class="prettyprint"><code class="language-js">{{wallet}}</code></pre>
+          </div>
+        </div>
+        <div class="xs-12 lg-6">
+          <input class="accordion__checkbox" checked type="checkbox" name="panel-credit" id="panel-credit">
+          <label class="accordion__label h4" for="panel-credit"><a target="_blank" href="/payment-stub/credit-plans">Credit Plans</a></label>
+          <div class="accordion__panel">
+            <pre class="prettyprint"><code class="language-js">{{creditPlansJson}}</code></pre>
+          </div>
+        </div>
+        <div class="xs-12 lg-6">
+          <input class="accordion__checkbox" checked type="checkbox" name="panel-promos" id="panel-promos">
+          <label class="accordion__label h4" for="panel-promos"><a target="_blank" href="/payment-stub/promotions">Promotions</a></label>
+          <div class="accordion__panel">
+            <pre class="prettyprint"><code class="language-js">{{promotionsInSnapshot}}</code></pre>
+          </div>
+        </div>
+        <div class="xs-12 lg-6">
+          <input class="accordion__checkbox" checked type="checkbox" name="panel-get-order" id="panel-get-order">
+          <label class="accordion__label h4" for="panel-get-order"><a target="_blank" href="/payment-stub/get-order">Get Order</a></label>
+          <div class="accordion__panel">
+            <pre class="prettyprint"><code class="language-js">{{getOrderJson}}</code></pre>
+          </div>
+        </div>
+        <div class="xs-12 lg-6">
+          <input class="accordion__checkbox" checked type="checkbox" name="panel-confirmation" id="panel-confirmation">
+          <label class="accordion__label h4" for="panel-confirmation"><a target="_blank" href="/payment-stub/confirmation">Confirmation</a></label>
+          <div class="accordion__panel">
+            <pre class="prettyprint"><code class="language-js">{{confirmationJson}}</code></pre>
+          </div>
+        </div>
+        <div class="xs-12 lg-6">
+          <input class="accordion__checkbox" checked type="checkbox" name="panel-order-retrieval" id="panel-order-retrieval">
+          <label class="accordion__label h4" for="panel-order-retrieval"><a target="_blank" href="/payment-stub/orderRetrieval">Order Retrieval</a></label>
+          <div class="accordion__panel">
+            <pre class="prettyprint"><code class="language-js">{{orderRetrievalJson}}</code></pre>
+          </div>
+        </div>
+        <div class="xs-12 lg-6">
+          <input class="accordion__checkbox" checked type="checkbox" name="panel-payments" id="panel-payments">
+          <label class="accordion__label h4" for="panel-payments"><a target="_blank" href="/payment-stub/payments">Order Payments</a></label>
+          <div class="accordion__panel">
+            <pre class="prettyprint"><code class="language-js">{{orderPaymentsJson}}</code></pre>
+          </div>
+        </div>
+        <div class="xs-12 lg-6">
+          <input class="accordion__checkbox" checked type="checkbox" name="panel-shipments" id="panel-shipments">
+          <label class="accordion__label h4" for="panel-shipments"><a target="_blank" href="/payment-stub/shipment">Shipments</a></label>
+          <div class="accordion__panel">
+            <pre class="prettyprint"><code class="language-js">{{shipmentsJson}}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    $(document).ready(function () {
+      $('.changeStub').change(function () {
+        let value = $(this).val()
+        if ($(this).attr('type') === 'checkbox') {
+          value = $(this).is(':checked')
+        } else if ($(this).attr('type') === 'radio') {
+          value = $(`input[name=${$(this).attr('name')}]:checked`).val()
+        }
+        $.ajax({
+          type: 'GET',
+          url: '/payment-stub/' + $(this).data('object'),
+          data: {
+            type: $(this).data('type'),
+            value,
+            index: $(this).data('index')
+          },
+          success: function () {
+            location.reload()
+          }
+        })
+      })
+      $('.clickStub').click(function () {
+        const isForm = $(this).parent().is('form')
+        $.ajax({
+          type: 'GET',
+          url: '/payment-stub/' + $(this).data('object'),
+          data: {
+            type: $(this).data('type'),
+            value: isForm ? $(this).parent().serialize() : $(this).data('value'),
+            index: $(this).data('index')
+          },
+          success: function () {
+            location.reload()
+          }
+        })
+      })
+      $("#slider-range").slider({
+      range: true,
+      min: 0,
+      max: 100,
+      values: [ $("#minimumDuration").val(), $("#maximumDuration").val() ],
+      slide: function(event, ui) {
+        $("#amount").val(`${ui.values[0]} - ${ui.values[1]}`);
+        $("#minimumDuration").val(ui.values[0])
+        $("#maximumDuration").val(ui.values[1])
+      }
+    });
+    $("#amount").val(
+      $("#slider-range").slider("values",0) + " - " + $("#slider-range").slider("values",1) 
+      );
+    })
+  </script>
+</body>
+
+</html>

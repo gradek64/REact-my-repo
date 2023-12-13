@@ -1,0 +1,14 @@
+{
+  "outOfStock": {
+    "title": "Sorry, this item is unavailable, we’ll remove it from your basket.",
+    "title_plural": "Sorry, some items are unavailable, we’ll remove them from your basket.",
+    "titleNoDelivery": "Sorry, this item is unavailable, please try using a different postcode or we'll remove it from your basket.",
+    "titleNoDelivery_plural": "Sorry, these items are unavailable, please try using a different postcode or we'll remove them from your basket."
+  },
+  "excluded": {
+    "title": "Sorry, we can’t deliver this item to that address. Please try using a different postcode or we’ll remove it from your basket.",
+    "title_plural": "Sorry, we can’t deliver these items to the address. Please try using a different postcode or we’ll remove them from your basket.",
+    "titleNoDelivery": "Sorry, we can't deliver this item to that address.",
+    "titleNoDelivery_plural": "Sorry, we can’t deliver these items to that address."
+  }
+}

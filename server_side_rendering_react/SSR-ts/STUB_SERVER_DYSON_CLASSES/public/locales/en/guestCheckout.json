@@ -1,0 +1,27 @@
+{
+  "title": "Confirm & pay",
+  "subHeading": "Your details",
+  "emailSuggestion": {
+    "text": "Did you mean <1>{{emailSuggestion}}</1>?"
+  },
+  "marketingOptIn": "If you'd like to receive marketing information (by post, email, text message, telephone and other electronic means) please opt-in below.",
+  "marketingOptOut": "One of the ways we use your information is to send you marketing information (by post, email, text message, telephone and other electronic means). If you don't want to receive marketing, opt out below.",
+  "passwordFormTitle": "Fancy creating an account?",
+  "passwordFormCTA": "Create account",
+  "policyLinkText": "For more information on how we use your personal details please refer to our <1>Privacy Policy</1> and <3>Cookie Policy.</3>",
+  "accountCreate": {
+    "titleSuccess": "Account successfully created",
+    "subtitleSuccess": "We've sent a confirmation email to {{emailAddress}}. Please check your inbox.",
+    "nextStepsPhrase": "You can now:",
+    "nextStepOne": "Create a wishlist",
+    "nextStepTwo": "Link your Nectar account",
+    "nextStepThree": "Manage your account and orders",
+    "nextStepFour": "Use Argos and Habitat with a single login"
+  },
+  "accountCreateFrom": {
+    "submit": "Create account",
+    "submitting": "Creating account",
+    "retry": "Retry",
+    "final": "Close"
+  }
+}

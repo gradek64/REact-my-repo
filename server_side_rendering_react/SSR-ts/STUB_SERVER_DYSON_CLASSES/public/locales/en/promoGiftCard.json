@@ -1,0 +1,51 @@
+{
+  "acceptedGiftCards": {
+    "acceptedCardsTitle": "Accepted Gift cards",
+    "prepaidCardTitle": "For prepaid Gift cards, select the Credit/Debit card payment option (e.g.\u00A0One4all)",
+    "giftCardImageTitle": "{{type}} Gift card"
+  },
+  "btnPromoAdd": "Add promo code",
+  "btnPromoAdding": "Adding promo code",
+  "btnPromoAdded": "Promo code added",
+  "btnPromoRemoveAriaLabel": "Remove promo code {{reference}} and its {{price}} saving.",
+  "btnNectarRemove": "Remove Nectar points",
+  "btnNectarRemoving": "Removing Nectar points",
+  "btnNectarRemoved": "Nectar points removed",
+  "btnGiftCardAdd": "Add gift card",
+  "btnGiftCardAdding": "Adding gift card",
+  "btnGiftCardAdded": "Gift card added",
+  "giftCardErrors": {
+    "datacash": "Sorry, if you have entered payment card details, you will need to enter them again if you add a gift card.",
+    "alreadyComplete": "Your order is now free - you can't reduce it any further!",
+    "insufficientBalance": "Sorry, there is nothing left to spend on that gift card.",
+    "invalid": "That card number doesn't look right. Please check and try again.",
+    "exists": "Sorry, you have already added that {{type}} gift card.",
+    "maxLimit": "Your order is now free - you can't reduce it any further!",
+    "maxLimit_both": "Sorry, but we only allow 3 Flexecash gift cards and 5 Argos gift cards per order.",
+    "maxLimit_argos": "Sorry, we only allow 5 Argos gift cards per order.",
+    "maxLimit_flexecash": "Sorry, we only allow 3 Flexecash gift cards per order.",
+    "giftCardInBasket": "Sorry, you cannot buy gift cards using gift cards."
+  },
+  "inputPromoReferenceLabel": "Promo code",
+  "inputGiftCardNumberLabel": "Card number",
+  "inputGiftCardNumberLabel_sr": "Enter card number starting 98260278, 10000 or 633827",
+  "inputGiftCardNumberLabel_hint": "Enter card number starting 98260278, 10000 or 633827",
+  "inputGiftCardPinLabel": "Pin number",
+  "inputGiftCardPinLabel_sr": "Enter PIN number. Scratch the panel on the back of the card",
+  "inputFlexecashExpiryLabel": "Expiry date",
+  "inputFlexecashCodeLabel": "Card security code",
+  "inputFlexecashCodeLabel_sr": "Card security code. Enter the 3 digit number, located on the back of the card",
+  "inputFlexecashCodeLabel_hint": "3 digits on back of the card",
+  "switchToGiftCard": "It looks like you've entered the number for a giftcard, <1>switch to the giftcard section?</1>",
+  "promoErrors": {
+    "datacash": "Sorry, if you have entered payment card details, you will need to enter them again if you add a promo code.",
+    "invalid": "Sorry, this code is invalid. Please check it and try again.",
+    "expired": "Sorry, this code has expired.",
+    "duplicated": "Sorry, you have already added that {{addedPromoReference}} promotion code.",
+    "inapplicable": "Sorry, your order is not eligible for this deal.",
+    "deleteAriaLabel": "Sorry, we could not remove that {{promoReference}} promo code. Please try again.",
+    "giftCardInBasket": "Sorry, you are unable to use a promo code when purchasing a gift card."
+  },
+  "tabPromo": "Promo code",
+  "tabGiftCard": "Gift\u00A0card & Flexecash"
+}

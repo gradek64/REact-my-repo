@@ -1,0 +1,11 @@
+{
+  "breadcrumbs": {
+    "trolley": "Trolley"
+  },
+  "btnBackToTrolley": "Back to trolley",
+  "datacashLoaded": {
+    "addressList": "Sorry, if you have entered payment card details, you will need to enter them again if you select a different address.",
+    "addressDetails": "Sorry, if you have entered payment card details, you will need to enter them again if you change your address.",
+    "nectarModal": "Sorry, if you have entered payment card details, you will need to enter them again if you add Nectar."
+  }
+}

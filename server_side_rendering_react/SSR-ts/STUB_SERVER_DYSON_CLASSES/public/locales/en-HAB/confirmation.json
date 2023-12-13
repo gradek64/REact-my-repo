@@ -1,0 +1,10 @@
+{
+  "alerts": {
+    "failedShipmentsPartiallyPlacedBody": "To buy these, please add them into your bag and place the order for them again. You've not been charged for them."
+  },
+  "habitatArgosCommunicationTitle": "Look out for details from Argos",
+  "habitatArgosCommunicationMessage": {
+    "COLLECTION": "Argos will email and text your collection details.",
+    "DELIVERY": "Argos will email and text your delivery details."
+  }
+}

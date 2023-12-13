@@ -1,0 +1,26 @@
+{
+  "heading": {
+    "title": "Manage my order",
+    "body": "Enter your details below to view, amend or cancel your order."
+  },
+  "form": {
+    "submit": {
+      "label": "View my order",
+      "retry": "please try again"
+    }
+  },
+  "shipment": {
+    "status": {
+      "cancelled": "You’ve cancelled me already",
+      "collected": "You’ve collected me already",
+      "returned": "You’ve returned me already"
+    }
+  },
+  "errorPage": {
+    "title": "Sorry, we’re unable to manage your order",
+    "body": "Please try logging in to view your order or contact our <1>customer service team</1>.",
+    "btnSignInSecurely": "Sign in securely",
+    "btnReturnToHome": "Return to home"
+  },
+  "vatReceiptLink": "View VAT receipt"
+}

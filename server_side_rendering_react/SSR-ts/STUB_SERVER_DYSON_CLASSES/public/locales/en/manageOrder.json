@@ -1,0 +1,40 @@
+{
+  "heading": {
+    "title": "Order No. {{orderId}}",
+    "body": "We've already emailed and texted you these order details. Though, you may want to take note of your order number to access this page in the future."
+  },
+  "shipment": {
+    "amendCTA": "Extend my collection date",
+    "resendTextCTA": "Resend my collection text",
+    "cancelCTA": "Cancel this item",
+    "cancelCTA_plural": "Cancel these items",
+    "confirmCancelCTA": "Yes, confirm cancellation",
+    "confirmAbandonCancelCTA": "No, keep this item",
+    "confirmAbandonCancelCTA_plural": "No, keep these items",
+    "cancelCTAText": "Are you sure you want to cancel this item?",
+    "cancelCTAText_plural": "Are you sure you want to cancel these items?",
+    "retryCTA": "Try again",
+    "cancelledText": "We've cancelled this item. We'll process your refund back to your original payment method.",
+    "cancelledText_plural": "We've cancelled these items. We'll process your refund back to your original payment method.",
+    "cancelError": "Sorry, we had a problem.",
+    "finalCancelError": "Sorry, there was still a problem with cancelling.",
+    "cancelContactUs": "Contact us to cancel your order",
+    "extendedAlert": "We'll keep your items in-store for another 7 days until {{extendedUntil}} at {{location}}.",
+    "extendedAlertError": "Sorry, we had a problem extending your collection.",
+    "finalExtendedAlertError": "Sorry, there was still a problem with extending your collection.",
+    "extendContactUs": "Contact us to extend your collection"
+  },
+  "order": {
+    "cancelCTA": "Cancel my order",
+    "confirmCancelCTA": "Yes, confirm cancellation",
+    "confirmAbandonCancelCTA": "No, keep this order",
+    "cancelCTAText": "Are you sure you want to cancel this order?",
+    "cancelledText": "We've cancelled this order. We'll process your refund back to your original payment method."
+  },
+  "analytics": {
+    "cancelItem": "Cancel this item",
+    "cancelItem_plural": "Cancel these items",
+    "cancelItemInteractionValue": "ors:retrievedorder:cancelthisitem",
+    "cancelItemInteractionValue_plural": "ors:retrievedorder:canceltheseitems"
+  }
+}

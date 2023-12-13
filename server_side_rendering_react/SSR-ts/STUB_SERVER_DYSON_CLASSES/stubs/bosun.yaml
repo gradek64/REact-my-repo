@@ -1,0 +1,28 @@
+bosun:
+  deployment:
+    type: app
+    config:
+      deploymentTimeout: 10m # time allowed for deployment
+      # this name will be part of the link as (namespace-servicename): argos-checkout-ui-payment-stub-service
+      serviceName: payment-stub-service
+      service:
+        port: 8080
+      container:
+        port: 3011
+        livenessHealthcheckPort: 3011
+        livenessInitialDelaySeconds: 30 # wait in seconds before do liveness check
+        livenessHealthcheckPath: / # check root route for liveness check
+        readinessHealthcheckPort: 3011
+        readinessInitialDelaySeconds: 30 # wait in seconds before do readiness check
+        readinessHealthcheckPath: / # check root route for readiness check
+        startupHealthcheckPort: 3011
+        startupInitialDelaySeconds: 30 # wait in seconds before do startup check
+        startupHealthcheckPath: / # check root route for startup check
+      resources:
+        # below can be monitor in https://grafana.dev.jspaas.uk/
+        requests:
+          memory: '1024Mi'
+          cpu: '600m'
+        limits:
+          memory: '1024Mi'
+          cpu: '4'

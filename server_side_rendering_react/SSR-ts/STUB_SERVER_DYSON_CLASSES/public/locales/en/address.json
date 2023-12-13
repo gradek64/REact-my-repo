@@ -1,0 +1,53 @@
+{
+  "addressForm": {
+    "fields": {
+      "email": {
+        "label": "Email address",
+        "hint": "We'll only use this for your receipt and order updates."
+      },
+      "title": {
+        "values": ["Mr", "Miss", "Mrs", "Ms", "Mx", "Dr"]
+      }
+    }
+  },
+  "confirmAddress": "Please confirm an address",
+  "list": {
+    "selectedLabel": "Selected address",
+    "preferredLabel": "Preferred address",
+    "preferredAddressTooltip": {
+      "message": "This is the address we’ll use as your contact and billing address, unless you tell us otherwise.",
+      "linkAriaLabel": "To edit this address please go to your account."
+    },
+
+    "btnAdd": "Add new address",
+    "btnEdit": "Edit",
+    "btnEditAriaLabel": "Edit address {{id}} of {{length}}",
+    "localizedPostcodeNotMatch": "Could you please confirm {{basketLocalizedPostcode}} is your delivery address? We’ve defaulted to your preferred address. Or you can add a new address if you’d like.",
+    "btnEditPreferredAriaLabel": "Edit preferred address",
+    "btnChoose": "Confirm",
+    "btnChoosing": "Choosing address",
+    "btnChosen": "Address chosen"
+  },
+  "onSubmitErrors": {
+    "contactAddress": "Sorry, we couldn’t save your preferred address. Please try again.",
+    "address": "Sorry, that didn't work. Please try again."
+  },
+  "editAddress": {
+    "contactAddressLabel": "Save as preferred address"
+  },
+  "formNames": {
+    "billingNewAddress": "Billing New Address",
+    "billingEditAddress": "Billing Edit Address",
+    "partialBillingAddress": "Partial Billing Address",
+    "deliveryNewAddress": "Delivery New Address",
+    "deliveryEditAddress": "Delivery Edit Address",
+    "partialDeliveryAddress": "Partial Delivery Address"
+  },
+  "billingAddress": {
+    "whatIsThisForContent": {
+      "billingAddressSameAsCard": "Your billing address should be the same as the card you're paying with. This is because it may be used to check whether your card is valid.",
+      "billingAddressSameAsBank": "If you're applying for Argos credit, the billing address (and your name) needs to be the one shown on your bank statements. This is because we'll need to make a credit check when you apply."
+    },
+    "guestHint": "We need this for your billing address, for security it must match your bank card or Argos card statement."
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    // "noImplicitAny": true, // TODO: fix module imports and enable this
+    "strictNullChecks": true,
+    "jsx": "react",
+
+    // We use webpack to emit the actual files - tsc is just used to find type
+    // errors. Note: The ESLint plugin does NOT find type errors, as that
+    // requires running the typescript compiler which would slow ESLint down.
+    "noEmit": true,
+
+    // The next three allow us to import modules in the familiar way
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    // The next three are recommended for Node 12.13.0. See link for upgrading
+    // to v14: https://github.com/microsoft/TypeScript/wiki/Node-Target-Mapping
+    "lib": ["ES2019", "dom", "ES2021.String"],
+    "module": "commonjs",
+    "target": "ES2019",
+
+    // Allows us to import files like a module
+    "baseUrl": "./src",
+    "paths": {
+      "mocks/*": ["config/testUtils/__mocks__/*"]
+    },
+
+    "types": ["webpack-env", "jest", "@testing-library/jest-dom", "applepayjs"]
+  },
+  "include": ["./src/**/*.ts", "./src/**/*.tsx", "./src/**/*.js", "./src/**/*.jsx", "./stubs/**/*.ts", "./stubs/**/*.js"],
+  "exclude": ["node_modules"],
+
+  // Used to run the stub, which transforms TS to JS at run-time
+  // https://github.com/TypeStrong/ts-node#paths-and-baseurl
+  "ts-node": {
+    "require": ["tsconfig-paths/register"],
+    "files": true,
+    "swc": true
+  }
+}

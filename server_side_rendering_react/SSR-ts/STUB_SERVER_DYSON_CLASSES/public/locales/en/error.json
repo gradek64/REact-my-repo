@@ -1,0 +1,34 @@
+{
+  "tryAgain": "Sorry, that didn't work. Please try again.",
+
+  "stockHold": {
+    "title_FAILED": "Sorry, the below item is no longer available",
+    "title_FAILED_plural": "Sorry, your items are no longer available",
+    "title_PARTIAL": "Sorry, the below item is no longer available",
+    "title_PARTIAL_plural": "Sorry, the below items are no longer available",
+    "text_FAILED": "",
+    "text_PARTIAL": "",
+    "promotionBadge": "Unfortunately, your offers may no longer be applied due to the unavailable item.",
+    "promotionBadge_plural": "Unfortunately, your offers may no longer be applied due to the unavailable items."
+  },
+
+  "errorPage": {
+    "heading": "Oops, there's been an error",
+    "defaultErrorText": "Sorry, we've had a technical glitch and this page won't load. Please go back and try again.",
+    "creditPlacedOrderTitle": "Sorry, there was a problem",
+    "placeOrderFailedErrorText": "Sorry, your order didn't go through. Please try again or contact support here",
+    "placeOrderVoucherNotActiveTitle": "Your order couldn't be processed online today.",
+    "placeOrderVoucherNotActive": "The promo codes {{promoCodes}} have already been used. You can retry without the promo codes applied.",
+    "paymentRefundableTitle": "Sorry, but we had a problem processing your order.",
+    "paymentRefundableText1": "Your payment's been refunded and if anything's left your account it'll be back within 7 days. Paypal refunds can take up to 30 days.",
+    "paymentRefundableText2": "In the meantime, you can try another payment type or visit your nearest store.",
+    "creditPlan": {
+      "title": "Your credit application was successful, but we weren't able to use it to buy your stuff."
+    },
+    "monthlyPlan": {
+      "title": "Your credit application was successful, but unfortunately we weren't able to use it to place the order due to a system error.",
+      "subHeading": "What now?",
+      "paragraphOne": "Your order and credit application will be cancelled. Please go back to the trolley, add your items and place the order again. You will be able to apply for credit on the payment page."
+    }
+  }
+}

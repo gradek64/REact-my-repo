@@ -1,0 +1,8 @@
+export { default as giftCardNumber } from './giftCardNumber'
+export { default as giftCardArgosPin } from './giftCardArgosPin'
+export { default as giftCardFlexecashCode } from './giftCardFlexecashCode'
+export { default as giftCardFlexecashExpiry } from './giftCardFlexecashExpiry'
+export { default as promoReference } from './promoReference'
+export { default as nectar2faCode } from './nectar2faCode'
+export { default as nectarCardNumber } from './nectarCardNumber'
+export { default as email, isMXDomainValid } from './email'

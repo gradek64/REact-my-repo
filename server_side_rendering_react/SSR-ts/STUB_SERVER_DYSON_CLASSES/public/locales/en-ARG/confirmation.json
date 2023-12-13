@@ -1,0 +1,13 @@
+{
+  "alerts": {
+    "failedShipmentsPartiallyPlacedBody": "To buy these, please add them into your trolley and place the order for them again. You've not been charged for them.",
+    "failedShipmentsPartiallyPlacedBody_newCreditApplication": "Your credit application was successful, but these items were not added to it, and you've not been charged for them."
+  },
+  "failedShipmentsPartiallyPlaced": {
+    "newCreditApplication": {
+      "heading": "What now?",
+      "paragraphOne": "You can add them back into your trolley and buy them now, but you will not be able to put them on credit, or apply for more credit.",
+      "paragraphTwo": "Or you can wait until you receive your Argos Card (7-10 days) and use it to buy them later."
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "argosCardIdAlert": "You will need to bring your Argos Card with you when you pick your items up as a form of ID",
+  "btnPlaceOrderPlace": "Place order",
+  "btnPlaceOrderPlacing": "Placing order",
+
+  "monthlyPaymentPlanMarketingBanner": {
+    "variableText": "{{apr}}% APR Representative"
+  },
+  "creditApplicationMarketingBanner": {
+    "title": "Buy now, pay later",
+    "buyNowText": "Spread the cost with an Argos Card",
+    "variableText": "{{apr}}% APR Representative variable"
+  },
+  "creditPlan": {
+    "btnFindOutMore": "Find out more",
+    "btnFindOutMoreAriaLabel": "Find out more about Argos Card Credit plan",
+    "btnMoreDetails": "More details.",
+    "btnMoreDetailsAriaLabel": "Go to the Argos card details page",
+    "buyNowPayLaterTitle": "What is a {{title}} plan?",
+    "buyNowPayLaterText": "If you pay the balance in full within your agreed credit plan period, you won't pay any interest. If you pay after the agreed period, you'll be charged interest on any balance remaining at the end of the plan. This interest will be backdated to the date of purchase, known as deferred interest. You should always try and pay back as much as you can as quickly as you can to reduce the amount of interest you’ll be charged.",
+    "dontHaveAnArgosCardText": "Don't have an Argos Card?",
+    "normalCreditTitle": "What is normal credit?",
+    "normalCreditText": "Normal credit works in the same way as a standard credit card. If you clear your balance before your next statement date, you’ll incur no interest. Your monthly statement will show how much you owe and the date you need to pay it by.",
+    "creditOptionsTitle": "Credit options",
+    "creditSubjectToStatus": "Credit subject to status. T&Cs Apply.",
+    "aprRepresentative": "Argos Card Representative <strong>{{apr}}% APR</strong> variable.",
+    "noCreditPlans": {
+      "retry": "Sorry, please try again or choose a different payment method.",
+      "failed": "Sorry, we can’t process your Argos Card credit plan right now. Please choose a different payment method."
+    }
+  },
+  "creditApplication": {
+    "alerts": {
+      "isCreditApplicationTemporarilyDisabled": "Sorry, we're experiencing some difficulties processing credit applications right now. Please <2>refresh</2> and try again, or choose a different payment method.",
+      "alreadyComplete": "You have nothing to pay so we can't offer you credit for this purchase. You can apply for an Argos Card any time after you check out.",
+      "overSpendLimit": "Your order is worth more than the amount of credit we can offer you on this purchase. You can apply for an Argos Card any time after you check out.",
+      "failedApplication": "Sorry, but you have already applied for credit.",
+      "noCreditToApplyFor_saved_argos_card": "Great news! You already have credit available. Please select your saved Argos Card and choose a new plan.",
+      "noCreditToApplyFor_no_saved_argos_card": "Sorry, there are no available credit options to apply for at the moment.",
+      "contactAddressReminder": "Wait! Are these details the same as your bank account?",
+      "deliveryAddressReminder": "Your delivery and account details are different.",
+      "confirmAddressErrorRetry": "Sorry, please try again or choose a different payment method.",
+      "confirmAddressErrorFinal": "Sorry, we can't process credit applications right now. Please choose a different payment method.",
+      "nonUKContactAddress": "You will need to have a UK address to qualify for these options.",
+      "singleCharacterFirstName": "Please enter your full name.",
+      "applyUsingHomeDelivery": "You will need to use home delivery to get this option."
+    },
+    "contactAddressReminderExplanation": "If the name or address on your Argos account is different to those shown on your <strong>bank statement</strong>, we can't give you credit.",
+    "deliveryAddressReminderExplanation": "To apply for your first credit plan, your delivery name and address must be the same as your registered account and bank account statement.",
+    "deliveryAddressReminderAccountHeading": "Account name & address",
+    "deliveryAddressReminderDeliveryHeading": "Delivery name & address",
+    "buttons": {
+      "applyNow": "Apply now",
+      "confirmAddress": "Yes. Apply using these.",
+      "updateContactAddress": "Update address",
+      "updateDeliveryAddress": "Update address",
+      "confirmAddressSubmitting": "Applying",
+      "confirmAddressFinal": "Close",
+      "changeAddress": "No! I need to change them!",
+      "changeDeliveryAddress": "Change delivery details and book new slot",
+      "confirmDeliveryAddress": "Proceed using my delivery details",
+      "cancelApplication": "Pay another way"
+    },
+    "applyNowButtonAccessibilityText": "Apply now for an Argos Card"
+  },
+  "monthlyPaymentPlan": {
+    "alerts": {
+      "nothingToPay": "You have nothing to pay so we can't offer you credit for this purchase.",
+      "overMaxSpendLimit": "Your order is worth more than the amount of credit we can offer you on this purchase.",
+      "basketContainsTuItems": "Sorry, your order has Tu clothing items. We can't offer you credit for those. Please <2>remove them from your basket</2> and try again.",
+      "basketContainsDigitalDownload": "Sorry, your order has digital downloads or gift card items. We can't offer you credit for those. Please <2>remove them from your basket</2> and try again.",
+      "basketContainsProductCareItems": "Sorry, your order has Argos product care items. We can't offer you credit for those. Please <2>remove them from your basket</2> and try again.",
+      "underMinSpendLimit": "Your order is worth less than the amount of credit we can offer you on this purchase."
+    },
+    "applyNowButtonAccessibilityText": "Apply now for an Argos Monthly Payment Plan"
+  },
+  "nectar": {
+    "summary": {
+      "change": "Change",
+      "applied": "{{amount, price}} ({{points, seperator}} points) applied to your order",
+      "spend": "Spend your Nectar points (up to {{maximum, price}})",
+      "minimumPoints": "You need a minimum of {{minimum, seperator}} Nectar points",
+      "minimumSpendLimit": "Spend over {{limit, price}} to use your points",
+      "earnLinked": "Collect {{count, seperator}} Nectar point on this order",
+      "earnLinked_plural": "Collect {{count, seperator}} Nectar points on this order",
+      "earnNonLinked": "Link your account after placing this order <2>and collect {{count, seperator}} Nectar point</2>",
+      "earnNonLinked_plural": "Link your account after placing this order <2>and collect {{count, seperator}} Nectar points</2>"
+    },
+    "nectar2faCodeError": "Please check the code entered is valid or request a new code.",
+    "nectarRequestNewCodeError": "There was an issue sending the code.",
+    "nectarBelowMinimumSpendAlert": "Sorry, the minimum spend amount for Nectar needs to be more than {{minSpendingLimitPoints, seperator}} points ({{minSpendingLimit, price}})",
+    "nectarInsufficientBalanceError": "You do not have enough points, please select a lower amount and try again."
+  },
+  "orderSummaryTotal": "Your order ({{count}} item)",
+  "orderSummaryTotal_plural": "Your order ({{count}} items)",
+  "paymentWarnings": {
+    "applePayOverLimitText": "Sorry, but Apple Pay is not available if you're spending more than £125"
+  },
+  "paymentErrors": {
+    "placeOrderFailedError": "Sorry, your order failed to place. Please try again.",
+    "applePayUnavailableErrorText": "Something went wrong with Apple Pay, please use a different payment type.",
+    "paypalErrorText": "Something went wrong with PayPal, please use a different payment type.",
+    "actionFailedErrorText": "Sorry, that didn't work. Please try again.",
+    "deleteAriaLabel": "Sorry, we could not remove that gift card. Please try again.",
+    "addPaymentGenericError": "Sorry, we're experiencing some difficulties processing credit/debit card payments right now. Please <2>refresh</2> and try again, or use PayPal instead. Don't worry, you won't need a PayPal account.",
+    "addPaymentArgosCardError": "Sorry, we're experiencing some difficulties processing Argos Card payments right now. Please <2>refresh</2> and try again, or use another payment method.",
+    "selectedDatacashUnavailable": "Sorry, we’re experiencing some difficulties processing {{paymentMethod}} payments right now. Please use an alternative payment method.",
+    "selectedDatacashUnavailableSavedCard": "Sorry, we’re experiencing some difficulties with saved cards right now. You will need to re-enter your card details.",
+    "allDatacashPaymentsUnavailable": "Sorry, we’re experiencing some difficulties processing card payments right now. Please use PayPal instead. Don't worry, you won't need a PayPal account."
+  },
+  "paymentMethods": {
+    "applePay": {
+      "ctaTitle": "Buy with Apple Pay",
+      "ctaTitleSetup": "Set up Apple Pay"
+    }
+  },
+  "title": "Confirm & pay",
+  "viewFullSummaryLink": "View",
+  "orderSummaryCreditLink": "View flexible credit",
+  "savedCardMessage": "We've upgraded our system, so you'll need to add your previously saved card details again.",
+  "CARD_DEBIT": "Pay with Credit/Debit card",
+  "CARD_ARGOS_CREDIT": "Pay with Argos card"
+}

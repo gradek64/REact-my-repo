@@ -1,0 +1,92 @@
+{
+  "alerts": {
+    "failedShipmentsPartiallyPlacedBody": ""
+  },
+  "monthlyCare": {
+    "title": "Insure with Argos Monthly Care",
+    "description": "Immediate accidental damage cover for £{{cost}}",
+    "btnFindOutMore": "Find out more",
+    "btnGetProtected": "Get protected",
+    "btnGetInsurance": "Get insurance",
+    "btnFindOutMoreAriaLabel": "Find out more about monthly care protection"
+  },
+  "subtitle": "We’ve emailed you these order details and will text you about your order.",
+  "collectionTimes": {
+    "holdUntil": "We'll hold your items until store closing on {{holdUntil}}",
+    "waitForEmail": "But before you head into store... wait for an email confirmation.",
+    "immediateMultipleShipments": "You can collect this part of your order right away. Or you can wait till the second part arrives in-store too.",
+    "immediate": "Collect right now",
+    "sameDay": "Collect from {{sameDay}} today",
+    "nextDay": "Collect tomorrow at {{time}} on {{date}}",
+    "default": "Collect at {{time}} on {{date}}",
+    "notReady": "We will let you know when it's in store and ready to collect."
+  },
+  "cardReminderAlert": {
+    "CARD_ARGOS_CREDIT": "Remember! If you don’t bring your Argos Card, you will not be able to pick this up.",
+    "CREDIT_CAPE2": {
+      "paragraphOne": "When you have your Argos Card, you need to bring it with you when you pick up your order. But...",
+      "paragraphTwo": "This time, you can bring one of these instead (must be current or valid):",
+      "idListItems": ["Valid UK Photocard Driving Licence", "Valid UK/EU Passport", "Credit/Debit Card"]
+    },
+    "CREDIT_MPP": {
+      "paragraphOne": "You will need to bring your ID when you pick up your order.",
+      "paragraphTwo": "You can bring one of these (must be current or valid):",
+      "idListItems": ["Valid UK Photocard Driving Licence", "Valid UK/EU Passport", "Credit/Debit Card"]
+    }
+  },
+  "noCollectionId": "Please wait until you get a text or email from us to say your order is ready.",
+  "companyVoucher": {
+    "header": "As a thank you for shopping with us, you'll get a discount on your next order.",
+    "body": "We’ll send you a specific email with details about how to claim (separate to your order confirmation email)."
+  },
+  "productCare": "You'll be covered right away and you don't need to do anything. We'll email you the policy details within 48 hours.",
+  "orderStatus": {
+    "fulfilled": {
+      "title": "Order complete"
+    },
+    "pending": {
+      "title": "Order pending",
+      "descriptionAlert": "Sorry, we're experiencing some difficulties with our service right now. Your order is still pending, but don't worry we'll send everything you need to know in an email once it goes through so please keep an eye on your inbox.",
+      "refundAlert": "If your order fails we will refund your payment as soon as possible."
+    },
+    "partiallyPlaced": {
+      "title": "Your order is only partially complete",
+      "subtitle": "We had a technical problem with part of your order.",
+      "moreDetailsLink": "More details here",
+      "moreDetailsLabel": "Skip to the failed items",
+      "alertHeading": "Sorry, but we had problems ordering these for you.",
+      "alertHeading_newCreditApplication": "Sorry, but we had problems ordering the items below.",
+      "skipToTop": "Skip back to top"
+    }
+  },
+  "shipments": {
+    "collection": {
+      "productTitle": "The following item...",
+      "productTitle_plural": "The following items...",
+      "availableTitle": "Is available to...",
+      "availableTitle_plural": "Are available to...",
+      "notAvailableTitle": "Is not available yet",
+      "notAvailableTitle_plural": "Are not available yet",
+      "shouldBeAvailableTitle": "Should be available to...",
+      "detailsTitle": "Use these details to pickup your order...",
+      "locationTitles": {
+        "collection": "Collection location",
+        "delivery": "Delivery location"
+      },
+      "timetable": {
+        "title": "Opening hours",
+        "storeLink": "More info"
+      }
+    },
+    "delivery": {
+      "digital": {
+        "checkJunkFolder": "Please, check your junk folder if it doesn't arrive in your inbox.",
+        "waiverAlert": "You agreed to the Digital Download Content agreement, waiving the right to cancel your digital download items."
+      },
+      "infoAdvice": "We've emailed you your delivery information, please view your order in account for more information.",
+      "sdf": {
+        "messaging": "For larger items, generally delivered by 2 people, you’ll be contacted to arrange a delivery date."
+      }
+    }
+  }
+}

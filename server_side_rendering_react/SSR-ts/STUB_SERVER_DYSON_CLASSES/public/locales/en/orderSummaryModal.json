@@ -1,0 +1,13 @@
+{
+  "headings": {
+    "singleDelivery": "Delivery",
+    "singlePreOrder": "Pre-order",
+    "multipleDeliveries": "Delivery {{shipmentNumber}} of {{totalShipments}}"
+  },
+  "location": {
+    "deliveryConfirmAndPay": "Delivery details",
+    "delivery": "Delivery details",
+    "collection": "Collection details",
+    "multiple": "Order split into {{n}} deliveries"
+  }
+}

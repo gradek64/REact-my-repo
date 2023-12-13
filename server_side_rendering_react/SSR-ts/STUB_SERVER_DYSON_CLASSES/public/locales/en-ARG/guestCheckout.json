@@ -1,0 +1,8 @@
+{
+  "accountCreate": {
+    "nextStepsPhrase": "As an Argos account holder you can now:",
+    "nextStepOne": "Create a wishlist"
+  },
+  "marketingOptInCheckBoxLabel": "Yes - I would like to receive news, tips and offers from Argos.",
+  "marketingOptOutCheckBoxLabel": "No - I don't want to receive marketing from Argos."
+}

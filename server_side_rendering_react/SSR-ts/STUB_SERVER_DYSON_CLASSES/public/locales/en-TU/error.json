@@ -1,0 +1,8 @@
+{
+  "stockHold": {
+    "text_FAILED": "You can go back to your basket to see if this item is available for delivery or collection from a different store. You can also return to home and start your search again.",
+    "text_FAILED_plural": "You can go back to your basket to see if these items are available for delivery or collection from a different store. You can also return to home and start your search again.",
+    "text_PARTIAL": "You can continue to checkout and we'll remove this item from your basket. You can also go back to your basket to see if this item is available for delivery or collection from a different store.",
+    "text_PARTIAL_plural": "You can continue to checkout and we'll remove these items from your basket. You can also go back to your basket to see if these items are available for delivery or collection from a different store."
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "breadcrumbs": {
+    "confirm": "Confirm",
+    "trolley": "",
+    "delivery": "Delivery"
+  },
+  "btnBackToTrolley": "",
+  "btnClose": "Close",
+  "btnContactSupport": "Contact support",
+  "btnContinueToCheckout": "Continue to checkout",
+  "btnRetry": "Retry",
+  "btnReturnToCheckout": "Return to checkout",
+  "btnReturnToHome": "Return to home",
+  "datacashLoaded": {
+    "addressList": "Sorry, if you have entered payment card details, you will need to enter them again if you select a different address.",
+    "addressDetails": "Sorry, if you have entered payment card details, you will need to enter them again if you change your address.",
+    "nectarModal": "Sorry, if you have entered payment card details, you will need to enter them again if you add Nectar."
+  },
+  "incompatibilityMessages": {
+    "CARD_NECTAR_SPEND": {
+      "PAYPAL": "Sorry, you can't use Nectar points if you pay with PayPal. You can use Nectar with other payment methods (except Apple Pay).",
+      "APPLE_PAY": "Sorry, you can't use Apple Pay with Nectar points. You can use Nectar with other payment methods (except PayPal)."
+    },
+    "PAYPAL": {
+      "CARD_NECTAR_SPEND": "Sorry, you can't use PayPal with Nectar points. You can use Nectar with other payment methods (except Apple Pay)."
+    },
+    "APPLE_PAY": {
+      "CARD_NECTAR_SPEND": "Sorry, you can't use Apple Pay with Nectar points. You can use Nectar with other payment methods (except PayPal)."
+    }
+  },
+  "linkLearnMoreArgosCard": "Learn more about credit options",
+  "paymentMethods": {
+    "CARD_ARGOS_CREDIT": "Argos Card",
+    "CARD_DEBIT": "Credit/Debit card",
+    "PAYPAL": "Paypal",
+    "MONTHLY_PAYMENT_PLAN": "Argos Monthly Payment Plan"
+  },
+  "placeOrderAnimationOverlay": {
+    "screenReaderText": "Your order is being placed - We'll redirect you to the order confirmation page shortly."
+  },
+  "helpSection": {
+    "title": "Questions about your order?",
+    "text": "Head to our <1>Help & FAQs page</1> to quickly get your question answered.",
+    "argosMonthlyPaymentPlan": "You can find <1>more information here</1> about Argos Monthly Payment Plans.",
+    "argosCardTitle": "Get help with your Argos Card",
+    "argosCardText": "Find everything you need <1>here</1> to stay on top of your finances."
+  },
+  "deliverySlots": {
+    "digital": "Within 2 hours by email",
+    "digitalDownload": "Delivered via email within 2 hours to {{email}}",
+    "warranty": "You'll be covered right away and we'll email you the policy details within 48 hours",
+    "preOrder": "This order will be delivered to you",
+    "general": "Arriving {{slot}}",
+    "deliveryInstructionsHeader": "Delivery instructions:",
+    "sdf": "Within {{count}} day from supplier",
+    "sdf_plural": "Within {{count}} days from supplier"
+  },
+  "nectarEarnOrderDetails": {
+    "linkedNectar": "Your Nectar point will reach your account in the next 30 days. Check your balance at ",
+    "linkedNectar_plural": "Your Nectar points will reach your account in the next 30 days. Check your balance at ",
+    "unlinkedNectar": "You can collect {{points}} Nectar points on this order by linking your Nectar account",
+    "pointsCollected": "Nectar point collected",
+    "pointsCollected_plural": "Nectar points collected",
+    "linkNectarAccount": "Link my Nectar account",
+    "nectarBalance": "point",
+    "nectarBalance_plural": "points"
+  }
+}

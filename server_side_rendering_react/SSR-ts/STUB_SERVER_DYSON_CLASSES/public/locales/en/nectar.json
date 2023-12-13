@@ -1,0 +1,21 @@
+{
+  "title": "Nectar Card",
+  "addNectarCard": "Add your Nectar card and collect points",
+  "nectarCardCollect": "Collect {{points, seperator}} Nectar points on this order",
+  "collectNectarPoints": "To collect and spend points on future purchases, you'll need to register for an account and link your Nectar card to it. You can register for an account on the order confirmation page after completing this order.",
+  "addNectarCardHint": "Enter the last 11 digits on your Nectar card, found on your card or within the app.",
+  "nectarEndingDigits": "Card ending {{digits}}",
+  "removeNectarFailedErrorText": "Sorry, that didn't work. Please try again.",
+  "removeNectarAriaLabel": "Sorry, we could not remove that nectar card. Please try again.",
+  "removeNectarCardButton": {
+    "submit": "Remove Nectar card",
+    "ariaLabel": "Remove Nectar card"
+  },
+  "addNectarCardButton": {
+    "submit": "Add Nectar card",
+    "submitting": "Adding Nectar card",
+    "submitted": "Nectar card saved",
+    "retry": "Retry",
+    "final": "Close"
+  }
+}

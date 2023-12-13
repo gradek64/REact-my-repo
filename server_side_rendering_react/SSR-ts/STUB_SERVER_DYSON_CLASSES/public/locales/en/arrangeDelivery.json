@@ -1,0 +1,52 @@
+{
+  "heading": {
+    "title": "Arrange delivery"
+  },
+  "deliveryAddress": {
+    "title": "Delivery details"
+  },
+  "deliveryHeadings": "Delivery",
+  "deliveryHeadings_plural": "Delivery {{shipmentNumber}} of {{count}}",
+  "radioGrid": {
+    "listVariant": {
+      "groupTitle": "Select a date",
+      "optionsTitle": "Select a time"
+    },
+    "gridVariant": {
+      "paginationButtonText": "days"
+    }
+  },
+  "deliveryInstructions": {
+    "checkbox": "Add delivery instructions",
+    "input": {
+      "label": "Delivery instructions"
+    }
+  },
+  "continueCTA": "Continue to payment",
+  "multipleShipmentsAlert_plural": "Your order will be sent as {{count}} separate deliveries. You'll only pay for one delivery",
+  "badges": {
+    "sameDay": "SAME DAY",
+    "nextDay": "NEXT DAY"
+  },
+  "slotNotSelectedError": "Please select from the available delivery slots to continue with your order.",
+  "importantInfo": {
+    "title": "Important information",
+    "ageRestriction": {
+      "title": "Age restriction",
+      "message": "Please tick box to confirm you are over 18. We operate a Think 25 age verification policy you may be asked for ID.",
+      "checkBox": "I certify that I am at least 18 years old.",
+      "alertBox": "Please indicate that you have read and agree to the terms."
+    }
+  },
+  "getConsignmentError": {
+    "retryMessage": "Sorry, something went wrong. Please try refreshing the page to see if that fixes the problem.",
+    "finalMessage": "Sorry, there was still a problem with showing you delivery slots.",
+    "submit": "Try again",
+    "retry": "Try again"
+  },
+  "getSlotsError": {
+    "retryMessage": "Sorry, something went wrong. Please try refreshing these slots to see if that fixes the problem."
+  },
+  "noSlotsAvailable": "Sorry, all of our slots are booked. Please try using a different postcode or collecting from a store.",
+  "specialDeliveryAlert": "Sorry, we can’t book a delivery slot for your postcode right now. You can continue with your order and we’ll get in touch to arrange delivery soon."
+}
