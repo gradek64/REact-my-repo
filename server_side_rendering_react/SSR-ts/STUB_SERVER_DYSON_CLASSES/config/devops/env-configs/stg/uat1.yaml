@@ -1,0 +1,14 @@
+envVariables:
+  ENV_CONFIG: uat1
+  LOG_LEVEL: '20'
+  NODE_ENV: production
+  ENV_NAME: ui-payment-uat1
+  ENV_LOCATION: staging
+  PRODUCT_GATEWAY_API_KEY: vault:secret/data/argospaas-api/argos-checkout-ui/payment-uat1/apigw-pdp-product-gateway#api_key
+  PRODUCT_GATEWAY_API_URL: vault:secret/data/argospaas-api/argos-checkout-ui/payment-uat1/apigw-pdp-product-gateway#api_url
+  ADDRESS_FINDER_API_KEY: vault:v1:/0Zq092CYc8m6KO15xFEXBd8b5qbg2lQKFDZ2lQJAr2KQpkHQzivAetStiZop+P+tFf5yJdrRwfaw/4pKB55Ow==
+public: true
+alsoListenInternally: true
+allowedCidrs:
+  - macro.rfc1918
+  - macro.akamai-siteshield

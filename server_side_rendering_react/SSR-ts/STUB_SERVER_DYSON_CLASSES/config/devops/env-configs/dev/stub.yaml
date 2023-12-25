@@ -1,0 +1,8 @@
+envVariables:
+  ENV_CONFIG: remoteStub
+  NODE_ENV: development
+  ENV_NAME: ui-payment-stub
+  ENV_LOCATION: dev
+  PRODUCT_GATEWAY_API_KEY: vault:secret/data/argospaas-api/argos-checkout-ui/payment-stub/apigw-pdp-product-gateway#api_key
+  PRODUCT_GATEWAY_API_URL: vault:secret/data/argospaas-api/argos-checkout-ui/payment-stub/apigw-pdp-product-gateway#api_url
+  ADDRESS_FINDER_API_KEY: vault:v1:5s5JIfPB6u4JeCHl77ypYAycidSvC8Km8HpqXdO5HQDh3ThfHmDl7SkcsjwuBeu6EGhCj9HzOVuleH2EIpGBVw==

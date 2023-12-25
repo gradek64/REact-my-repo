@@ -1,0 +1,17 @@
+{
+  "ENV": "staging",
+  "HEADER_ENV": "staging",
+  "GATEWAY_API": "https://argos-checkout-checkout-gateway.int.stg.jspaas.uk",
+  "RECEIPT_API": "https://apps.ereceipts.co.uk",
+  "ACCOUNT_API": "https://argos-account-account-service.int.stg.jspaas.uk",
+  "WCS_API": "https://uat1.test-arg-uk.com",
+  "SESSION_MANAGER_API": "https://user-session-manager-user-session-manager.int.stg.jspaas.uk",
+  "MARKETING_PREFERENCE_API": "https://argos-wishlist-api-gateway-v1.public.eu-west-1.staging.deveng.systems",
+  "CONSUL": "consul-mesos.eu-west-1.staging.deveng.systems",
+  "CONSUL_ENV": "uat1",
+  "BOSUN_CONFIG_MAP": "uat1",
+  "VAULT_ENV": "staging",
+  "VAULT_ROLE": "checkout_ui-payment-uat1",
+  "ACCOUNT_URL": "https://uat1.test-arg-uk.com",
+  "PAYPAL_CLIENT_ID": "AUQ0UB_ru1n2s8XPcdKhLLlLo3RKYZwo2fU-Xgw6UcUy4DHm3siAO3HbHA9NWDZUV3fnJQLRmlOuaKSD"
+}

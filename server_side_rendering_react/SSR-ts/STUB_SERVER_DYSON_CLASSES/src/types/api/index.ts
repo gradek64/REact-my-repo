@@ -59,6 +59,7 @@ export type {
   OrderConfirmationShipment,
   OrderRetrievalShipment,
   OrderRetrievalResponseSuccessProps,
+  SendOrderDataToAdManagerPayload,
 } from './order'
 export type {
   PaymentMethodsAPIPayload,
@@ -90,7 +91,6 @@ export type {
   OrderSource,
   Amounts as SnapshotAmounts,
   PrepareForCheckoutAPIRequest,
-  GetSnapshotAPIResponse,
   StockHoldInfo as SnapshotStockHoldInfo,
   Shipment as SnapshotShipment,
   Line as SnapshotLine,
@@ -103,7 +103,6 @@ export type {
   SnapshotAddress,
   SnapshotDeliveryAddress,
   OrderCharge,
-  UpdateAddressAPIResponse,
   DeliveryFlags,
 } from './snapshot'
 export type {
@@ -121,7 +120,6 @@ export {
   InitSnapshotAPINonFatalErrorAdvice,
   GetSnapshotAPIErrorAdvice,
   PrepareForCheckoutAPIErrorAdvice,
-  CreateFulfilmentAPIErrorAdvice,
 } from './errorResponse'
 export type { ErrorResponse } from './errorResponse'
 export {
@@ -165,4 +163,5 @@ export interface APIResponse<T, D = undefined> extends Response {
   request: APIRequest<D>
 }
 
+export { CreateFulfilmentAPIErrorAdvice } from './delivery'
 export type { GetConsignmentsAPIResponse, GetConsignmentsAPIPayload, BookingRequest } from './delivery'

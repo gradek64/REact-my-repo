@@ -1,10 +1,9 @@
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
-import { OrderStore, OrderTimetableHours } from '../types/reducers'
 
 dayjs.extend(customParseFormat)
 
-const formatTimeArray = (days: OrderTimetableHours[], open: boolean): string[] => {
+const formatTimeArray = (days: any[], open: boolean): string[] => {
   return days.map((element) => {
     const elementType = open ? element.open : element.close
     const time = dayjs('1/1/1 '.concat(elementType))
@@ -16,7 +15,7 @@ const formatTimes = (openTimes: string[], closeTimes: string[]): string[] => {
   return openTimes.map((element, index) => element.concat(' to ').concat(closeTimes[index]))
 }
 
-export const formatStoreTime = (store: OrderStore | undefined): string[] | undefined => {
+export const formatStoreTime = (store: any | undefined): string[] | undefined => {
   if (!store || !store.timetable || !store.timetable?.defaultWeek) return undefined
 
   const defaultWeek = store.timetable.defaultWeek

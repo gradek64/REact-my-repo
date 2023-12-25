@@ -2,8 +2,7 @@
 /* eslint-disable */
 
 import { canUseDom } from '@sainsburys-tech/boltui-utils'
-import { PaymentMethod } from 'types/api'
-import { PaymentMethodRoutes, Season, SelectablePaymentMethod } from 'types/reducers'
+//import { PaymentMethod } from 'types/api'
 
 const host = process.env.HOST || 'localhost'
 const port = '8080'
@@ -35,10 +34,10 @@ export type LegacyConfig = {
   app: {
     rootFontSize: number
   }
-  paymentMethodsOrder: ReadonlyArray<SelectablePaymentMethod>
-  paymentMethodRoutes: Record<string, PaymentMethodRoutes>
+  paymentMethodsOrder: ReadonlyArray<[]>
+  paymentMethodRoutes: Record<string, []>
   placeOrderAnimation: {
-    seasons: { [key in Season]: Season }
+    seasons: { ['key']: any }
     [key: string]: any
   }
 
@@ -72,7 +71,7 @@ export type LegacyConfig = {
   [key: string]: any
 }
 
-const config: LegacyConfig = {
+const config = {
   host,
   port,
   prepayApiServer: prepayApi,
@@ -99,20 +98,20 @@ const config: LegacyConfig = {
     placeOrderShowErrorDelay: 500,
   },
   paymentMethodRoutes: {
-    default: PaymentMethodRoutes.DEFAULT,
-    creditDebitCard: PaymentMethodRoutes.CARD_DEBIT,
-    paypal: PaymentMethodRoutes.PAYPAL,
-    applePay: PaymentMethodRoutes.APPLE_PAY,
-    argosCardCreditPlan: PaymentMethodRoutes.CARD_ARGOS_CREDIT,
+    default: 'PaymentMethodRoutes.DEFAULT',
+    creditDebitCard: 'PaymentMethodRoutes.CARD_DEBIT',
+    paypal: 'PaymentMethodRoutes.PAYPAL',
+    applePay: 'PaymentMethodRoutes.APPLE_PAY',
+    argosCardCreditPlan: 'PaymentMethodRoutes.CARD_ARGOS_CREDIT',
   },
   statuses: {
     initialisationInProgress: 202,
   },
   paymentMethodsOrder: [
-    PaymentMethod.CARD_DEBIT,
-    PaymentMethod.CARD_ARGOS_CREDIT,
-    PaymentMethod.PAYPAL,
-    PaymentMethod.APPLE_PAY,
+    'CARD_DEBIT',
+    'CARD_ARGOS_CREDIT',
+    'PAYPAL',
+    'APPLE_PAY',
   ],
   nectar: {
     CARD_NECTAR: {
@@ -147,19 +146,19 @@ const config: LegacyConfig = {
   maximumNumberOfGiftCards: 8,
   placeOrderAnimation: {
     seasons: {
-      default: Season.DEFAULT,
-      xmas: Season.XMAS,
-      defaultTu: Season.DEFAULT_TU,
-      xmasTu: Season.XMAS_TU,
-      defaultHabitat: Season.DEFAULT_HABITAT,
-      xmasHabitat: Season.XMAS_HABITAT,
-      halloween: Season.HALLOWEEN,
-      pride: Season.PRIDE,
-      prideTu: Season.PRIDE_TU,
-      prideHabitat: Season.PRIDE_HABITAT,
-      blackHistoryMonth: Season.BLACK_HISTORY_MONTH,
-      blackHistoryMonthHabitat: Season.BLACK_HISTORY_MONTH_HABITAT,
-      blackHistoryMonthTu: Season.BLACK_HISTORY_MONTH_TU,
+      default: 'Season.DEFAULT',
+      xmas: 'Season.XMAS',
+      defaultTu: 'Season.DEFAULT_TU',
+      xmasTu: 'Season.XMAS_TU',
+      defaultHabitat: 'Season.DEFAULT_HABITAT',
+      xmasHabitat: 'Season.XMAS_HABITAT',
+      halloween: 'Season.HALLOWEEN',
+      pride: 'Season.PRIDE',
+      prideTu: 'Season.PRIDE_TU',
+      prideHabitat: 'Season.PRIDE_HABITAT',
+      blackHistoryMonth: 'Season.BLACK_HISTORY_MONTH',
+      blackHistoryMonthHabitat: 'Season.BLACK_HISTORY_MONTH_HABITAT',
+      blackHistoryMonthTu: 'Season.BLACK_HISTORY_MONTH_TU',
     },
     initialDelayMs: 2000,
     colors: {

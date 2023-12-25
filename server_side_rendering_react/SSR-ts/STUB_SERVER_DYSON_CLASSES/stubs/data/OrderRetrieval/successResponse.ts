@@ -1,10 +1,9 @@
 import dayjs from 'dayjs'
 import Response from '../../helpers/API/Response'
-import { getAvailableCare, getAvailableCareForDelivery, getDateTime, getOrderResponsePayments } from '../../helpers'
+import { getAvailableCare, getAvailableCareForDelivery, getDateTime } from '../../helpers'
 import { SessionDataProps } from '../../../src/types/stubs/session'
 import { StatusCode, ShipmentStatusType } from '../../../src/types/api'
-import { SubBrand } from '../../../src/types/reducers'
-import { DecoratedRequest } from '../../../src/types/server'
+import { DecoratedRequest } from 'types/server'
 
 /*
   NOTE: The success response model is based on the contract for "Order Retrieval Get" documented in GitBook
@@ -50,7 +49,7 @@ const successResponse = (req: DecoratedRequest<{ orderId: string }>, sessionData
 
   const getSubBrandBasedOnProducts = () => {
     const HasTuItems = basket.getOrderLines().some(({ product }) => !!product.id.includes('tuc'))
-    return HasTuItems ? SubBrand.ARGOS_TU : SubBrand.ARGOS_DIGITAL
+    return HasTuItems ? 'ARGOS_TU' : 'ARGOS_DIGITAL'
   }
 
   const availableCare = isDelivery
@@ -98,7 +97,7 @@ const successResponse = (req: DecoratedRequest<{ orderId: string }>, sessionData
     currency: 'GBP',
     availableCare,
     payments: {
-      payments: getOrderResponsePayments(sessionData),
+      payments: {},
       giftCardsTotal: orderPayments.giftCardsTotal ? (orderPayments.giftCardsTotal as number) : undefined,
     },
     advices: orderAdvice,

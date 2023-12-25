@@ -31,7 +31,7 @@ export enum GetWalletAPIErrorAdvice {
  * [Gitbook](http://gitbook-checkout-arch.service.eu-west-1.dev.deveng.systems/docs/orchs/endpoints/account/types/wallet.html#walletresponse)
  */
 export type GetWalletAPIPayload = {
-  savedPaymentMethods: SavedPaymentMethod[]
+  cookie: string
 }
 
 /**

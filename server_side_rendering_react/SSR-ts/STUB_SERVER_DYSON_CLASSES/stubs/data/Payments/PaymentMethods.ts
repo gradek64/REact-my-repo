@@ -1,5 +1,5 @@
 import { PaymentMethod, PaymentMethodsAPIPayload, PaymentMethodStatus } from '../../../src/types/api'
-import { Payment } from '../../../src/types/reducers'
+import { Payment } from 'types/reducers'
 import { PaymentMethodsStub, SerialisableStubObject } from '../../../src/types/stubs'
 
 const APPLE_PAY_MAX_BALANCE = 125

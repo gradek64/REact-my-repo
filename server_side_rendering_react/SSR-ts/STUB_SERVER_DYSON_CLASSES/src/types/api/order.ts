@@ -100,6 +100,25 @@ export interface OrderRetrievalShipment extends ShipmentCore {
   isCancellable: boolean
 }
 
+export interface SendOrderDataToAdManagerPayload {
+  orders: [
+    {
+      customerId: '' // it is always empty string
+      sessionId: string
+      orderDate: string
+      id: string
+      orderItems: [
+        {
+          sku: string
+          quantity: number
+          regularUnitPrice: number
+          totalOrderItemPriceAfterDiscounts: number
+        },
+      ]
+    },
+  ]
+}
+
 export type Shipment = OrderConfirmationShipment | OrderRetrievalShipment
 export interface GetOrderConfirmationSuccessAPIPayload {
   order: OrderConfirmationResponseSuccessProps

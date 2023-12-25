@@ -1,0 +1,16 @@
+{
+  "ENV": "remoteStub",
+  "HEADER_ENV": "development",
+  "GATEWAY_API": "https://argos-checkout-ui-payment-stub-service.int.dev.jspaas.uk",
+  "RECEIPT_API": "https://argos-checkout-ui-payment-stub-service.int.dev.jspaas.uk",
+  "ACCOUNT_API": "https://argos-checkout-ui-payment-stub-service.int.dev.jspaas.uk",
+  "WCS_API": "https://argos-checkout-ui-payment-stub-service.int.dev.jspaas.uk",
+  "SESSION_MANAGER_API": "https://argos-checkout-ui-payment-stub-service.int.dev.jspaas.uk",
+  "MARKETING_PREFERENCE_API": "https://argos-checkout-ui-payment-stub-service.int.dev.jspaas.uk",
+  "CONSUL": "consul-mesos.eu-west-1.dev.deveng.systems",
+  "CONSUL_ENV": "dev",
+  "BOSUN_CONFIG_MAP": "dev",
+  "VAULT_ENV": "dev",
+  "VAULT_ROLE": "checkout_ui-payment-stub",
+  "PAYPAL_CLIENT_ID": "AUQ0UB_ru1n2s8XPcdKhLLlLo3RKYZwo2fU-Xgw6UcUy4DHm3siAO3HbHA9NWDZUV3fnJQLRmlOuaKSD"
+}

@@ -35,7 +35,7 @@ import {
   OrderRetrievalShipment,
   OrderAdvice,
 } from '../../../src/types/api'
-import { OrderStatus, Brand } from '../../../src/types/reducers'
+import { OrderStatus, Brand } from 'types/reducers'
 import { round2Decimals } from '../../helpers'
 import { isPhysicalShipmentType } from '../../../src/helpers/orderHelpers'
 import { getUTCFormattedDate } from '../../helpers/dateHelper'

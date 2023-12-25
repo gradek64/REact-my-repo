@@ -79,6 +79,7 @@ export const checkoutAuth = (req: RequestWithSession, res: Response, next: NextF
 
 // Checks the user's WCS session.
 export const accountAuth = (req: RequestWithSession, res: Response, next: NextFunction) => {
+  console.log('---- route =>  /account-api')
   if (skipAccountAuth(req.path)) {
     next()
     return
@@ -92,11 +93,13 @@ export const accountAuth = (req: RequestWithSession, res: Response, next: NextFu
 
   console.log('loginState', loginState)
   if (loginState !== 'logged in') {
+    console.log('not logged in')
     res.sendStatus(StatusCode.UNAUTHORIZED) // TODO: return correct error body
     res.end()
 
     return
   }
 
+  console.log('should progress goes further on server components')
   next()
 }

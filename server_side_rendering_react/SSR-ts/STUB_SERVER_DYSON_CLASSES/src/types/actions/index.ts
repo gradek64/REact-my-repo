@@ -101,6 +101,7 @@ export type {
   GetCollectionSnapshotActionPayload,
   InitSnapshotSuccessActionPayload,
   FulfilmentCreatedFailurePayload,
+  InitUserInfoPagePayload,
 } from './meta'
 
 export type {

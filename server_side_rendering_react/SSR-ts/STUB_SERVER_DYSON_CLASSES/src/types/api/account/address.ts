@@ -35,15 +35,3 @@ export interface AccountAddressLines {
   country: string
 }
 
-/**
- * [Gitbook](https://gitbook-checkout-arch.service.eu-west-1.dev.deveng.systems/docs/orchs/endpoints/account/types/address.html#address)
- */
-export interface AccountAddress {
-  id: string
-  type: string
-  person: AccountAddressPerson
-  lines: AccountAddressLines
-  contactAddress: boolean
-}
-
-export type UpdateAccountAddressAPIResponse = APIResponse<AccountAddress>

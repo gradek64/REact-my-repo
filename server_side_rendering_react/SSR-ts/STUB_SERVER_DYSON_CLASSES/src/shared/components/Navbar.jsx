@@ -30,7 +30,7 @@ export default function Navbar() {
       {languages.map(({ name, param }) => (
         <li key={param}>
           <NavLink
-            activeStyle={{ fontWeight: "bold" }}
+            activeStyle={{ fontWeight: 'bold' }}
             to={`/popular/${param}`}
           >
             {name}
@@ -38,8 +38,13 @@ export default function Navbar() {
         </li>
       ))}
       <li>
-        <NavLink activeStyle={{ fontWeight: "bold" }} to={`/guest`}>
-          {"chunk loaded GuestCheckoutContainer"}
+        <NavLink activeStyle={{ fontWeight: 'bold' }} to={`/guest`}>
+          {'chunk loaded GuestCheckoutContainer'}
+        </NavLink>
+      </li>
+      <li>
+        <NavLink activeStyle={{ fontWeight: 'bold' }} to={`/userInfo`}>
+          {'user protected route UserSecretInfoContainer'}
         </NavLink>
       </li>
     </ul>

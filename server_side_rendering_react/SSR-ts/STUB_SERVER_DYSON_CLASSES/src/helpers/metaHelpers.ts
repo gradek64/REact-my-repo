@@ -10,7 +10,6 @@ import {
   ProductInclude,
   StockHoldProductStatus,
 } from '../types/api'
-import { OutOfStockItem } from '../types/reducers'
 
 /**
  * Checks if out of stock products exist in the snapshot
@@ -64,7 +63,7 @@ export const getProductPromotion = (
   return null
 }
 
-export const getOutOfStockProducts = (holds: StockHold[]): OutOfStockItem[] => {
+export const getOutOfStockProducts = (holds: StockHold[]): any[] => {
   const outOfStock = holds
     .filter((hold) => hold.fullyReserved === false)
     .map(({ productId: id, title, requested, allocated }) => ({
@@ -81,7 +80,7 @@ export const getOutOfStockProducts = (holds: StockHold[]): OutOfStockItem[] => {
   return outOfStock
 }
 
-export const getProductsWithStockHoldStatus = (holds: StockHold[]): OutOfStockItem[] => {
+export const getProductsWithStockHoldStatus = (holds: StockHold[]): any[] => {
   const outOfStock = holds
     .filter((hold) => hold.status)
     .map(({ productId: id, title, requested, allocated, status }) => ({
@@ -160,7 +159,7 @@ export const getProductInformation = (responses: GetProductsAPIPayload[], holds:
     outOfStockProductInfo[response.data.id] = productInfo
   })
 
-  const outOfStockProductState: OutOfStockItem[] = outOfStockProducts.map((item) => ({
+  const outOfStockProductState: any[] = outOfStockProducts.map((item) => ({
     ...item,
     product: { ...item.product, ...outOfStockProductInfo[item.product.id] },
     total: {
@@ -170,7 +169,7 @@ export const getProductInformation = (responses: GetProductsAPIPayload[], holds:
     },
   }))
 
-  const excludedProducts: OutOfStockItem[] = productsWithStockHoldStatus
+  const excludedProducts: any[] = productsWithStockHoldStatus
     .map((item) => ({
       ...item,
       product: { ...item.product, ...outOfStockProductInfo[item.product.id] },

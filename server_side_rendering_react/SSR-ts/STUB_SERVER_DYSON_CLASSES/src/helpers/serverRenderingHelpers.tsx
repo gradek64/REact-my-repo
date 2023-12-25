@@ -4,7 +4,6 @@ import { nconf } from '../../config/envconfig/envConfig'
 import Logger from '../utils/Logger'
 import { ErrorPageTypeParam } from '../types/routes'
 import { errorPath } from '../paths'
-import { Brand, Theme } from '../types/reducers'
 
 export const isDevelopment = () => !(nconf.get('NODE_ENV') === 'production' || nconf.get('NODE_ENV') === 'staging')
 
@@ -80,25 +79,19 @@ export const getJsFiles = (modules: string[] = []) => {
   )
 }
 
-// Gets the brand name from the host header, defaults to argos
-export const getBrandAndThemeFromHeader = (header) => {
-  if (header === 'hab') return { brand: Brand.HABITAT, theme: Theme.HABITAT }
-  if (header === 'tuc') return { brand: Brand.TU, theme: Theme.TU }
 
-  return { brand: Brand.ARGOS, theme: Theme.ARGOS }
-}
 
 // Gets the CSS file for the theme, defaults to argos
 export const getThemeCss = (theme) => {
-  if (theme === Theme.HABITAT) return 'bolt-habitat.min.css'
-  if (theme === Theme.TU) return 'bolt-tu.min.css'
+  if (theme === 'HABITAT') return 'bolt-habitat.min.css'
+  if (theme === 'TU') return 'bolt-tu.min.css'
 
   return 'bolt.min.css'
 }
 
 export const getTealiumBrand = (brand) => {
-  if (brand === Brand.HABITAT) return 'habitat'
-  if (brand === Brand.TU) return 'tuc'
+  if (brand === 'HABITAT') return 'habitat'
+  if (brand === 'TU') return 'tuc'
 
   return 'main'
 }

@@ -14,9 +14,12 @@ import {
   GetSnapshotFailureActionPayload,
   InitSnapshotFailureActionPayload,
   FulfilmentCreatedFailurePayload,
+  InitUserInfoPagePayload,
 } from '../types/actions'
 
 import { OutOfStockActionPayload } from '../types/reducers'
+
+export const INIT_USER_INFO_PAGE = createAction<InitUserInfoPagePayload>('INIT_USER_INFO_PAGE')
 
 export const LOAD_APP = createAction('LOAD_APP')
 

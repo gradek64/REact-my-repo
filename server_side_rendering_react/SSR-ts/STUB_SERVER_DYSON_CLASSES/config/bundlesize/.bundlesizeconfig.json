@@ -1,0 +1,188 @@
+{
+  "files": [
+    {
+      "path": "./dist/client/chunk-address.*.min.js",
+      "maxSize": "2 KB"
+    },
+    {
+      "path": "./dist/client/chunk-addressAdd.*.min.js",
+      "maxSize": "3 KB"
+    },
+    {
+      "path": "./dist/client/chunk-addressAdd~addressEdit~arrangeDelivery~giftcardForm~guestCheckout~missingAddress~nectar~nectarAddCar~f8f9242f.*.min.js",
+      "maxSize": "6 KB"
+    },
+    {
+      "path": "./dist/client/chunk-addressAdd~addressEdit~guestCheckout~missingAddress.*.min.js",
+      "maxSize": "11 KB"
+    },
+    {
+      "path": "./dist/client/chunk-addressEdit.*.min.js",
+      "maxSize": "4 KB"
+    },
+    {
+      "path": "./dist/client/chunk-addressList.*.min.js",
+      "maxSize": "8 KB"
+    },
+    {
+      "path": "./dist/client/chunk-applepay.*.min.js",
+      "maxSize": "5 KB"
+    },
+    {
+      "path": "./dist/client/chunk-arrangeDelivery.*.min.js",
+      "maxSize": "12 KB"
+    },
+    {
+      "path": "./dist/client/chunk-confirmAndPay.*.min.js",
+      "maxSize": "9 KB"
+    },
+    {
+      "path": "./dist/client/chunk-creditOptionsDrawer.*.min.js",
+      "maxSize": "1 KB"
+    },
+    {
+      "path": "./dist/client/chunk-creditPlan.*.min.js",
+      "maxSize": "7 KB"
+    },
+    {
+      "path": "./dist/client/chunk-deliveryHandover.*.min.js",
+      "maxSize": "1 KB"
+    },
+    {
+      "path": "./dist/client/chunk-error.*.min.js",
+      "maxSize": "7 KB"
+    },
+    {
+      "path": "./dist/client/chunk-giftcardForm.*.min.js",
+      "maxSize": "12 KB"
+    },
+    {
+      "path": "./dist/client/chunk-guestCheckout.*.min.js",
+      "maxSize": "8 KB"
+    },
+    {
+      "path": "./dist/client/chunk-landing.*.min.js",
+      "maxSize": "2 KB"
+    },
+    {
+      "path": "./dist/client/chunk-loading.*.min.js",
+      "maxSize": "2 KB"
+    },
+    {
+      "path": "./dist/client/chunk-manageOrder.*.min.js",
+      "maxSize": "15 KB"
+    },
+    {
+      "path": "./dist/client/chunk-missingAddress.*.min.js",
+      "maxSize": "4 KB"
+    },
+    {
+      "path": "./dist/client/chunk-nectar.*.min.js",
+      "maxSize": "9 KB"
+    },
+    {
+      "path": "./dist/client/chunk-nectarAddCard.*.min.js",
+      "maxSize": "7 KB"
+    },
+    {
+      "path": "./dist/client/chunk-nectarWrapper.*.min.js",
+      "maxSize": "1 KB"
+    },
+    {
+      "path": "./dist/client/chunk-orderConfirmation.*.min.js",
+      "maxSize": "18 KB"
+    },
+    {
+      "path": "./dist/client/chunk-orderRetrieval.*.min.js",
+      "maxSize": "7 KB"
+    },
+    {
+      "path": "./dist/client/chunk-orderRetrievalError.*.min.js",
+      "maxSize": "3 KB"
+    },
+    {
+      "path": "./dist/client/chunk-orderSummary.*.min.js",
+      "maxSize": "10 KB"
+    },
+    {
+      "path": "./dist/client/chunk-payment.*.min.js",
+      "maxSize": "38 KB"
+    },
+    {
+      "path": "./dist/client/chunk-paymentFrame.*.min.js",
+      "maxSize": "3 KB"
+    },
+    {
+      "path": "./dist/client/chunk-paypal.*.min.js",
+      "maxSize": "1 KB"
+    },
+    {
+      "path": "./dist/client/chunk-promoForm.*.min.js",
+      "maxSize": "9 KB"
+    },
+    {
+      "path": "./dist/client/chunk-promoGiftCard.*.min.js",
+      "maxSize": "2 KB"
+    },
+    {
+      "path": "./dist/client/chunk-vendors~addressAdd~addressEdit~arrangeDelivery~giftcardForm~guestCheckout~missingAddress~nectar~nect~fc301854.*.min.js",
+      "maxSize": "6 KB"
+    },
+    {
+      "path": "./dist/client/chunk-vendors~addressAdd~addressEdit~guestCheckout~missingAddress.*.min.js",
+      "maxSize": "10 KB"
+    },
+    {
+      "path": "./dist/client/chunk-vendors~arrangeDelivery.*.min.js",
+      "maxSize": "15 KB"
+    },
+    {
+      "path": "./dist/client/chunk-vendors~arrangeDelivery~payment.*.min.js",
+      "maxSize": "5 KB"
+    },
+    {
+      "path": "./dist/client/chunk-vendors~client.*.min.js",
+      "maxSize": "184 KB"
+    },
+    {
+      "path": "./dist/client/chunk-vendors~confirmAndPay.*.min.js",
+      "maxSize": "6 KB"
+    },
+    {
+      "path": "./dist/client/chunk-vendors~confirmAndPay~error~manageOrder~orderConfirmation~orderSummary.*.min.js",
+      "maxSize": "6 KB"
+    },
+    {
+      "path": "./dist/client/chunk-vendors~creditOptionsDrawer.*.min.js",
+      "maxSize": "8 KB"
+    },
+    {
+      "path": "./dist/client/chunk-vendors~creditPlan.*.min.js",
+      "maxSize": "6 KB"
+    },
+    {
+      "path": "./dist/client/chunk-vendors~manageOrder~orderConfirmation.*.min.js",
+      "maxSize": "7 KB"
+    },
+    {
+      "path": "./dist/client/chunk-vendors~orderConfirmation.*.min.js",
+      "maxSize": "19 KB"
+    },
+    {
+      "path": "./dist/client/chunk-vendors~payment.*.min.js",
+      "maxSize": "8 KB"
+    },
+    {
+      "path": "./dist/client/chunk-vendors~zxcvbnCommonPackage.*.min.js",
+      "maxSize": "203 KB"
+    },
+    {
+      "path": "./dist/client/chunk-vendors~zxcvbnEnPackage.*.min.js",
+      "maxSize": "495 KB"
+    },
+    {
+      "path": "./dist/client/client.*.min.js",
+      "maxSize": "149 KB"
+    }
+  ]
+}

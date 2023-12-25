@@ -1,4 +1,3 @@
-import { Channel } from '../types/reducers'
 
-export const isApp = (channel: Channel): boolean => channel === Channel.APP
-export const isWeb = (channel: Channel): boolean => channel === Channel.WEB
+export const isApp = (channel: 'APP' | 'WEB'): boolean => channel === 'APP'
+export const isWeb = (channel: 'APP' | 'WEB'): boolean => channel === 'WEB'

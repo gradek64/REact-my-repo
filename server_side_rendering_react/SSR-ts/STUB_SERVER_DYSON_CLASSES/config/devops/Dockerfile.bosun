@@ -1,0 +1,56 @@
+FROM node:18.16.0-alpine as builder
+
+ARG GITHUB_PACKAGES_AUTH_TOKEN
+ENV GITHUB_PACKAGES_AUTH_TOKEN=$GITHUB_PACKAGES_AUTH_TOKEN
+
+WORKDIR /app
+
+# install dependencies first so that it is cached
+COPY ./.npmrc ./package.json ./yarn.lock ./
+
+RUN yarn --production
+
+COPY ./babel.config.js ./cypress.config.js ./tsconfig.json ./
+COPY ./config/webpack ./config/webpack
+COPY ./config/envconfig ./config/envconfig
+COPY ./config/newrelic ./config/newrelic
+COPY ./config/i18n ./config/i18n
+COPY ./cypress/docker-compose-cypress.yml ./cypress/docker-compose-cypress.yml
+COPY ./public ./public
+
+COPY ./src ./src
+
+ENV NODE_OPTIONS=--openssl-legacy-provider
+ARG DOCKER_ENV_TYPE=production
+ENV NODE_ENV=$DOCKER_ENV_TYPE
+ENV PUBLIC_PATH_BOSUN=/assets-v2/payment/
+RUN yarn build:client --mode $DOCKER_ENV_TYPE && yarn build:server --mode $DOCKER_ENV_TYPE
+
+
+FROM node:18.16.0-alpine as deploy-server
+
+WORKDIR /app
+
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/config/newrelic ./config/newrelic
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/config/envconfig ./config/envconfig
+
+EXPOSE 8080
+
+ENTRYPOINT ["yarn", "serve"]
+
+STOPSIGNAL SIGINT
+
+
+FROM node:18.16.0-alpine as export-to-host
+
+WORKDIR /app
+
+COPY --from=builder /app/dist/client ./dist/client
+
+
+
+

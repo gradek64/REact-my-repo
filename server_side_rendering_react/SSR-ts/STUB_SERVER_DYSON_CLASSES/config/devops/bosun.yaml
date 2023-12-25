@@ -1,0 +1,40 @@
+# If there are elements of the bosun.yaml that are only known during the execution of the workflow
+# (such as setting an environment variable to the current git SHA) then these can be overriden at
+# runtime by using the bosun-yaml-overrides input.
+# https://github.com/sainsburys-tech/bosun-actions-deploy
+bosun:
+  deployment:
+    type: app
+    config:
+      # Anything under 'config:' that needs tweaking for a certain sub environment e.g. uat2,
+      # move it into one of the config override files under 'configOverride:'
+      akamaiSureRoute: true
+      deploymentTimeout: 10m
+      serviceName: payment
+      service:
+        port: 8080
+      container:
+        port: 8080
+        livenessHealthcheckPort: 8080
+        livenessInitialDelaySeconds: 30
+        livenessHealthcheckPath: /health
+        readinessHealthcheckPort: 8080
+        readinessInitialDelaySeconds: 60
+        readinessHealthcheckPath: /ready
+        startupHealthcheckPort: 8080
+        startupInitialDelaySeconds: 30
+        startupHealthcheckPath: /health
+      resources:
+        requests:
+          memory: '1024Mi'
+          cpu: '500m'
+        limits:
+          memory: '1024Mi'
+          cpu: '4'
+    configOverride:
+      dev.stub: ./config/devops/env-configs/dev/stub.yaml
+      dev.sit1: ./config/devops/env-configs/dev/sit1.yaml
+      stg.uat1: ./config/devops/env-configs/stg/uat1.yaml
+      stg.uat2: ./config/devops/env-configs/stg/uat2.yaml
+      stg.pt1: ./config/devops/env-configs/stg/pt1.yaml
+      prd.prod: ./config/devops/env-configs/prd/production.yaml

@@ -23,6 +23,10 @@ export type PrepareForCheckoutActionPayload = {
   options: PrepareForCheckoutAPIRequest
 }
 
+export type InitUserInfoPagePayload = {
+  cookie: string
+}
+
 export type PrepareForCheckoutSuccessActionPayload = {
   id: string
 }

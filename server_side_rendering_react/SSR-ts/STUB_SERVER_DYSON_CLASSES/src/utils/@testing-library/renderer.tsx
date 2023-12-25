@@ -15,7 +15,7 @@ import { PreloadedState } from 'redux'
 import i18n from '../../../config/i18n/test'
 import rootSaga from '../../sagas'
 import createStoreActual from '../../store'
-import { RootState } from '../../types/reducers'
+import { RootState } from 'types/reducers'
 import { initialState as reducerInitialState } from '../../config/testUtils/__mocks__/state'
 
 const browserHistory = createBrowserHistory()

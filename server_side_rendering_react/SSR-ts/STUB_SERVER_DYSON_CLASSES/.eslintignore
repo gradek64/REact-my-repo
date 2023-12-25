@@ -1,0 +1,4 @@
+dist
+stubs/sessions
+**/__snapshots__/**
+node_modules

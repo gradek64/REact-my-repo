@@ -1,5 +1,4 @@
 import { DeliveryFlag, ShipmentType } from 'types/api'
-import { Consignment } from 'types/reducers/delivery'
 import { BookingRequest } from 'types/api/delivery'
 import { ArrangeDeliveryFormValues, Slot } from 'types/containers/ArrangeDeliveryContainer'
 
@@ -25,7 +24,7 @@ export const isSlotlessConsignmentType = (type: ShipmentType): boolean => {
   return ![ShipmentType.SMALL_ITEM, ShipmentType.LARGE_ITEM, ShipmentType.CLOTHING].includes(type)
 }
 
-export const getDeliveryCharges = (slots: Slot[], chargedSlotIndex: number, consignments: Consignment[]) =>
+export const getDeliveryCharges = (slots: Slot[], chargedSlotIndex: number, consignments: any[]) =>
   slots.map(({ deliveryCharge, x, y, type }, index) => {
     if (isSlotlessConsignmentType(type)) return { value: 0 }
 
@@ -42,7 +41,7 @@ export const getDeliveryCharges = (slots: Slot[], chargedSlotIndex: number, cons
   })
 
 export const getBookingRequests = (
-  consignments: Consignment[],
+  consignments: any[],
   values: ArrangeDeliveryFormValues,
 ): BookingRequest[] => {
   const deliveryCharges = getDeliveryCharges(values.slots, slotToCharge(values.slots), consignments)

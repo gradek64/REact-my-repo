@@ -1,5 +1,5 @@
-import { Brand, Channel, Payment } from '../reducers'
-import {
+
+/* import {
   AccountAddress,
   AccountAddressPerson,
   APIResponse,
@@ -8,14 +8,14 @@ import {
   SnapshotPromotion,
   SnapshotStockHoldInfo,
   Store,
-} from 'types/api'
+} from 'types/api' */
 
 /**
  * [Gitbook](https://gitbook-checkout-arch.service.eu-west-1.dev.deveng.systems/docs/orchs/endpoints/checkout/types/orders#ordersource)
  */
 export interface OrderSource {
-  salesChannel: Channel
-  channelBrand: Brand
+  salesChannel: any
+  channelBrand: any
   ipAddress: string
   userAgent: string
   deviceId: string
@@ -52,7 +52,7 @@ export interface OrderCharge {
   total: Total
 }
 
-interface SnapshotAddressPerson extends AccountAddressPerson {
+interface SnapshotAddressPerson {
   id?: string
   email?: string
 }
@@ -62,29 +62,17 @@ interface SnapshotContactAddressPerson extends SnapshotAddressPerson {
   email: string
 }
 
-export interface SnapshotAddress extends Omit<AccountAddress, 'id' | 'contactAddress'> {
-  id?: string
-  person: SnapshotAddressPerson
-}
 
-export interface SnapshotAddressWithId extends SnapshotAddress {
-  id: string
-}
 
 /**
  * The contact address will always have an id
  */
-export interface SnapshotContactAddress extends SnapshotAddressWithId {
-  person: SnapshotContactAddressPerson
-}
+
 
 export type PostcodeMismatchDeliveryAddress = {
   lines: { postcode: string; country: string }
 }
 
-export type ValidDeliveryAddress = SnapshotAddressWithId
-
-export type SnapshotDeliveryAddress = ValidDeliveryAddress | PostcodeMismatchDeliveryAddress
 
 /**
  * The customer indicates the type of user the snapshot belongs to, and their
@@ -95,50 +83,13 @@ export interface SnapshotCustomer {
   type?: 'REGISTERED' | 'GUEST'
 }
 
-export interface GetSnapshotAPIPayload {
-  snapshot: {
-    status: OrderSnapshotStatus
-    source: OrderSource
-    billingAddress: SnapshotAddress
-    contactAddress: SnapshotContactAddress
-    deliveryAddress?: SnapshotDeliveryAddress
-    customer: SnapshotCustomer
-    amounts: Amounts
-    orderId?: string
-    lines: Line[]
-    stockHolds: SnapshotStockHoldInfo[] | null
-    nectar: {
-      isLinked: boolean
-      baseEarnPoints: number
-      promotionEarnPoints: number
-      card?: {
-        token: string
-        last4Digits: string
-      }
-    }
-    promotions: SnapshotPromotion[]
-    payments: {
-      payments: Payment[]
-      giftCardsTotal?: number
-    }
-    // store is not returned for delivery fulfilments
-    store?: Store
-    shipments: Shipment[]
-    fulfilmentType: FulfilmentType
-    isWcsHandover: boolean
-  }
-}
 
-export type GetSnapshotAPIResponse = APIResponse<GetSnapshotAPIPayload>
 
-export type PrepareForCheckoutAPIRequest = {
-  source: Omit<OrderSource, 'deviceId'>
-  fulfilment: FulfilmentType
-}
 
-export interface InitSnapshotAPIPayload extends GetSnapshotAPIPayload {
+
+export interface InitSnapshotAPIPayload {
   id: string
-  errorCodes?: InitSnapshotAPINonFatalErrorAdvice[]
+  errorCodes?: any[]
 }
 
 /**
@@ -333,7 +284,7 @@ export interface Line {
 
 export type DeliveryShipmentType = Omit<ShipmentType, ShipmentType.PREPAY>
 
-export type UpdateAddressAPIResponse = APIResponse<{ status: 'ORDER_ADDRESS_UPDATED' }>
+//export type UpdateAddressAPIResponse = APIResponse<{ status: 'ORDER_ADDRESS_UPDATED' }>
 
 export enum DeliverableDays {
   SEVEN = 7,

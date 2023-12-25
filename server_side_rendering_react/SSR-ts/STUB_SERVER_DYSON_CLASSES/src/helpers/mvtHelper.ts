@@ -1,4 +1,4 @@
-import { Brand, OrderSummaryVariant, Channel, Theme } from '../types/reducers'
+
 
 // Cookies
 export const PREPAY_TEST_COOKIE = 'Checkout_Test_Group_1'
@@ -17,41 +17,35 @@ export const cookieList = [
 ]
 
 // Defaults
-export const ORDER_SUMMARY_DEFAULT = OrderSummaryVariant.MINI
-export const BRAND_DEFAULT = Brand.ARGOS
-export const THEME_DEFAULT = Brand.ARGOS
-export const CHANNEL_DEFAULT = Channel.WEB
+export const ORDER_SUMMARY_DEFAULT = 'MINI'
+export const BRAND_DEFAULT = 'ARGOS'
+export const THEME_DEFAULT = 'ARGOS'
+export const CHANNEL_DEFAULT = 'WEB'
 
 // Ensures the cookie is a valid value, falling back to the default if not
-export const getOrderSummaryVariant = (value: OrderSummaryVariant) => {
+export const getany = (value: any) => {
   switch (value) {
-    case OrderSummaryVariant.FULL:
-    case OrderSummaryVariant.MINI:
-    case OrderSummaryVariant.HEADER:
+    case 'FULL':
+    case 'MINI':
+    case 'HEADER':
       return value
     default:
       return ORDER_SUMMARY_DEFAULT
   }
 }
 
-export const getBrand = (value: Brand) => {
-  return Brand[value] || BRAND_DEFAULT
-}
 
-export const getTheme = (value: Theme) => {
-  return Theme[value] || THEME_DEFAULT
-}
 
 export const getChannel = (value: undefined | string) => {
   if (typeof value === 'undefined') {
-    return Channel.WEB
+    return 'WEB'
   }
 
-  return Channel.APP
+  return 'APP'
 }
 
-export const isStickyHeader = (value: OrderSummaryVariant) => value === OrderSummaryVariant.HEADER
-export const isSecureHeader = (value: OrderSummaryVariant) => !isStickyHeader(value)
+export const isStickyHeader = (value: any) => value === 'HEADER'
+export const isSecureHeader = (value: any) => !isStickyHeader(value)
 
-export const showFullSidebar = (value: OrderSummaryVariant) => value !== OrderSummaryVariant.MINI
-export const hideSidebarMobile = (value: OrderSummaryVariant) => value === OrderSummaryVariant.HEADER
+export const showFullSidebar = (value: any) => value !== 'MINI'
+export const hideSidebarMobile = (value: any) => value === 'HEADER'

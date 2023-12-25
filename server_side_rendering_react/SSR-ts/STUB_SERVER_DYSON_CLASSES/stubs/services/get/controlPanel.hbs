@@ -14,7 +14,6 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 </head>
 
 <body class="bolt-v2">
@@ -1369,8 +1368,11 @@
   </main>
   <script>
     $(document).ready(function () {
+      console.log('ready')
       $('.changeStub').change(function () {
         let value = $(this).val()
+
+        console.log('changeStub')
         if ($(this).attr('type') === 'checkbox') {
           value = $(this).is(':checked')
         } else if ($(this).attr('type') === 'radio') {
@@ -1386,6 +1388,14 @@
           },
           success: function () {
             location.reload()
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            // Handle error response
+            console.error('Error:', textStatus, errorThrown);
+            
+            // Optionally, you can access additional details from jqXHR
+            console.log('Status Code:', jqXHR.status);
+            console.log('Response Text:', jqXHR.responseText);
           }
         })
       })
