@@ -4,7 +4,7 @@ import Home from './components/Home';
 import Grid from './components/Grid';
 import ParamsQuery from './components/ParamsQuery';
 import Login from './components/Login';
-import UserSecretInfoContainer from './pages/UserSecretInfo';
+import UserSecretInfoContainer from './containers/UserSecretInfoContainer/UserSecretInfoContainer';
 import { fetchPopularRepos } from './api';
 import { GuestCheckoutContainer } from './containers';
 
@@ -73,6 +73,7 @@ export const processRoutes = (
 
     routesProcessing.map((route) => {
       const match = matchPath(req.url, route);
+      if (match) console.log('--------MATCH------', route.component);
       if (match) {
         let reduxAction;
 
@@ -87,6 +88,7 @@ export const processRoutes = (
             initialAction = component.getInitialActions({ req, match });
           }
         }
+
 
         // Regular non-lazy component that check for initialActions
         if (route.component.getInitialActions) {

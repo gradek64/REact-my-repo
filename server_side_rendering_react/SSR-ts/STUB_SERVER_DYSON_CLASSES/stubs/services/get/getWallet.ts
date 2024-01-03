@@ -8,7 +8,7 @@ const getWallet = {
   method: 'GET',
   delay: 100,
   cache: false,
-  render: (req: RequestWithSession, res: Response<GetWalletAPIPayload | GetWalletErrorAPIPayload>) => {
+  render: (req: RequestWithSession, res: Response) => {
     const sessionData = SessionManager.getSession(req)
     console.log('/account-api/users/:id/wallet')
     console.log('all cookies send to the request::====', req.cookies)
@@ -16,7 +16,7 @@ const getWallet = {
     const wallet = sessionData.wallet
     const { status, error } = wallet.response
 
-    console.log('!!!!!! wallet', wallet)
+    console.log('!!!!!! wallet response', wallet)
 
     const body = !error
       ? wallet.getDetails()

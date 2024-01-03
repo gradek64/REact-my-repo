@@ -1,5 +1,5 @@
-import { APIResponse } from '../types/api'
-import { ErrorDetail, ErrorResponse } from '../types/api/errorResponse'
+import { APIResponse } from 'types/api'
+import { ErrorDetail, ErrorResponse } from 'types/api/errorResponse'
 
 // Type guard
 export function isAPIErrorResponseType<T, D>(

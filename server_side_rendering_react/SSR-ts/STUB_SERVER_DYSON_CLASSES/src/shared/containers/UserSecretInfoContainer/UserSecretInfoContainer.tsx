@@ -1,11 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom'
 import { match } from 'react-router'
 import { Request } from 'express'
 
 
 import { getMeta } from '../../selectors';
+import GetSnapshotRedirects from '../GetSnapshotRedirects/GetSnapshotRedirects'
+
+import UserSecretInfo from '../../pages/UserSecretInfo'
 import { INIT_USER_INFO_PAGE } from '../../../actions'
 
 const UserSecretInfoContainer = (props) => {
@@ -19,7 +20,7 @@ const UserSecretInfoContainer = (props) => {
       for example by redux selectors
     */
 
-  const { error } = useSelector(getMeta);
+  /* const { error } = useSelector(getMeta);
 
   if (error) {
     if (typeof error === 'object' && !(error instanceof Error) && error.status === StatusCode.UNAUTHORIZED) {
@@ -33,13 +34,13 @@ const UserSecretInfoContainer = (props) => {
     }
 
     return <Redirect to={errorPath} />
-  }
+  } */
 
   return (
-    <div>
-      <h1>Parent Component UserSecretInfoContainer</h1>
-      {props.children}
-    </div>
+    <GetSnapshotRedirects>
+      <UserSecretInfo />
+    </GetSnapshotRedirects>
+
   );
 };
 
@@ -72,6 +73,8 @@ type GetInitialActionsParams<
 UserSecretInfoContainer.getInitialActions = ({ req, match }: GetInitialActionsParams<MatchParams>) => {
   const { id } = match.params
   const cookie = req.get('cookie') || ''
+
+  console.log('---------------COOKIE----------')
 
   return INIT_USER_INFO_PAGE({ cookie })
 }

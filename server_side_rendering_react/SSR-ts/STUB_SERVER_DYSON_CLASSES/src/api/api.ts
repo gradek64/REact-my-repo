@@ -4,15 +4,12 @@ import Logger from '../utils/Logger'
 import endpoints from './endpoints'
 import { request } from '../helpers/requestHelpers'
 import {
-
+  APIResponse,
   CreateAnonymousSessionAPIRequest,
   CreateAnonymousSessionAPIResponse,
+  StatusCode,
 } from 'types/api'
-import {
-  GuestAccountExistsAPIResponse,
-  GuestCreateAccountAPIResponse,
-  CreateUserAccountReqBody,
-} from 'types/api/account/user'
+
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -71,7 +68,7 @@ const apiFactory = (): Api => {
 /**
  * Helper method to read superagent responses
  */
-/* export function checkResponse<T>(response: APIResponse<T>, shouldRedirectToLogin = true) {
+export function checkResponse<T>(response: APIResponse<T>, shouldRedirectToLogin = true) {
   return new Promise((resolve, reject) => {
     if (!response || !response.status) {
       Logger.fatal("We didn't get a response")
@@ -143,6 +140,6 @@ const apiFactory = (): Api => {
       })
     }
   })
-} */
+}
 
 export default apiFactory()

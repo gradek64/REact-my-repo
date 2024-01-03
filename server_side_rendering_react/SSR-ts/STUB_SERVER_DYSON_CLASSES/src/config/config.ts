@@ -2,7 +2,6 @@
 /* eslint-disable */
 
 import { canUseDom } from '@sainsburys-tech/boltui-utils'
-//import { PaymentMethod } from 'types/api'
 
 const host = process.env.HOST || 'localhost'
 const port = '8080'

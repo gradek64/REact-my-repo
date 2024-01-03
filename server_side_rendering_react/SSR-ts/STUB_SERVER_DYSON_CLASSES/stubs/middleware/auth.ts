@@ -38,6 +38,13 @@ export const checkoutAuth = (req: RequestWithSession, res: Response, next: NextF
     return
   }
 
+  console.log('autrization here where you suppposed check for cookies session Id', req.cookies)
+  console.log({ sessionid: req.cookies.sessionId })
+
+  //you should redirect to the already here when the session id cookie is not present just send back the 
+  // StatusCode.UNAUTHORIZED
+
+
   const sessionData = SessionManager.getSession(req)
   const { snapshotService, user } = sessionData
 

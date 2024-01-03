@@ -1,4 +1,4 @@
-import { APIResponse, GetSnapshotAPIPayload } from 'types/api'
+import { APIResponse } from 'types/api'
 import { FulfilmentStub } from 'types/stubs'
 
 export type GetConsignmentsAPIResponse = APIResponse<FulfilmentStub>
@@ -15,7 +15,7 @@ export enum SoftErrorType {
   STOCK_HOLD_PARTIAL_ALLOCATION = 'STOCK_HOLD_PARTIAL_ALLOCATION',
 }
 
-export interface CreateFulfilmentBody extends GetSnapshotAPIPayload {
+export interface CreateFulfilmentBody {
   id: string
   errorCodes?: SoftErrorType[]
 }

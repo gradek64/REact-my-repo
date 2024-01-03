@@ -56,9 +56,9 @@ const ssrMiddleware = (req, res, next) => {
       // query for the results of the render.
       const context = {
         status: 200,
-      }
+      };
 
-      console.log('store', store.getState())
+      // console.log('store', store.getState())
 
       // As we are code splitting, we need to find out which chunks
       // the SSR uses so the client can use them. <Loadable.Capture>
@@ -70,15 +70,13 @@ const ssrMiddleware = (req, res, next) => {
         .bold()
         .log('requested req.url in promise response', req.url);
 
-      
-
       // Render the part of the app that gets hydrated on the client
       const appHtml = ReactDOMServer.renderToString(
         <Loadable.Capture report={(moduleName) => modules.push(moduleName)}>
-            <ReduxProvider store={store}>
-                <StaticRouter location={req.url} context={context}>
-                  <App />
-                </StaticRouter>
+          <ReduxProvider store={store}>
+            <StaticRouter location={req.url} context={context}>
+              <App />
+            </StaticRouter>
           </ReduxProvider>
         </Loadable.Capture>
       );

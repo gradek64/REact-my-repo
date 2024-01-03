@@ -14,8 +14,9 @@ export function* initUserInfoPageSaga(action) {
       payload: { cookie },
     } = action;
 
-    //other essential action on load page
+    //other essential action on load page those call are based on cookie authorization
 
+    console.log('get w wallet saga called !!! with cookie', cookie)
     yield fork(getWalletSaga, cookie)
 
 

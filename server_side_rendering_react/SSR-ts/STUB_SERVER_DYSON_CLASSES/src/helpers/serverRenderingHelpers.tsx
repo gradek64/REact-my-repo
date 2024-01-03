@@ -3,7 +3,6 @@ import { Request, Response } from 'express'
 import { nconf } from '../../config/envconfig/envConfig'
 import Logger from '../utils/Logger'
 import { ErrorPageTypeParam } from '../types/routes'
-import { errorPath } from '../paths'
 
 export const isDevelopment = () => !(nconf.get('NODE_ENV') === 'production' || nconf.get('NODE_ENV') === 'staging')
 
@@ -14,7 +13,7 @@ export function internalErrorHandler(error: { message: string; stack: string }, 
   Logger.error({ name: 'server', msg: 'Internal server error', detail: error.message })
 
   if (!isDevelopment()) {
-    return res.redirect(`${errorPath}?type=${ErrorPageTypeParam.INTERNAL_ERROR}`)
+    return res.redirect(`error?type=${ErrorPageTypeParam.INTERNAL_ERROR}`)
   }
 
   return res.status(500).send(`

@@ -1,4 +1,4 @@
-import { APIResponse, AccountAddress } from '..'
+import { APIResponse } from '..'
 
 /**
  * [Gitbook](https://argos-checkout-architecture-reference.int.dev-ie-01.jspaas.uk/docs/orchs/endpoints/account/user.register)
@@ -9,8 +9,8 @@ export interface CreateUserAccountReqBody {
     email: string
     password: string
   }
-  billingAddress: AccountAddress
-  deliveryAddress: AccountAddress
+  billingAddress: any
+  deliveryAddress: any
   marketingPreferenceOptIn: boolean
   channelBrand: any
 }

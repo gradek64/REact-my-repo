@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit'
 
 import {
-  GET_STOCK_HOLD_INFO,
+  INIT_USER_INFO_PAGE,
 } from '../../actions'
 
 import { StockHoldStatus } from 'types/reducers'
@@ -109,7 +109,7 @@ const setErrorAdvice = (
 
 const metaReducer = createReducer(initialState, (builder) =>
   builder
-    .addCase(GET_STOCK_HOLD_INFO, () => { })
+    .addCase(INIT_USER_INFO_PAGE, () => { })
 
 )
 
