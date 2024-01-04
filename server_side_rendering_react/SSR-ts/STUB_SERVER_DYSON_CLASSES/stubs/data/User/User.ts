@@ -1,4 +1,3 @@
-import { Addresses } from '../Address'
 import { SerialisableStubObject, UserStub } from 'types/stubs'
 
 export default class User implements SerialisableStubObject<UserStub> {
@@ -10,7 +9,6 @@ export default class User implements SerialisableStubObject<UserStub> {
   private _email: string
   private _homePhone: string
   private _mobilePhone: string
-  private _addresses: Addresses
   private _marketingPreferences: UserStub['marketingPreferences']
 
   constructor() {
@@ -27,7 +25,6 @@ export default class User implements SerialisableStubObject<UserStub> {
       email: this._email,
       homePhone: this._homePhone,
       mobilePhone: this._mobilePhone,
-      addresses: this._addresses.toJson(),
       marketingPreferences: { ...this._marketingPreferences },
     }
   }
@@ -41,7 +38,6 @@ export default class User implements SerialisableStubObject<UserStub> {
     this._email = json.email
     this._homePhone = json.homePhone
     this._mobilePhone = json.mobilePhone
-    this._addresses.fromJson(json.addresses)
     this._marketingPreferences = { ...json.marketingPreferences }
   }
 
@@ -54,7 +50,6 @@ export default class User implements SerialisableStubObject<UserStub> {
     this._email = ''
     this._homePhone = ''
     this._mobilePhone = ''
-    this._addresses = new Addresses()
     this._marketingPreferences = { ARGOS: null, TU: null, HABITAT: null, responseStatus: 200 }
   }
 
@@ -136,10 +131,6 @@ export default class User implements SerialisableStubObject<UserStub> {
 
   set mobilePhone(value) {
     this._mobilePhone = value
-  }
-
-  get addresses() {
-    return this._addresses
   }
 
   get marketingPreferences() {

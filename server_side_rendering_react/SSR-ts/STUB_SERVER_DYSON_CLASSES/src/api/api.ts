@@ -5,19 +5,19 @@ import endpoints from './endpoints'
 import { request } from '../helpers/requestHelpers'
 import {
   APIResponse,
-  CreateAnonymousSessionAPIRequest,
-  CreateAnonymousSessionAPIResponse,
-  StatusCode,
+  // CreateAnonymousSessionAPIRequest,
+  // CreateAnonymousSessionAPIResponse,
 } from 'types/api'
 
 
 const isProduction = process.env.NODE_ENV === 'production'
 
+
 interface Api {
   // Wallet
   getWallet: (userId: string, cookie: string) => unknown
   // Session
-  createAnonymousSession: (options: CreateAnonymousSessionAPIRequest) => CreateAnonymousSessionAPIResponse
+ // createAnonymousSession: (options: CreateAnonymousSessionAPIRequest) => CreateAnonymousSessionAPIResponse
 }
 
 const apiFactory = (): Api => {
@@ -57,8 +57,8 @@ const apiFactory = (): Api => {
 
     getWallet: (userId, cookie) => request.get(endpoints.getWallet(userId)).set({ Cookie: cookie }),
     // Session
-    createAnonymousSession: (options) =>
-      request.post(endpoints.createAnonymousSession(), options) as unknown as CreateAnonymousSessionAPIResponse,
+    //createAnonymousSession: (options) =>
+      //request.post(endpoints.createAnonymousSession(), options) as unknown as CreateAnonymousSessionAPIResponse,
   }
 }
 
@@ -76,7 +76,7 @@ export function checkResponse<T>(response: APIResponse<T>, shouldRedirectToLogin
       return
     }
 
-    if (response.status === StatusCode.NOT_FOUND) {
+    if (response.status === 404) {
       reject(response)
 
       Logger.error({
@@ -87,7 +87,7 @@ export function checkResponse<T>(response: APIResponse<T>, shouldRedirectToLogin
       })
       return
     }
-    if (response.status === StatusCode.UNAUTHORIZED && shouldRedirectToLogin) {
+    if (response.status === 401 && shouldRedirectToLogin) {
       if (canUseDom()) {
         const successUrl = `${window.location.pathname}${window.location.search}`
         window.location.href = `/login?pageName=mandatoryPrepay&successUrl=${encodeURIComponent(successUrl)}`
@@ -104,7 +104,7 @@ export function checkResponse<T>(response: APIResponse<T>, shouldRedirectToLogin
       return
     }
 
-    if (response.status === StatusCode.BAD_REQUEST) {
+    if (response.status === 400) {
       reject(response)
 
       Logger.error({

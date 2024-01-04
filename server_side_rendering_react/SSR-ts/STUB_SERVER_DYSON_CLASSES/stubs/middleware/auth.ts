@@ -2,10 +2,9 @@ import { NextFunction, Response } from 'express'
 import { match } from 'path-to-regexp'
 import SessionManager from '../data/SessionManager'
 
-import snapshotServiceDatasets from '../data/SnapshotService/SnapshotServiceDatasets'
 import StubResponse from '../helpers/API/Response'
 import { RequestWithSession } from '../../src/types/stubs/session'
-import { StatusCode } from '../../src/types/api'
+
 
 // TODO: remove this when User is typed
 type PartialUserStub = {
@@ -46,9 +45,9 @@ export const checkoutAuth = (req: RequestWithSession, res: Response, next: NextF
 
 
   const sessionData = SessionManager.getSession(req)
-  const { snapshotService, user } = sessionData
+  const { user } = sessionData
 
-  const required = snapshotService.customerType
+  const required: 'REGISTERED' | 'GUEST' = 'REGISTERED'
   const loginState = (user as unknown as PartialUserStub).loginState
   const sessionState = (req.cookies as Cookies).session_token
 
@@ -60,16 +59,16 @@ export const checkoutAuth = (req: RequestWithSession, res: Response, next: NextF
   }
 
   // If the snapshot is in GUEST state, the user must be logged out and have an anonymous session
-  if (required === 'GUEST' && loginState !== 'logged in' && sessionState === 'anonymous') {
+  /* if (required === 'GUEST' && loginState !== 'logged in' && sessionState === 'anonymous') {
     returnAuthError = false
-  }
+  } */
 
   // If the snapshot has no owner, the user must be a valid owner (either logged in or have an anonymous session)
-  if (required === 'NONE' && (loginState === 'logged in' || sessionState === 'anonymous')) {
+  /* if (required === 'NONE' && (loginState === 'logged in' || sessionState === 'anonymous')) {
     returnAuthError = false
-  }
+  } */
 
-  if (returnAuthError) {
+  /* if (returnAuthError) {
     const status = required === 'GUEST' ? StatusCode.FORBIDDEN : StatusCode.UNAUTHORIZED
     const body: StubResponse =
       required === 'GUEST'
@@ -79,7 +78,7 @@ export const checkoutAuth = (req: RequestWithSession, res: Response, next: NextF
     res.status(status).send(body)
     res.end()
     return
-  }
+  } */
 
   next()
 }
@@ -101,7 +100,7 @@ export const accountAuth = (req: RequestWithSession, res: Response, next: NextFu
   console.log('loginState', loginState)
   if (loginState !== 'logged in') {
     console.log('not logged in')
-    res.sendStatus(StatusCode.UNAUTHORIZED) // TODO: return correct error body
+    res.sendStatus(401) // TODO: return correct error body
     res.end()
 
     return

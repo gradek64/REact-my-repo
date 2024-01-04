@@ -14,17 +14,35 @@ export type { CreateUserAccountReqBody } from './account/user'
 
 // enums
 export { GetWalletAPIErrorAdvice } from './account/wallet'
+export {
+  PlaceOrderErrorDetailsAdvice,
+  OrderSnapshotStatus,
+  FulfilmentStatus,
+  FulfilmentLocationType,
+  ShipmentStatusType,
+  OrderAdviceInfo,
+  OrderAdviceType,
+} from './order'
+
+export {
+  PaymentMethod,
+  PaymentMethodStatus,
+  CreditApplicationStatus,
+  AddPaymentAPIErrorAdvice,
+  PatchPaymentAPIErrorAdvice,
+  DeletePaymentAPIErrorAdvice,
+} from './payment'
 
 /**
  * Session Manager
  */
-export type {
+/* export type {
   CreateAnonymousSessionAPIRequest,
   CreateAnonymousSessionAPIResponse,
   CreateSessionResponsePayload,
-} from './session/session'
+} from './session/session' */
 
-export { StatusCode } from './StatusCodes'
+//export { StatusCode } from './StatusCodes'
 interface APIRequest<D> {
   _data: D
   url: string

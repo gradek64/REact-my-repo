@@ -37,11 +37,6 @@ const getWallet = require('./get/getWallet');
 //const getStubHealth = require('./get/getStubHealth');
 const modifyCheckUserService = require('./get/modifyCheckUserService');
 const modifyCreateUserService = require('./get/modifyCreateUserService');
-const modifyPatchCustomer = require('./get/modifyPatchCustomer');
-const modifySetCheckoutApi = require('./get/modifySetCheckoutApi');
-const modifyCancelOrder = require('./get/modifyCancelOrder');
-const modifyExtendOrder = require('./get/modifyExtendOrder');
-const modifyArrangeDelivery = require('./get/modifyArrangeDelivery');
 
 module.exports = {
   // Account API
@@ -79,9 +74,4 @@ module.exports = {
   //getStubHealth,
   modifyCheckUserService,
   modifyCreateUserService,
-  modifyPatchCustomer,
-  modifySetCheckoutApi,
-  modifyCancelOrder,
-  modifyExtendOrder,
-  modifyArrangeDelivery,
 };
