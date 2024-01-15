@@ -1,3 +1,4 @@
+const logger = require("node-color-log")
 const SessionManager = require('../../data/SessionManager')
 const walletDataset = require('../../data/Wallet/WalletDataset')
 
@@ -28,7 +29,7 @@ const modifyStubWallet = {
     if (query.type === 'walletResponseData') {
       if (walletResponseData[value]) {
         walletResponseData[value].setupWallet(wallet)
-        console.log(`API: Setup wallet response as - ${walletResponseData[value].description}`)
+        logger.color("yellow").log(`API: Setup wallet response as - ${walletResponseData[value].description}`)
       } else {
         return { error: 'Wallet response dataset not found' }
       }

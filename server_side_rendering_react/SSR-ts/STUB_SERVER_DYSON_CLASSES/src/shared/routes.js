@@ -8,7 +8,7 @@ import UserSecretInfoContainer from './containers/UserSecretInfoContainer/UserSe
 import { fetchPopularRepos } from './api';
 import { GuestCheckoutContainer } from './containers';
 
-//redux and sagas
+// redux and sagas
 import createStore from '../store';
 import rootSaga from '../sagas';
 
@@ -65,7 +65,7 @@ export const processRoutes = (
     // Start the root saga tasks which is a promise
     const tasks = store.runSaga(rootSaga);
 
-    //return new Promise((resolve, reject) => {
+    // return new Promise((resolve, reject) => {
     // Will contain routes that will be processed in the next recursion
     const next = [];
 
@@ -94,8 +94,9 @@ export const processRoutes = (
         if (route.component.getInitialActions) {
           reduxAction = route.component.getInitialActions({ req, match });
         }
+        console.log('STORE',store.getState())
 
-        //this promise has to be resolved even though there are not any other initial actions or nested routes
+        // this promise has to be resolved even though there are not any other initial actions or nested routes
         if (reduxAction) {
           console.log('reduxAction', reduxAction);
           return store.dispatch(reduxAction);

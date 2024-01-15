@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const UserSecretInfo = (props) => {
-  console.log('props......', props);
+const UserSecretInfo = ({savedPaymentMethods}) => {
+  console.log('props......', savedPaymentMethods);
 
   /*
       This page will have parent container that will authoriztioin before it is even available 
       since it will contain sensitive user info
     */
 
-  return <div>{'secret info is here'}</div>;
+  return <div>{JSON.stringify(savedPaymentMethods)}</div>;
 };
 
 export default UserSecretInfo;

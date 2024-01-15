@@ -1386,7 +1386,8 @@
             value,
             index: $(this).data('index')
           },
-          success: function () {
+          success: function (s) {
+            console.log('jquery success',s)
             location.reload()
           },
           error: function(jqXHR, textStatus, errorThrown) {

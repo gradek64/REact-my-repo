@@ -1,7 +1,7 @@
 /**
  * THIS IS : YOUR STUB NODE.js SERVER as back-end API server
  *
- **/
+ * */
 
 // Allows us to use import/export in any other file
 require('@babel/register');
@@ -14,10 +14,12 @@ const cookieParser = require('cookie-parser');
 const dyson = require('dyson');
 const chalk = require('chalk');
 const path = require('path');
+
 const PORT = process.env.PORT || 3011;
 
-//move them to config in envcofig file
+// move them to config in envcofig file
 const config = require('./config').default;
+
 const options = {
   configDir: path.join(__dirname, './services'),
   exposeRequest: true,
@@ -27,7 +29,7 @@ const configs = dyson.getConfigurations(options);
 const app = express();
 
 console.log('app!!!');;
-//----middleware
+// ----middleware
 app.use(cookieParser());
 const {
   checkoutAuth,
@@ -69,14 +71,14 @@ app.use('/account-api', accountAuth);
     // Send a response indicating that the POST request has been completed
     res.status(200).send('POST request completed successfully!');
   }); */
-//---- middleware
+// ---- middleware
 console.log('all middleware!!!');
-//--- static assets
+// --- static assets
 app.use('/images', express.static(path.join(process.cwd(), 'images')));
 app.use('/public', express.static(path.join(process.cwd(), 'public')));
 
-//-- run dyson server
+// -- run dyson server
 dyson.registerServices(app, options, configs);
-app.listen(PORT, (port) => {
+app.listen(PORT, () => {
   console.log('STUBS server running on :',PORT)
 });

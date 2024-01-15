@@ -1,23 +1,21 @@
-import { canUseDom } from '@sainsburys-tech/boltui-utils'
-import Logger from '../utils/Logger'
+import { canUseDom } from "@sainsburys-tech/boltui-utils";
+import Logger from "../utils/Logger";
 
-import endpoints from './endpoints'
-import { request } from '../helpers/requestHelpers'
+import endpoints from "./endpoints";
+import { request } from "../helpers/requestHelpers";
 import {
   APIResponse,
   // CreateAnonymousSessionAPIRequest,
   // CreateAnonymousSessionAPIResponse,
-} from 'types/api'
+} from "types/api";
 
-
-const isProduction = process.env.NODE_ENV === 'production'
-
+const isProduction = process.env.NODE_ENV === "production";
 
 interface Api {
   // Wallet
-  getWallet: (userId: string, cookie: string) => unknown
+  getWallet: (userId: string, cookie: string) => unknown;
   // Session
- // createAnonymousSession: (options: CreateAnonymousSessionAPIRequest) => CreateAnonymousSessionAPIResponse
+  // createAnonymousSession: (options: CreateAnonymousSessionAPIRequest) => CreateAnonymousSessionAPIResponse
 }
 
 const apiFactory = (): Api => {
@@ -55,69 +53,74 @@ const apiFactory = (): Api => {
     SERVER: http://localhost:3011/account-api/users/11/wallet
 */
 
-    getWallet: (userId, cookie) => request.get(endpoints.getWallet(userId)).set({ Cookie: cookie }),
+    getWallet: (userId, cookie) =>
+      request.get(endpoints.getWallet(userId)).set({ Cookie: cookie }),
     // Session
-    //createAnonymousSession: (options) =>
-      //request.post(endpoints.createAnonymousSession(), options) as unknown as CreateAnonymousSessionAPIResponse,
-  }
-}
-
-
-
+    // createAnonymousSession: (options) =>
+    // request.post(endpoints.createAnonymousSession(), options) as unknown as CreateAnonymousSessionAPIResponse,
+  };
+};
 
 /**
  * Helper method to read superagent responses
  */
-export function checkResponse<T>(response: APIResponse<T>, shouldRedirectToLogin = true) {
+export function checkResponse<T>(
+  response: APIResponse<T>,
+  shouldRedirectToLogin = true
+) {
   return new Promise((resolve, reject) => {
+    console.log("CHECK is RESPOMSE", response.status);
+
     if (!response || !response.status) {
-      Logger.fatal("We didn't get a response")
-      reject()
-      return
+      Logger.fatal("We didn't get a response");
+      reject();
+      return;
     }
 
     if (response.status === 404) {
-      reject(response)
+      reject(response);
 
       Logger.error({
         method: response.request.method,
         url: response.request.url,
         status: response.status,
         text: response.text,
-      })
-      return
+      });
+      return;
     }
     if (response.status === 401 && shouldRedirectToLogin) {
       if (canUseDom()) {
-        const successUrl = `${window.location.pathname}${window.location.search}`
-        window.location.href = `/login?pageName=mandatoryPrepay&successUrl=${encodeURIComponent(successUrl)}`
+        const successUrl = `${window.location.pathname}${window.location.search}`;
+        window.location.href = `/login?pageName=mandatoryPrepay&successUrl=${encodeURIComponent(
+          successUrl
+        )}`;
       }
 
-      reject(response)
+      reject(response);
 
       Logger.error({
         method: response.request.method,
         url: response.request.url,
         status: response.status,
         text: response.text,
-      })
-      return
+      });
+      return;
     }
 
     if (response.status === 400) {
-      reject(response)
+      reject(response);
 
       Logger.error({
         method: response.request.method,
         url: response.request.url,
         status: response.status,
         text: response.text,
-      })
-      return
+      });
+      return;
     }
 
     if (response && response.ok) {
-      resolve(response.body)
+      resolve(response.body);
 
       Logger.debug({
         method: response.request.method,
@@ -125,21 +128,21 @@ export function checkResponse<T>(response: APIResponse<T>, shouldRedirectToLogin
         status: response.status,
         // hide success body in prod as it contains customer data
         text: isProduction ? undefined : response.text,
-      })
-      return
+      });
+      return;
     }
 
     if (response && !response.ok) {
-      reject(response)
+      reject(response);
 
       Logger.error({
         method: response.request.method,
         url: response.request.url,
         status: response.status,
         text: response.text,
-      })
+      });
     }
-  })
+  });
 }
 
-export default apiFactory()
+export default apiFactory();
